@@ -1,0 +1,19 @@
+# 忽略所有.iml扩展名文件
+*.iml
+.gradle
+# 忽略项目根目录下的local.properties文件
+/local.properties
+/.idea
+/.idea/libraries
+.DS_Store
+# 忽略build目录下的所有文件
+build/
+/captures
+# 忽略当前目录下myNihonnGo目录下的build文件夹下所有文件
+MySakuraApp/build/
+tlsui/build/
+xutil_library/build/
+xutil_library/xutil_library.iml
+# 忽略所有以~接尾的文件
+*~
+import-summary.txt

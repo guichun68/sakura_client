@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
+    android:background="#F6F6F6"
+    android:orientation="vertical">
+
+    <!-- 当前控件可用去指定底部viewpager的显示,一一对应(1,1) -->
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        android:background="@drawable/sel_click_btn_login"
+        app:tabIndicatorColor="@color/indicator_color"
+        app:tabTextColor="@color/tran_white"
+        app:tabSelectedTextColor="@color/main_white"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_pager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

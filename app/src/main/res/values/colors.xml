@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <color name="main_blue_light">#3F56B5</color>
+  <color name="main_blue_dark">#30459E</color>
+  <color name="main_white">#FFFFFF</color>
+  <color name="main_black">#000000</color>
+  <color name="main_black_grey">#6D6D6D</color>
+  <color name="fab_red">#ff0000</color>
+  <color name="gray">#3c3c3c</color>
+  <color name="title_color">#03A9F4</color>
+  <color name="bar_color">#A103A9F4</color>
+  <color name="tran_white">#77FFFFFF</color>
+  <color name="indicator_color">#84FFFF</color>
+  <color name="bg_gray_line">#DCD7D7</color>
+  <color name="bg_gray_line2">#9E9898</color>
+  <color name="text_bg">#CDD1D3</color>
+  <color name="text_bg_press">#1AB1F5</color>
+
+  <color name="black_overlay">#66000000</color>
+  <color name="gray_background">#ffececec</color>
+  <color name="white">#FFFFFF</color>
+  <color name="black">#000000</color>
+  <color name="red">#E51A18</color>
+  <color name="line_color">#523E2E</color>
+  <color name="dark">#999999</color>
+
+  <color name="search_tab_nomarl">#363636</color>
+  <color name="search_tab_select">#E82926</color>
+  <color name="menu_item_text_color">#E60200</color>
+
+  <color name="news_item_has_read_textcolor">#828282</color>
+  <color name="news_item_no_read_textcolor">#363636</color>
+  <color name="bottom_text_color">#666666</color>
+  <color name="news_tab_theme">#FF5544</color>
+  <color name="gray_notrans">#773C3C3C</color>
+  <color name="gray_h">#EE3C3C3C</color>
+  <color name="update_normal">#F6F6F6</color>
+  <color name="update_press">#CCC8CC</color>
+  <color name="word_item_gray">#E5E5E5</color>
+  <color name="bg_gray">#D6D0D0</color>
+  <color name="grammar_font">#008080</color>
+
+  <!--zlzx start -->
+  <color name="background">#FCFBFB</color>
+  <color name="title_back_ground">#1A1A25</color>
+  <!-- zlzx end-->
+  <color name="text_blue1">#1173CB</color>
+  <color name="line">#DDDDDD</color>
+  <color name="text_gray1">#777777</color>
+  <color name="btn_blue_hover">#1E86E4</color>
+  <color name="btn_blue">#0F73CB</color>
+
+  <color name="btn_text">#FFFFFF</color>
+  <color name="btn_text_hover">#CCFFFFFF</color>
+  <color name="btn_red">#D63F41</color>
+  <color name="btn_red_hover">#E8484B</color>
+  <color name="text_gray2">#767676</color>
+  <color name="background_gray1">#EBEBEB</color>
+  <color name="background_gray2">#E6E6E6</color>
+  <color name="background_gray3">#D4D4D4</color>
+  <color name="background_gray4">#EFEFF4</color>
+  <color name="line_btn">#BBBBBB</color>
+  <color name="panel_black">#25272A</color>
+  <!--蒙版-->
+  <color name="colorMask">#66000000</color>
+  <color name="bright_foreground_dark">#80ffffff</color>
+  <color name="transparent">#00000000</color>
+  <color name="white_tran">#99ffffff</color>
+  <color name="blueStatus">#1680E2</color>
+  <color name="grey">#8C8C8C</color>
+</resources>

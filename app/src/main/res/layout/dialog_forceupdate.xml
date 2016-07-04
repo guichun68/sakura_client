@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="升级提醒"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="5dip"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/fengge"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/bg_gray_line" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:text="您必须升级后才能继续使用"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:text="新版本更新内容：修复了若干bug"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_marginTop="10dip"
+        android:id="@+id/fengge2"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/bg_gray_line" />
+
+    <LinearLayout
+        android:id="@+id/ll_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:text="立即升级" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:text="取消" />
+        
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:visibility="gone"
+        android:paddingBottom="10dip" />
+
+</LinearLayout>

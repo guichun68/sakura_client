@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/id_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/title_color"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+         >
+        <!--自定义标题栏内容-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_title_word"
+                style="@style/title_text"
+                android:text="@string/tab_word_center"/>
+            <TextView
+                android:id="@+id/tv_title_skr_bunnpo"
+                style="@style/title_text"
+                android:text="@string/tab_grammar_sakura"/>
+            <TextView
+                android:id="@+id/tv_title_skr_tanngo"
+                style="@style/title_text"
+                android:text="@string/tab_word_sakura"/>
+            <TextView
+                android:id="@+id/tv_title_seting"
+                style="@style/title_text"
+                android:text="@string/setting"/>
+
+        </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    <!--DrawerLayout分两部分，一部分是内容，一部分是侧边栏-->
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/id_drawerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_toolbar">
+
+        <austin.mysakuraapp.views.lazyviewpager.LazyViewPager
+            android:id="@+id/id_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/grammar_font"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item1"
+                style="@style/item_menu_style"
+                tools:text="级别1"/>
+            <TextView
+                android:id="@+id/item2"
+                style="@style/item_menu_style"
+                tools:text="级别2"/>
+            <TextView
+                android:id="@+id/item3"
+                style="@style/item_menu_style"
+                tools:text="级别3"/>
+            <TextView
+                android:id="@+id/item4"
+                style="@style/item_menu_style"
+                tools:text="级别4"/>
+            <TextView
+                android:id="@+id/item5"
+                style="@style/item_menu_style"
+                tools:text="级别5"/>
+            <TextView
+                android:id="@+id/item6"
+                style="@style/item_menu_style"
+                tools:text="级别1"/>
+            <TextView
+                android:id="@+id/item7"
+                style="@style/item_menu_style"
+                tools:text="级别1"/>
+            <TextView
+                android:id="@+id/item8"
+                style="@style/item_menu_style"
+                tools:text="级别1"/>
+            <TextView
+                android:id="@+id/item9"
+                style="@style/item_menu_style"
+                tools:text="级别1"/>
+            <TextView
+                android:id="@+id/item10"
+                style="@style/item_menu_style"
+                tools:text="级别1"/>
+            <TextView
+                android:id="@+id/item11"
+                style="@style/item_menu_style"
+                tools:text="级别1"/>
+            <TextView
+                android:id="@+id/item12"
+                style="@style/item_menu_style"
+                tools:text="级别1"/>
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
