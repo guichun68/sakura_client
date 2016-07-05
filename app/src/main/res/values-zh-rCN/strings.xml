@@ -20,6 +20,7 @@
     <string name="hintPhoneNumFormatWrong">手机号不合法</string>
     <string name="hintAccountOrPwdWrong">账号或密码错误</string>
     <string name="hintLoginFail">登录失败</string>
+	<string name="updated">已更新</string>
     <!-- 新内容 -->
 	<string name="hintautologin">记住用户名密码</string>
 	<string name="noun">名词</string>

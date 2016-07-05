@@ -14,6 +14,7 @@ import austin.mysakuraapp.adapters.WordRecyclerViewAdapter;
 import austin.mysakuraapp.model.bean.WordResult;
 import austin.mysakuraapp.presentation.INounWordPresenter;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
+import austin.mysakuraapp.utils.UIUtil;
 import austin.mysakuraapp.viewfeature.INounWordView;
 
 /**
@@ -30,7 +31,7 @@ public class BaseWordPager implements INounWordView{
      * 上拉加载，下拉刷新组件
      */
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
+    private LinearLayoutManager layoutManager;
     private RecyclerView mRecyclerView;
     private Integer level;
 
@@ -82,7 +83,7 @@ public class BaseWordPager implements INounWordView{
                 refresh();
             }
         });
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        layoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -99,7 +100,7 @@ public class BaseWordPager implements INounWordView{
 
                 int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
-                    Log.d("test", "loading executed");
+                    Log.d("test", "loading executed：isLoading="+isLoading);
 
                     boolean isRefreshing = mSwipeRefreshLayout.isRefreshing();
                     if (isRefreshing) {
@@ -107,6 +108,7 @@ public class BaseWordPager implements INounWordView{
                         return;
                     }
                     if (!isLoading) {
+                        Log.e(TAG,"加载更多");
                         isLoading = true;
                         presenter.getWordItemData(mClassiNo,level,++mPageNo,false);
                     }
@@ -129,7 +131,6 @@ public class BaseWordPager implements INounWordView{
     }
 
     private void refresh() {
-        presenter.refresh();
         mPageNo = 1;
         presenter.getWordItemData(mClassiNo,level,mPageNo,true);
     }
@@ -141,30 +142,41 @@ public class BaseWordPager implements INounWordView{
     @Override
     public void onGetItemData(Object obj, int what) {
         isLoading = false;
-        Log.e(TAG,"获取数据成功："+obj.toString());
-/*        adapter.notifyDataSetChanged();
-        mSwipeRefreshLayout.setRefreshing(false);*/
+        dismisProgress();
+        if(obj == null){
+            UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));
+            return;
+        }
+        UIUtil.showToastSafe(UIUtil.getString(R.string.updated));
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFailureGetData(String msg) {
         isLoading = false;
+        dismisProgress();
         Log.e(TAG,"获取数据失败："+msg);
-//        adapter.notifyDataSetChanged();
-//        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void dismisProgress() {
         mSwipeRefreshLayout.setRefreshing(false);
+        //TODO 如果底部进度条显示中，则关闭
+        adapter.notifyItemRemoved(adapter.getItemCount());
+        /*if(adapter.getItemCount()+1==presenter.getAdapterData().size()){
+            adapter.
+        }*/
+/*        int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+        if (lastVisibleItemPosition + 1 == adapter.getItemCount()){
+            adapter.notifyItemRemoved(lastVisibleItemPosition);
+        }*/
     }
 
-    @Override
-    public void notifyData() {
-        adapter.notifyDataSetChanged();
-    }
+
+
 
     public void initData() {
+        mSwipeRefreshLayout.setProgressViewOffset(false, 0, UIUtil.dip2px(44));
         mSwipeRefreshLayout.setRefreshing(true);
         refresh();
     }

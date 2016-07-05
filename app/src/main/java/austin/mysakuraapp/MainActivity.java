@@ -6,7 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,6 +24,7 @@ import austin.mysakuraapp.fragments.SetingFrag;
 import austin.mysakuraapp.fragments.SkrBunnpoFrag;
 import austin.mysakuraapp.fragments.SkrTanngoFrag;
 import austin.mysakuraapp.fragments.wordcenter.TangoFrag;
+import austin.mysakuraapp.utils.UIUtil;
 import austin.mysakuraapp.views.lazyviewpager.LazyViewPager;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -45,12 +53,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void configViews(){
+
         tvTitleWordCenter.setTextColor(Color.parseColor(pressColor));
         // 设置显示Toolbar
         setSupportActionBar(mToolbar);
         // 设置Drawerlayout开关指示器，即Toolbar最左边的那个icon
         ActionBarDrawerToggle mActionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+
         mActionBarDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
         // 初始化ViewPager的适配器，并设置给它

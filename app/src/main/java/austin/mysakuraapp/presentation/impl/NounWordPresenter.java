@@ -80,6 +80,7 @@ public class NounWordPresenter implements INounWordPresenter {
         @Override
         public void onFailure(String msg) {
             Log.e(TAG, "获取数据失败");
+            view.dismisProgress();
         }
 
         private void processData(String result, boolean isRefresh) {
@@ -103,15 +104,12 @@ public class NounWordPresenter implements INounWordPresenter {
                 return;
             }
             if (StringUtil.isEmpty(result) || responseList.size() == 0) {
-                UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));
-                view.dismisProgress();
+                view.onGetItemData(null,200);
                 return;
             }
             List<WordResult> words = responseList;
 //		SharedPreferencesUtils.putString("words", JSONArray.toJSONString(words));
             if (words == null || words.isEmpty() || words.get(0) == null) {
-                UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));
-                view.dismisProgress();
                 view.onGetItemData(null, 0);
                 return;
             }
@@ -123,9 +121,8 @@ public class NounWordPresenter implements INounWordPresenter {
                     mWordsList.clear();
                 }
                 mWordsList.addAll(words);
-                view.notifyData();
                 //移除顶部和底部view的操作
-                view.dismisProgress();
+                view.onGetItemData(result,200);
             }
         }
 
@@ -136,11 +133,5 @@ public class NounWordPresenter implements INounWordPresenter {
          return mWordsList;
     }
 
-    @Override
-    public void refresh() {
-        if(wordsTemp != null){
-            wordsTemp.clear();
-        }
 
-    }
 }

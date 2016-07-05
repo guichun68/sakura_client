@@ -12,7 +12,4 @@ public interface INounWordView {
 
     void dismisProgress();
 
-    void notifyData();
-
-
 }

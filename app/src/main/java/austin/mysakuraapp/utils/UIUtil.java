@@ -195,4 +195,24 @@ public class UIUtil {
 				drawable.getMinimumHeight());
 		btn.setCompoundDrawables(drawable, null, null, null);
 	}
+	/**
+	 * 采用反射获取状态栏的高度
+	 * @param context
+	 * @return
+	 */
+	public static int getStatusBarHeight(Context context) {
+		// 反射手机运行的类：android.R.dimen.status_bar_height.
+		int statusHeight = -1;
+		try {
+			Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+			Object object = clazz.newInstance();
+			String heightStr = clazz.getField("status_bar_height").get(object).toString();
+			int height = Integer.parseInt(heightStr);
+			//dp--->px
+			statusHeight = context.getResources().getDimensionPixelSize(height);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return statusHeight;
+	}
 }

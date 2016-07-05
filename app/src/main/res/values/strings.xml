@@ -51,6 +51,7 @@
   <string name="nine_tone">⑨</string>
   <string name="ten_tone">⑩</string>
   <string name="no_enough_data">there\'s no more data</string>
+  <string name="updated">Updated</string>
 
   <string name="loading">loading&#8230;</string>
   <string name="get_data_error">Failed to get information</string>

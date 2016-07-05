@@ -28,8 +28,4 @@ public interface INounWordPresenter {
      */
     List<WordResult> getAdapterData();
 
-    /**
-     * 刷新操作的相关逻辑
-     */
-    void refresh();
 }
