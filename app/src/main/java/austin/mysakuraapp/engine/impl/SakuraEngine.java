@@ -9,14 +9,14 @@ import austin.mysakuraapp.engine.OnResultListener;
 public class SakuraEngine extends BaseEngine implements ISakuraEngine {
 
 	@Override
-	public void getSakuraData(OnResultListener listener, Boolean flag) {
+	public void getSakuraData(OnResultListener listener, Boolean flag,int what) {
 		String url = GlobalParams.URL_SLIDING_MENU_SAKURA;
-		getServiceDataUsePostFastjson(null,url,listener,flag,null);
+		getServiceDataUsePostFastjson(null,url,listener,flag,null,what);
 	}
 	
 	@Override
-	public void getSakuraWordCenterData(OnResultListener listener, Boolean flag) {
+	public void getSakuraWordCenterData(OnResultListener listener, Boolean flag,int what) {
 		String url = GlobalParams.URL_SAKURA_WORD_CENTER;
-		getServiceDataUsePostFastjson(null,url,listener,flag,null);
+		getServiceDataUsePostFastjson(null,url,listener,flag,null,what);
 	}
 }

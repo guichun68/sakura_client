@@ -6,9 +6,9 @@ package austin.mysakuraapp.viewfeature;
  */
 public interface INounWordView {
 
-    void onGetItemData(Object obj, int what);
+//    void onGetItemData(Object obj, int what);
 
-    void onFailureGetData(String msg);
+//    void onFailureGetData(String msg);
 
     void dismisProgress();
 

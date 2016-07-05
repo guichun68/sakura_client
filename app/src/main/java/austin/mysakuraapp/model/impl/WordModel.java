@@ -14,7 +14,7 @@ import austin.mysakuraapp.presentation.INounWordPresenter;
 public class WordModel extends BaseEngine implements IWordModel {
 
     @Override
-    public void getWordData(String url, HashMap param, OnResultListener listener) {
-        getServiceDataUsePostFastjsonArray(param,url,listener,false,null);
+    public void getWordData(String url, HashMap param, OnResultListener listener,int what) {
+        getServiceDataUsePostFastjsonArray(param,url,listener,false,null,what);
     }
 }

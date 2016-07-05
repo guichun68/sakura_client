@@ -9,8 +9,8 @@ public interface ISakuraEngine {
 	 * @param listener
 	 * @param flag
 	 */
-	void getSakuraData(OnResultListener listener, Boolean flag);
+	void getSakuraData(OnResultListener listener, Boolean flag,int what);
 	
-	void getSakuraWordCenterData(OnResultListener listener, Boolean flag);
+	void getSakuraWordCenterData(OnResultListener listener, Boolean flag,int what);
 
 }

@@ -12,16 +12,16 @@ public class WordCenterEngineImpl extends BaseEngine implements
 		IWordCenterEngine {
 
 	@Override
-	public void getWordCenterData(OnResultListener listener, Boolean flag) {
+	public void getWordCenterData(OnResultListener listener, Boolean flag,int what) {
 		String url = GlobalParams.URL_SLIDING_MENU_WORD_CENTER;
 //		getServiceData(null, url, listener, flag);
-		getServiceDataUsePostFastjson(null,url,listener,flag,null);
+		getServiceDataUsePostFastjson(null,url,listener,flag,null,what);
 	}
 
 	@Override
 	public void getClassifyItemData(String url,HashMap<String,String> param,
-			OnResultListener onResultListener, boolean flag) {
+			OnResultListener onResultListener, boolean flag,int what) {
 //		getServiceData(param, url, onResultListener, flag);
-		getServiceDataUsePostFastjsonArray(param,url,onResultListener,flag,null);
+		getServiceDataUsePostFastjsonArray(param,url,onResultListener,flag,null,what);
 	}
 }

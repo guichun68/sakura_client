@@ -12,7 +12,7 @@ public interface IWordCenterEngine {
 	 * @param listener
 	 * @param flag
 	 */
-	void getWordCenterData(OnResultListener listener, Boolean flag);
+	void getWordCenterData(OnResultListener listener, Boolean flag,int what);
 	
 
 	/**抽出的通用方法，获得 词汇中心--》某一个大类下(如形容词)--》某一个单独类别的数据（如一类形容词）
@@ -22,5 +22,5 @@ public interface IWordCenterEngine {
 	 * @param b
 	 */
 	void getClassifyItemData(String wordFlag, HashMap<String, String> param,
-							 OnResultListener onResultListener, boolean b);
+							 OnResultListener onResultListener, boolean b,int what);
 }

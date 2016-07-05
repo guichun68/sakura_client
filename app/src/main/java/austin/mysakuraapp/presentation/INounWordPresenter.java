@@ -2,6 +2,7 @@ package austin.mysakuraapp.presentation;
 
 import java.util.List;
 
+import austin.mysakuraapp.engine.OnResultListener;
 import austin.mysakuraapp.model.bean.WordResult;
 import austin.mysakuraapp.viewfeature.INounWordView;
 
@@ -20,7 +21,7 @@ public interface INounWordPresenter {
      * @param pageNo 页数
      * @param isRefresh 是否是刷新操作
      */
-    void getWordItemData(Integer classifyType,Integer level,Integer pageNo,boolean isRefresh);
+    void getWordItemData(Integer classifyType, Integer level, Integer pageNo, boolean isRefresh, OnResultListener listener);
 
     /**
      * 获取填充RecyclerView的数据

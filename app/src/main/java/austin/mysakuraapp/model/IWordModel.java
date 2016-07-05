@@ -13,6 +13,7 @@ public interface IWordModel {
      * @param url 值取自GlobalParams.URL_ADJ_...用来告诉接口你要获得那种词性的单词
      * @param param 相应的参数
      * @param listener 回调
+     * @param what 标识
      */
-    void getWordData(String url, HashMap param, OnResultListener listener);
+    void getWordData(String url, HashMap param, OnResultListener listener,int what);
 }

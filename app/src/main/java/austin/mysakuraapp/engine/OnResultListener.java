@@ -17,5 +17,5 @@ public interface OnResultListener {
 	/**
 	 * 请求服务器失败时回调
 	 */
-	void onFailure(String msg);
+	void onFailure(String msg,int what);
 }

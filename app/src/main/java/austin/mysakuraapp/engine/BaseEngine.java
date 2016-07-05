@@ -31,7 +31,7 @@ public abstract class BaseEngine<T> {
 
 	public void getServiceDataUsePostFastjson(HashMap<String,String> params, String url,
 									   final OnResultListener listener, final boolean flag,
-									   final Class<T> clazz) {
+									   final Class<T> clazz,int what) {
 		if (!NetworkUtil.checkNetwork(UIUtil.getContext())) {
 			// PromptUtil.showNoNetWork(GlobalParams.MAIN);
 			UIUtil.showToastSafe(UIUtil.getContext(),R.string.hintCheckNet);
@@ -41,7 +41,7 @@ public abstract class BaseEngine<T> {
 			{
 				request.add(params);
 			}
-			CallServer.getRequestInstance().add(GlobalParams.MAIN, ConstantValue.WHAT_BASE, request, new HttpListener<JSONObject>() {
+			CallServer.getRequestInstance().add(GlobalParams.MAIN, what, request, new HttpListener<JSONObject>() {
 
 
 				@Override
@@ -50,13 +50,13 @@ public abstract class BaseEngine<T> {
 					String result = jsonObj.toString();
 //					String jsonString = jsonObj.toJSONString();
 					if (result.length() > 0) {
-						listener.onGetData(result, 0);
+						listener.onGetData(result, what);
 					}
 				}
 
 				@Override
 				public void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long networkMillis) {
-					listener.onFailure(exception.getMessage());
+					listener.onFailure(exception.getMessage(),what);
 				}
 			}, false, flag);
 		}
@@ -64,7 +64,7 @@ public abstract class BaseEngine<T> {
 
 	public void getServiceDataUsePostFastjsonArray(HashMap<String,String> params, String url,
 												   final OnResultListener listener, final boolean flag,
-												   final Class<T> clazz) {
+												   final Class<T> clazz,int what) {
 		if (!NetworkUtil.checkNetwork(MainActivity.getForegroundActivity())) {
 			// PromptUtil.showNoNetWork(GlobalParams.MAIN);
 			UIUtil.showToastSafe(UIUtil.getContext(),R.string.hintCheckNet);
@@ -75,7 +75,7 @@ public abstract class BaseEngine<T> {
 			{
 				request.add(params);
 			}
-			CallServer.getRequestInstance().add(GlobalParams.MAIN, ConstantValue.WHAT_BASE, request, new HttpListener<JSONArray>() {
+			CallServer.getRequestInstance().add(GlobalParams.MAIN, what, request, new HttpListener<JSONArray>() {
 
 
 				@Override
@@ -84,13 +84,13 @@ public abstract class BaseEngine<T> {
 					String result = jsonObj.toString();
 //					String jsonString = jsonObj.toJSONString();
 					if (result.length() > 0) {
-						listener.onGetData(result, 0);
+						listener.onGetData(result, what);
 					}
 				}
 
 				@Override
 				public void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long networkMillis) {
-					listener.onFailure(exception.getMessage());
+					listener.onFailure(exception.getMessage(),what);
 				}
 			}, false, flag);
 		}

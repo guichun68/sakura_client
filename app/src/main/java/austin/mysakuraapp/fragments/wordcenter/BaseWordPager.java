@@ -6,12 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-
-import java.util.List;
+import android.widget.LinearLayout;
 
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.adapters.WordRecyclerViewAdapter;
-import austin.mysakuraapp.model.bean.WordResult;
+import austin.mysakuraapp.engine.OnResultListener;
 import austin.mysakuraapp.presentation.INounWordPresenter;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
 import austin.mysakuraapp.utils.UIUtil;
@@ -21,7 +20,7 @@ import austin.mysakuraapp.viewfeature.INounWordView;
  * Created by austin on 2016/6/28.
  * Desc: 名词类别，包括各种名词小类
  */
-public class BaseWordPager implements INounWordView{
+public class BaseWordPager implements INounWordView {
 
     View view;
     INounWordPresenter presenter;
@@ -56,24 +55,24 @@ public class BaseWordPager implements INounWordView{
         bindView();
         configView();
     }
+
     private void initPresenter() {
         this.presenter = BeanFactoryUtil.getImpl(INounWordPresenter.class);
-        if(presenter == null){
+        if (presenter == null) {
             throw new NullPointerException("check if you forget to write INounWordPresenter's implement class in properties file ?");
         }
         presenter.init(this);
     }
 
-    public void bindView(){
-        adapter = new WordRecyclerViewAdapter(context,presenter.getAdapterData());
-        view = View.inflate(context,R.layout.wordpager, null);
+    public void bindView() {
+        adapter = new WordRecyclerViewAdapter(context, presenter.getAdapterData());
+        view = View.inflate(context, R.layout.wordpager, null);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
     }
 
 
-
-    public void configView(){
+    public void configView() {
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blueStatus);
         //进入时本页时默认自动刷新
 
@@ -100,7 +99,7 @@ public class BaseWordPager implements INounWordView{
 
                 int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
-                    Log.d("test", "loading executed：isLoading="+isLoading);
+                    Log.d("test", "loading executed：isLoading=" + isLoading);
 
                     boolean isRefreshing = mSwipeRefreshLayout.isRefreshing();
                     if (isRefreshing) {
@@ -108,9 +107,28 @@ public class BaseWordPager implements INounWordView{
                         return;
                     }
                     if (!isLoading) {
-                        Log.e(TAG,"加载更多");
+                        Log.e(TAG, "加载更多");
                         isLoading = true;
-                        presenter.getWordItemData(mClassiNo,level,++mPageNo,false);
+                        presenter.getWordItemData(mClassiNo, level, ++mPageNo, false, new OnResultListener() {
+
+                            @Override
+                            public void onGetData(Object obj, int what) {
+                                dismisProgress();
+                                if (obj == null) {
+                                    mPageNo--;
+                                    UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));
+                                    return;
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(String msg, int what) {
+                                dismisProgress();
+                                mPageNo--;
+                                UIUtil.showToastSafe(msg);
+                            }
+                        });
                     }
                 }
             }
@@ -127,53 +145,49 @@ public class BaseWordPager implements INounWordView{
                 Log.d(TAG, "LongItemClick item position = " + position);
             }
         });
-
     }
 
     private void refresh() {
         mPageNo = 1;
-        presenter.getWordItemData(mClassiNo,level,mPageNo,true);
+        presenter.getWordItemData(mClassiNo, level, mPageNo, true, new OnResultListener() {
+            @Override
+            public void onGetData(Object obj, int what) {
+                {
+                    dismisProgress();
+                    if (obj == null) {
+                        UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));
+                        return;
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, int what) {
+                dismisProgress();
+                UIUtil.showToastSafe(msg);
+            }
+        });
     }
 
-    public View getRootView(){
+    public View getRootView() {
         return view;
     }
 
     @Override
-    public void onGetItemData(Object obj, int what) {
-        isLoading = false;
-        dismisProgress();
-        if(obj == null){
-            UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));
-            return;
-        }
-        UIUtil.showToastSafe(UIUtil.getString(R.string.updated));
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onFailureGetData(String msg) {
-        isLoading = false;
-        dismisProgress();
-        Log.e(TAG,"获取数据失败："+msg);
-    }
-
-    @Override
     public void dismisProgress() {
+        isLoading = false;
         mSwipeRefreshLayout.setRefreshing(false);
-        //TODO 如果底部进度条显示中，则关闭
-        adapter.notifyItemRemoved(adapter.getItemCount());
-        /*if(adapter.getItemCount()+1==presenter.getAdapterData().size()){
-            adapter.
-        }*/
-/*        int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-        if (lastVisibleItemPosition + 1 == adapter.getItemCount()){
-            adapter.notifyItemRemoved(lastVisibleItemPosition);
-        }*/
+        View lastV = layoutManager.findViewByPosition(layoutManager.findLastVisibleItemPosition());
+        if (lastV != null) {
+            Log.e(TAG + "lastView !=null", lastV.toString());
+            if (lastV instanceof LinearLayout) {
+                adapter.notifyItemRemoved(adapter.getItemCount());
+            }
+        } else {
+            Log.e(TAG + "lastView == null", "lastView ==null");
+        }
     }
-
-
-
 
     public void initData() {
         mSwipeRefreshLayout.setProgressViewOffset(false, 0, UIUtil.dip2px(44));
