@@ -14,17 +14,19 @@ import austin.mysakuraapp.engine.OnResultListener;
 import austin.mysakuraapp.presentation.INounWordPresenter;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
 import austin.mysakuraapp.utils.UIUtil;
+import austin.mysakuraapp.viewfeature.IMainView;
 import austin.mysakuraapp.viewfeature.INounWordView;
 
 /**
  * Created by austin on 2016/6/28.
  * Desc: 名词类别，包括各种名词小类
  */
-public class BaseWordPager implements INounWordView {
+public abstract class BaseWordPager implements INounWordView {
 
     View view;
     INounWordPresenter presenter;
     private Context context;
+
     protected static final String TAG = BaseWordPager.class.getSimpleName();
     /**
      * 上拉加载，下拉刷新组件
@@ -45,7 +47,6 @@ public class BaseWordPager implements INounWordView {
     private WordRecyclerViewAdapter adapter;
 
     boolean isLoading;
-
 
     public BaseWordPager(Context context, int classItemId, Integer level) {
         mClassiNo = classItemId;
@@ -71,7 +72,6 @@ public class BaseWordPager implements INounWordView {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
     }
 
-
     public void configView() {
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blueStatus);
         //进入时本页时默认自动刷新
@@ -95,6 +95,7 @@ public class BaseWordPager implements INounWordView {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                ctrlToolBarShowOrHide(recyclerView,dx,dy);
                 Log.d("test", "onScrolled");
 
                 int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
@@ -147,6 +148,9 @@ public class BaseWordPager implements INounWordView {
         });
     }
 
+    //控制首页中ToolBar的显示和隐藏
+    public abstract void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy);
+
     private void refresh() {
         mPageNo = 1;
         presenter.getWordItemData(mClassiNo, level, mPageNo, true, new OnResultListener() {
@@ -182,6 +186,7 @@ public class BaseWordPager implements INounWordView {
         if (lastV != null) {
             Log.e(TAG + "lastView !=null", lastV.toString());
             if (lastV instanceof LinearLayout) {
+                Log.e(TAG+"comin","in if");
                 adapter.notifyItemRemoved(adapter.getItemCount());
             }
         } else {

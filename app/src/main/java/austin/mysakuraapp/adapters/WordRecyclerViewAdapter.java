@@ -1,6 +1,8 @@
 package austin.mysakuraapp.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -11,14 +13,17 @@ import android.widget.TextView;
 import java.util.List;
 
 import austin.mysakuraapp.R;
+import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.model.bean.WordResult;
 import austin.mysakuraapp.utils.BusiUtils;
 import austin.mysakuraapp.utils.StringUtil;
+import austin.mysakuraapp.utils.UIUtil;
 
 public class WordRecyclerViewAdapter extends Adapter<ViewHolder> {
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
+    private static final int TYPE_HEADER = 3;
     private Context context;
     private List<WordResult> data;
 
@@ -48,15 +53,27 @@ public class WordRecyclerViewAdapter extends Adapter<ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
+        if(position == 0){
+            return TYPE_HEADER;
+        }
         if (position + 1 == getItemCount()) {
             return TYPE_FOOTER;
-        } else {
+        } else{
             return TYPE_ITEM;
         }
+
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(viewType == TYPE_HEADER){
+            CardView view = new CardView(context);
+//            RecyclerView.LayoutParams param = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIUtil.dip2px((int)context.getResources().getDimension(R.dimen.tabLayout_size)));
+            RecyclerView.LayoutParams param = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, GlobalParams.TAB_LAYOUT_HEIGHT);
+            view.setLayoutParams(param);
+            HeadViewHolder holder = new HeadViewHolder(view);
+            return holder;
+        }
         if (viewType == TYPE_ITEM) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_word, parent,
                     false);
@@ -128,6 +145,12 @@ public class WordRecyclerViewAdapter extends Adapter<ViewHolder> {
         }
     }
 
+    static class HeadViewHolder extends ViewHolder {
+
+        public HeadViewHolder(View view) {
+            super(view);
+        }
+    }
     static class FootViewHolder extends ViewHolder {
 
         public FootViewHolder(View view) {

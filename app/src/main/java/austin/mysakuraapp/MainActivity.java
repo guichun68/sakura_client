@@ -1,19 +1,13 @@
 package austin.mysakuraapp;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,11 +17,11 @@ import austin.mysakuraapp.adapters.MyViewPagerAdapter;
 import austin.mysakuraapp.fragments.SetingFrag;
 import austin.mysakuraapp.fragments.SkrBunnpoFrag;
 import austin.mysakuraapp.fragments.SkrTanngoFrag;
-import austin.mysakuraapp.fragments.wordcenter.TangoFrag;
-import austin.mysakuraapp.utils.UIUtil;
+import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfNoun;
+import austin.mysakuraapp.viewfeature.IMainView;
 import austin.mysakuraapp.views.lazyviewpager.LazyViewPager;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener,IMainView{
     private static MainActivity mForegroundActivity;
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
@@ -119,11 +113,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mTitles = getResources().getStringArray(R.array.tab_titles);
         //初始化填充到ViewPager中的Fragment集合
         mFragments = new ArrayList<>();
-        TangoFrag tangoFrag = new TangoFrag();
+        TanngoFragOfNoun tanngoFragOfNoun = new TanngoFragOfNoun();
         SkrBunnpoFrag skrBunnpo = new SkrBunnpoFrag();
         SkrTanngoFrag skrTango = new SkrTanngoFrag();
         SetingFrag setFrag = new SetingFrag();
-        mFragments.add(tangoFrag);
+
+        mFragments.add(tanngoFragOfNoun);
         mFragments.add(skrBunnpo);
         mFragments.add(skrTango);
         mFragments.add(setFrag);
@@ -161,5 +156,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
     public static MainActivity getForegroundActivity() {
         return mForegroundActivity;
+    }
+    @Override
+    public void showToolBar() {
+        ObjectAnimator ani = ObjectAnimator.ofFloat(mToolbar,View.TRANSLATION_Y,-mToolbar.getHeight(),0);
+        ani.setDuration(500);
+        ani.start();
+    }
+
+    @Override
+    public void hideToolBar() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mToolbar,View.TRANSLATION_Y,0,-mToolbar.getHeight());
+        animator.setDuration(500);
+        animator.start();
+    }
+
+    @Override
+    public boolean isToobarShow() {
+        return mToolbar.isShown();
     }
 }

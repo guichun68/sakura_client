@@ -83,4 +83,6 @@ public class GlobalParams {
 	public static boolean showNihonngo = false;//sakura语法页显示日文？默认显示中文。
 	public static TabChangedListener mTabChangedListener;//BaseItemPager类使用的tab改变监听器
 	public static TabChangedListener mTabChangedLisBaseItemPager;
+
+	public static Integer TAB_LAYOUT_HEIGHT,TAB_LAYOUT_WIDTH;
 }
