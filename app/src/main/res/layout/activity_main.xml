@@ -58,6 +58,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/grammar_font"
+            android:clickable="true"
             android:orientation="vertical">
 
             <TextView

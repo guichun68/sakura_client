@@ -27,9 +27,9 @@ import austin.mysakuraapp.viewfeature.IMainView;
 
 /**
  * Created by austin on 2016/6/28.
- * Desc: 单词中心之名词Fragment
+ * Desc: 单词中心之形容词Fragment
  */
-public class TanngoFragOfNoun extends Fragment {
+public class TanngoFrag extends Fragment {
 
     private View view;
     private TabLayout mTabLayout;
@@ -38,29 +38,39 @@ public class TanngoFragOfNoun extends Fragment {
     private List<BaseWordPager> pagers = new ArrayList<>();
     TangoFragVPAdapter adapter;
 
-    boolean isshow ;//当前toolbar的显示状态，默认显示。
+    boolean isshow ;//当前TabLayout的显示状态，默认显示。
     int disy;//一次滑动的距离
     private String[] titles;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frag_wordcenter,container,false);
+        view = inflater.inflate(R.layout.frag,container,false);
         bindView();
         initData();
         configView();
-        isshow = ((IMainView)getActivity()).isToobarShow();
+        isshow = isTablayoutShowing();
         return view;
     }
+
+    public boolean isTablayoutShowing(){
+        return mTabLayout.isShown();
+    }
+
     private void bindView() {
         mTabLayout = (TabLayout) view.findViewById(R.id.tl_tablayout);
         mViewPager = (ViewPager) view.findViewById(R.id.vp_tabvp);
-
-        titles = getActivity().getResources().getStringArray(R.array.noun_tab_title);
+        titles = getActivity().getResources().getStringArray(R.array.other_tab_title);
     }
     private void initData() {
         initSpecifyTypeViews();
+        getPagers().get(0).initBaseData();
+    }
+    public String[] getTabLayoutTitles() {
+        return titles;
+    }
 
+    private void configView() {
         adapter = new TangoFragVPAdapter(getPagers(),getTabLayoutTitles());
         mViewPager.setAdapter(adapter);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -79,13 +89,6 @@ public class TanngoFragOfNoun extends Fragment {
 
             }
         });
-        getPagers().get(0).initBaseData();
-    }
-    public String[] getTabLayoutTitles() {
-        return titles;
-    }
-
-    private void configView() {
         // 将TabLayout和ViewPager进行关联，让两者联动起来
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabsFromPagerAdapter(adapter);
@@ -126,15 +129,13 @@ public class TanngoFragOfNoun extends Fragment {
 
     public void initSpecifyTypeViews() {
         pagers.clear();
-        BaseWordPager pagerType1,pagerType2,pagerType3,pagerType4;
-        pagerType1 = new TangoFragBasePager(getActivity(), ConstantValue.NOUN_TYPE_ANIMAL, null);
-        pagerType2 = new TangoFragBasePager(getActivity(), ConstantValue.NOUN_TYPE_PLANT, null);
-        pagerType3 = new TangoFragBasePager(getActivity(), ConstantValue.NOUN_TYPE_VEHICLE, null);
-        pagerType4 = new TangoFragBasePager(getActivity(), ConstantValue.NOUN_TYPE_OTHER, null);
+        BaseWordPager pagerType1,pagerType2,pagerType3;
+        pagerType1 = new TangoFragBasePager(getActivity(), ConstantValue.OTHER_TYPE_ONE, null);
+        pagerType2 = new TangoFragBasePager(getActivity(), ConstantValue.OTHER_TYPE_TWO, null);
+        pagerType3 = new TangoFragBasePager(getActivity(), ConstantValue.OTHER_TYPE_ALL, null);
         pagers.add(pagerType1);
         pagers.add(pagerType2);
         pagers.add(pagerType3);
-        pagers.add(pagerType4);
     }
 
     class TangoFragBasePager extends BaseWordPager{

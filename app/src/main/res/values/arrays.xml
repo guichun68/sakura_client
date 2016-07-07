@@ -15,4 +15,24 @@
     <item>交通</item>
     <item>其他</item>
   </string-array>
+  <string-array name="verb_tab_title">
+    <item>一类</item>
+    <item>二类</item>
+    <item>三类</item>
+  </string-array>
+  <string-array name="adj_tab_title">
+    <item>一类</item>
+    <item>二类</item>
+  </string-array>
+  <string-array name="other_tab_title">
+    <item>接头词</item>
+    <item>接尾词</item>
+    <item>全部</item>
+  </string-array>
+  <string-array name="word_side">
+    <item>名词</item>
+    <item>动词</item>
+    <item>形容词</item>
+    <item>其他</item>
+  </string-array>
 </resources>

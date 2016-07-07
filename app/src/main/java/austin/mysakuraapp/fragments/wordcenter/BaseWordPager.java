@@ -194,7 +194,7 @@ public abstract class BaseWordPager implements INounWordView {
         }
     }
 
-    public void initData() {
+    public void initBaseData() {
         mSwipeRefreshLayout.setProgressViewOffset(false, 0, UIUtil.dip2px(44));
         mSwipeRefreshLayout.setRefreshing(true);
         refresh();

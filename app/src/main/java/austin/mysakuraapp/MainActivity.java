@@ -17,24 +17,31 @@ import austin.mysakuraapp.adapters.MyViewPagerAdapter;
 import austin.mysakuraapp.fragments.SetingFrag;
 import austin.mysakuraapp.fragments.SkrBunnpoFrag;
 import austin.mysakuraapp.fragments.SkrTanngoFrag;
+import austin.mysakuraapp.fragments.wordcenter.TanngoFrag;
+import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfAdj;
 import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfNoun;
+import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfOther;
+import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfVerb;
+import austin.mysakuraapp.utils.UIUtil;
 import austin.mysakuraapp.viewfeature.IMainView;
 import austin.mysakuraapp.views.lazyviewpager.LazyViewPager;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener,IMainView{
+public class MainActivity extends BaseActivity implements View.OnClickListener, IMainView {
     private static MainActivity mForegroundActivity;
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
     private LazyViewPager mViewPager;
 
-    // TabLayout中的tab标题
-    private String[] mTitles;
+    // TabLayout中的tab标题、侧边栏标题
+    private String[] mTitles, mSlidTitles;
+    private List<TextView> mSidebarMenus = new ArrayList<>();
     // 填充到ViewPager中的Fragment
     private List<Fragment> mFragments;
     private MyViewPagerAdapter mViewPagerAdapter;
-    private TextView tvTitleWordCenter,tvTitleSkrBunnpo,tvTitleSkrTanngo,tvTitleSeting;
+    private TextView tvTitleWordCenter, tvTitleSkrBunnpo, tvTitleSkrTanngo, tvTitleSeting;
 
-    String defaultColor = "#CDD1D3",pressColor="#FFFFFF";
+    String defaultColor = "#CDD1D3", pressColor = "#FFFFFF";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +53,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
         configViews();
     }
 
-    private void configViews(){
-
+    private void configViews() {
+        refreshMenu(mSlidTitles);
+        regSideListener();
         tvTitleWordCenter.setTextColor(Color.parseColor(pressColor));
         // 设置显示Toolbar
         setSupportActionBar(mToolbar);
@@ -83,7 +91,50 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
     }
 
     /**
+     * 注册侧边栏条目点击监听事件
+     */
+    private void regSideListener() {
+        for(int i=0;i<mSidebarMenus.size();i++){
+            mSidebarMenus.get(i).setOnClickListener(new SideClickListener(i));
+        }
+
+    }
+
+    class SideClickListener implements View.OnClickListener{
+        private final int position;
+
+        SideClickListener(int position){
+            this.position = position;
+        }
+        @Override
+        public void onClick(View v) {
+            switch (position){
+                //TODO 判断当前哪个界面(Frag)处于显示状态,就把相应的侧边栏点击事件（连同角标）传过去让其自行处理
+
+            }
+        }
+    }
+
+    /**
+     * （初始化）刷新侧边栏数据
+     *
+     * @param mSlidTitles 侧边栏标题集合
+     */
+    private void refreshMenu(String[] mSlidTitles) {
+        for (TextView tv : mSidebarMenus
+                ) {
+            tv.setText(null);
+            tv.setVisibility(View.INVISIBLE);
+        }
+        for (int i = 0; i < mSlidTitles.length; i++) {
+            mSidebarMenus.get(i).setVisibility(View.VISIBLE);
+            mSidebarMenus.get(i).setText(mSlidTitles[i]);
+        }
+    }
+
+    /**
      * 渲染标题字体颜色
+     *
      * @param i 当前选中的tab角标
      */
     private void setTitlePressIndex(int i) {
@@ -92,7 +143,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
         tvTitleSeting.setTextColor(Color.parseColor(defaultColor));
         tvTitleSkrTanngo.setTextColor(Color.parseColor(defaultColor));
         tvTitleSkrBunnpo.setTextColor(Color.parseColor(defaultColor));
-        switch (i){
+        switch (i) {
             case 0:
                 tvTitleWordCenter.setTextColor(Color.parseColor(pressColor));
                 break;
@@ -111,14 +162,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
     private void initData() {
         // Tab的标题采用string-array的方法保存，在res/values/arrays.xml中写
         mTitles = getResources().getStringArray(R.array.tab_titles);
+        mSlidTitles = getResources().getStringArray(R.array.word_side);
         //初始化填充到ViewPager中的Fragment集合
         mFragments = new ArrayList<>();
-        TanngoFragOfNoun tanngoFragOfNoun = new TanngoFragOfNoun();
+//        TanngoFragOfNoun tanngoFragOfNoun = new TanngoFragOfNoun();
+        TanngoFrag tanngoFrag = new TanngoFrag();
         SkrBunnpoFrag skrBunnpo = new SkrBunnpoFrag();
         SkrTanngoFrag skrTango = new SkrTanngoFrag();
         SetingFrag setFrag = new SetingFrag();
 
-        mFragments.add(tanngoFragOfNoun);
+        mFragments.add(tanngoFrag);
         mFragments.add(skrBunnpo);
         mFragments.add(skrTango);
         mFragments.add(setFrag);
@@ -126,6 +179,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
 
     @Override
     void bindView() {
+        TextView item1 = (TextView) findViewById(R.id.item1);
+        TextView item2 = (TextView) findViewById(R.id.item2);
+        TextView item3 = (TextView) findViewById(R.id.item3);
+        TextView item4 = (TextView) findViewById(R.id.item4);
+        TextView item5 = (TextView) findViewById(R.id.item5);
+        TextView item6 = (TextView) findViewById(R.id.item6);
+        TextView item7 = (TextView) findViewById(R.id.item7);
+        TextView item8 = (TextView) findViewById(R.id.item8);
+        TextView item9 = (TextView) findViewById(R.id.item9);
+        TextView item10 = (TextView) findViewById(R.id.item10);
+        TextView item11 = (TextView) findViewById(R.id.item11);
+        TextView item12 = (TextView) findViewById(R.id.item12);
+        mSidebarMenus.add(item1);
+        mSidebarMenus.add(item2);
+        mSidebarMenus.add(item3);
+        mSidebarMenus.add(item4);
+        mSidebarMenus.add(item5);
+        mSidebarMenus.add(item6);
+        mSidebarMenus.add(item7);
+        mSidebarMenus.add(item8);
+        mSidebarMenus.add(item9);
+        mSidebarMenus.add(item10);
+        mSidebarMenus.add(item11);
+        mSidebarMenus.add(item12);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.id_drawerlayout);
         mToolbar = (Toolbar) findViewById(R.id.id_toolbar);
         mViewPager = (LazyViewPager) findViewById(R.id.id_viewpager);
@@ -139,7 +217,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_title_word:
                 mViewPager.setCurrentItem(0);
                 break;
@@ -154,19 +232,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,I
                 break;
         }
     }
+
     public static MainActivity getForegroundActivity() {
         return mForegroundActivity;
     }
+
     @Override
     public void showToolBar() {
-        ObjectAnimator ani = ObjectAnimator.ofFloat(mToolbar,View.TRANSLATION_Y,-mToolbar.getHeight(),0);
+        ObjectAnimator ani = ObjectAnimator.ofFloat(mToolbar, View.TRANSLATION_Y, -mToolbar.getHeight(), 0);
         ani.setDuration(500);
         ani.start();
     }
 
     @Override
     public void hideToolBar() {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mToolbar,View.TRANSLATION_Y,0,-mToolbar.getHeight());
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mToolbar, View.TRANSLATION_Y, 0, -mToolbar.getHeight());
         animator.setDuration(500);
         animator.start();
     }
