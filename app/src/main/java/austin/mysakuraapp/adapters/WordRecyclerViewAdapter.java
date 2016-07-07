@@ -48,8 +48,9 @@ public class WordRecyclerViewAdapter extends Adapter<ViewHolder> {
     @Override
     public int getItemCount() {
         if(data == null)return 0;
-        return data.size() == 0 ? 0 : data.size() + 1;
+        return data.size() == 0 ? 0 : data.size() + 2;
     }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -91,7 +92,7 @@ public class WordRecyclerViewAdapter extends Adapter<ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
             //holder.tv.setText(data.get(position));
-            WordResult wordResult = data.get(position);
+            WordResult wordResult = data.get(position-1);
             ((ItemViewHolder) holder).tvWord.setText(wordResult.getWd_name());
             ((ItemViewHolder) holder).tvKanna.setText(wordResult.getWd_kana());
             int tone = wordResult.getWd_tone();
