@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -14,15 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import austin.mysakuraapp.adapters.MyViewPagerAdapter;
+import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.fragments.SetingFrag;
 import austin.mysakuraapp.fragments.SkrBunnpoFrag;
 import austin.mysakuraapp.fragments.SkrTanngoFrag;
 import austin.mysakuraapp.fragments.wordcenter.TanngoFrag;
-import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfAdj;
-import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfNoun;
-import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfOther;
-import austin.mysakuraapp.fragments.wordcenter.TanngoFragOfVerb;
-import austin.mysakuraapp.utils.UIUtil;
 import austin.mysakuraapp.viewfeature.IMainView;
 import austin.mysakuraapp.views.lazyviewpager.LazyViewPager;
 
@@ -39,14 +36,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private List<Fragment> mFragments;
     private MyViewPagerAdapter mViewPagerAdapter;
     private TextView tvTitleWordCenter, tvTitleSkrBunnpo, tvTitleSkrTanngo, tvTitleSeting;
-
+    private FragmentManager mFragManager;
     String defaultColor = "#CDD1D3", pressColor = "#FFFFFF";
+
+    TanngoFrag tanngoFrag;
+    SkrBunnpoFrag skrBunnpo;
+    SkrTanngoFrag skrTango;
+    SetingFrag setFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mForegroundActivity = this;
+        GlobalParams.MAIN = this;
+        mFragManager = getSupportFragmentManager();
         bindView();
 
         initData();
@@ -84,6 +88,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
             }
         });
+
         tvTitleWordCenter.setOnClickListener(this);
         tvTitleSeting.setOnClickListener(this);
         tvTitleSkrBunnpo.setOnClickListener(this);
@@ -108,9 +113,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
         @Override
         public void onClick(View v) {
-            switch (position){
-                //TODO 判断当前哪个界面(Frag)处于显示状态,就把相应的侧边栏点击事件（连同角标）传过去让其自行处理
-
+            // 判断当前哪个界面(Frag)处于显示状态,就把相应的侧边栏点击事件（连同角标）传过去让其自行处理
+            if(GlobalParams.foreFrag instanceof TanngoFrag){
+                   ((TanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
+                return;
+            }
+            if(GlobalParams.foreFrag instanceof SkrBunnpoFrag){
+                //TODO do sth;
+                return;
+            }
+            if(GlobalParams.foreFrag instanceof SkrTanngoFrag){
+                //TODO do sth;
+                return;
+            }
+            if(GlobalParams.foreFrag instanceof SetingFrag){
+                //TODO do sth;
+                return;
             }
         }
     }
@@ -165,16 +183,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mSlidTitles = getResources().getStringArray(R.array.word_side);
         //初始化填充到ViewPager中的Fragment集合
         mFragments = new ArrayList<>();
-//        TanngoFragOfNoun tanngoFragOfNoun = new TanngoFragOfNoun();
-        TanngoFrag tanngoFrag = new TanngoFrag();
-        SkrBunnpoFrag skrBunnpo = new SkrBunnpoFrag();
-        SkrTanngoFrag skrTango = new SkrTanngoFrag();
-        SetingFrag setFrag = new SetingFrag();
-
+//       TanngoFragOfNoun tanngoFragOfNoun = new TanngoFragOfNoun();
+        tanngoFrag = new TanngoFrag();
+        skrBunnpo = new SkrBunnpoFrag();
+        skrTango = new SkrTanngoFrag();
+        setFrag = new SetingFrag();
         mFragments.add(tanngoFrag);
         mFragments.add(skrBunnpo);
         mFragments.add(skrTango);
         mFragments.add(setFrag);
+        tanngoFrag.setFragmentManager(mFragManager);
+        GlobalParams.foreFrag = tanngoFrag;
     }
 
     @Override
@@ -219,16 +238,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_title_word:
-                mViewPager.setCurrentItem(0);
+                mViewPager.setCurrentItem(0);//切换页面
+                refreshMenu(getResources().getStringArray(R.array.word_side));//刷新侧滑栏标题
+                GlobalParams.foreFrag = tanngoFrag;//记录当前最顶端显示的frag
                 break;
             case R.id.tv_title_skr_bunnpo:
                 mViewPager.setCurrentItem(1);
+                refreshMenu(getResources().getStringArray(R.array.bunnpo_side));
+                GlobalParams.foreFrag = skrBunnpo;
                 break;
             case R.id.tv_title_skr_tanngo:
                 mViewPager.setCurrentItem(2);
+                refreshMenu(getResources().getStringArray(R.array.sakura_side));
+                GlobalParams.foreFrag = skrTango;
                 break;
             case R.id.tv_title_seting:
                 mViewPager.setCurrentItem(3);
+                mDrawerLayout.closeDrawers();
+                GlobalParams.foreFrag = setFrag;
                 break;
         }
     }

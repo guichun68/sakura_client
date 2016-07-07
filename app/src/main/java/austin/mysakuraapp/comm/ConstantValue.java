@@ -27,6 +27,9 @@ public interface ConstantValue {
 	 */
 	  String FRAG_TAG_GRAMMAR="FRAG_TAG_GRAMMAR";
 
+	String FRAG_TAG_NOUN="FRAG_TAG_NOUN",FRAG_TAG_VERB = "FRAG_TAG_VERB",FRAG_TAG_ADJ="Frag_TAG_adj",
+	FRAG_TAG_OTHER = "FRAG_TAG_OTHER";
+
 	/**
 	 * 点击个人中心的“语法和文化”进入后的页面TAG
 	 */
@@ -146,4 +149,8 @@ public interface ConstantValue {
 	int WHAT_UPDATE = 666;
 	int WHAT_GET_GRAMMAR = 777;
 	int WHAT_BASE = 888;
+	//单词中心页面点击侧边栏打开相关类型（如名词、形容词..）frag页面时传递的顶部title集合的Bundle key
+	String TitleArguBundle = "tab_titles";
+	String WordCenterType = "word_center_type";
+	int WordTypeNoun = 0,WordTypeVerb=1,WordTypeAdj=2,WordTypeOther=3;
 }

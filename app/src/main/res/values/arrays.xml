@@ -35,4 +35,31 @@
     <item>形容词</item>
     <item>其他</item>
   </string-array>
+  <string-array name="bunnpo_side">
+    <item>二级</item>
+    <item>三级</item>
+    <item>四级</item>
+    <item>五级</item>
+    <item>六级</item>
+    <item>七级</item>
+    <item>八级</item>
+    <item>九级</item>
+    <item>十级</item>
+    <item>十一级</item>
+    <item>十二级</item>
+  </string-array>
+  <string-array name="sakura_side">
+    <item>一级</item>
+    <item>二级</item>
+    <item>三级</item>
+    <item>四级</item>
+    <item>五级</item>
+    <item>六级</item>
+    <item>七级</item>
+    <item>八级</item>
+    <item>九级</item>
+    <item>十级</item>
+    <item>十一级</item>
+    <item>十二级</item>
+  </string-array>
 </resources>

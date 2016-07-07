@@ -23,8 +23,13 @@ public class UIManager {
 	}
 
 
-/*
-
+	/**
+	 *
+	 * @param target 要打开的fragment
+	 * @param isAddStack 添加到回退栈？
+	 * @param bundle 传递的参数
+     * @param fragTag target的标签
+     */
 	public void changeFragmentWithTag(Fragment target, boolean isAddStack,
 									  Bundle bundle, String fragTag) {
 		FragmentManager manager = GlobalParams.MAIN.getSupportFragmentManager();
@@ -49,12 +54,12 @@ public class UIManager {
 			transaction.addToBackStack(null);
 		}
 
-		transaction.replace(R.id.content_frame, target, fragTag);
+		transaction.replace(R.id.fl_content, target, fragTag);
 
 		transaction.commitAllowingStateLoss();
 
 	}
-*/
+
 
 
 	/**

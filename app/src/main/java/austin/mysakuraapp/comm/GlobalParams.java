@@ -1,6 +1,7 @@
 package austin.mysakuraapp.comm;
 
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import austin.mysakuraapp.engine.IFragmentListener;
@@ -85,4 +86,5 @@ public class GlobalParams {
 	public static TabChangedListener mTabChangedLisBaseItemPager;
 
 	public static Integer TAB_LAYOUT_HEIGHT,TAB_LAYOUT_WIDTH;
+	public static Fragment foreFrag;
 }
