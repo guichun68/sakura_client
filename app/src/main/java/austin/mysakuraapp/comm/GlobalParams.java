@@ -89,4 +89,5 @@ public class GlobalParams {
 	public static Integer TAB_LAYOUT_HEIGHT,TAB_LAYOUT_WIDTH;
 	public static Fragment foreFrag;
 	public static WordRecyclerViewAdapter globalWordAdapter;
+	public static boolean isDrawerOpened ;
 }

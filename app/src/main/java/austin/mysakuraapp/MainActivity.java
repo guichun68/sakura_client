@@ -21,6 +21,7 @@ import java.util.logging.LogRecord;
 
 import austin.mysakuraapp.adapters.MyViewPagerAdapter;
 import austin.mysakuraapp.comm.GlobalParams;
+import austin.mysakuraapp.engine.MyActionBarDrawerToggle;
 import austin.mysakuraapp.fragments.SetingFrag;
 import austin.mysakuraapp.fragments.SkrBunnpoFrag;
 import austin.mysakuraapp.fragments.SkrTanngoFrag;
@@ -49,7 +50,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     SkrTanngoFrag skrTango;
     SetingFrag setFrag;
     private LinearLayout mLlContent;
-    private ActionBarDrawerToggle mActionBarDrawerToggle;
+    private MyActionBarDrawerToggle mActionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         setSupportActionBar(mToolbar);
         // 设置Drawerlayout开关指示器，即Toolbar最左边的那个icon
         mActionBarDrawerToggle =
-                new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+                new MyActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
 
         mActionBarDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
@@ -248,6 +249,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
+        if(GlobalParams.isDrawerOpened){
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
         switch (v.getId()) {
             case R.id.tv_title_word://切换到了单词中心
                 mViewPager.setCurrentItem(0);//切换页面

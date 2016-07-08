@@ -112,11 +112,10 @@ public abstract class BaseWordPagerInner implements INounWordView,IFragmentListe
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 ctrlToolBarShowOrHide(recyclerView,dx,dy);
-                Log.d("test", "onScrolled");
 
                 int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
-                    Log.d("test", "loading executed：isLoading=" + isLoading);
+//                    Log.d("test", "loading executed：isLoading=" + isLoading);
 
                     boolean isRefreshing = mSwipeRefreshLayout.isRefreshing();
                     if (isRefreshing) {
@@ -124,7 +123,7 @@ public abstract class BaseWordPagerInner implements INounWordView,IFragmentListe
                         return;
                     }
                     if (!isLoading) {
-                        Log.e(TAG, "加载更多");
+//                        Log.e(TAG, "加载更多");
                         isLoading = true;
                         presenter.getWordItemData(mClassiNo, level, ++mPageNo, false, new OnResultListener() {
 
@@ -155,7 +154,7 @@ public abstract class BaseWordPagerInner implements INounWordView,IFragmentListe
             @Override
             public void onItemClick(View view, int position) {
                 GlobalParams.globalWordAdapter = adapter;
-                Log.d(TAG, "item position = " + position);
+//                Log.d(TAG, "item position = " + position);
                 if(adapter.getItemViewType(position)!=WordRecyclerViewAdapter.TYPE_ITEM)return;
                 WordResult word = adapter.getData().get(position-1);
                 WordDetailFragment target = (WordDetailFragment) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_WORD_DETAIL);
