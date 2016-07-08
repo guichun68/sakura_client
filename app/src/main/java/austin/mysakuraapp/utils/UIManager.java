@@ -73,40 +73,77 @@ public class UIManager {
 	 *            是否将hideFragment添加到回退栈
 	 * @param bundle
 	 *            传递数据用的对象
-	 * @param fragmentTag
+	 * @param fragTag
 	 *            target的标签
 	 */
-/*
-	public void changeFragmentAndSaveViews(Fragment hideFragment,
-										   Fragment target, boolean showToggle, boolean isAddStack,
-										   Bundle bundle, String fragmentTag) {
-		if (target.isAdded()) {
 
-			if (GlobalParams.MAIN.getSlidingMenu().isShown() && showToggle) {
-				GlobalParams.MAIN.getSlidingMenu().toggle(true);
-			}
-			// Fragment target2 =
-			// GlobalParams.MAIN.getSupportFragmentManager().findFragmentByTag(fragmentTag);
+	public void changeFragmentAndSaveViews(Fragment hideFragment,
+										   Fragment target, boolean isAddStack,
+										   Bundle bundle, String fragTag) {
+		FragmentManager manager = GlobalParams.MAIN.getSupportFragmentManager();
+		if (target.isAdded()) {
+			Fragment fragment = manager.findFragmentByTag(fragTag);
+			manager.beginTransaction().show(fragment).commit();
 			return;
 		}
 		if (bundle != null) {
 			target.setArguments(bundle);
 		}
-		FragmentManager manager = GlobalParams.MAIN.getSupportFragmentManager();
 		FragmentTransaction tc = manager.beginTransaction();
 		tc.setCustomAnimations(R.anim.push_left_out, R.anim.push_right_in,
 				R.anim.push_left_in, R.anim.push_right_out);
 		// tc.setCustomAnimations(R.anim.push_left_out, R.anim.push_right_in);
 		if ( hideFragment != null && !target.isAdded())
 			tc.hide(hideFragment);
-		tc.add(R.id.content_frame, target, fragmentTag);
+		tc.add(R.id.fl_content, target, fragTag);
 		// 是否添加到回退栈，以便按返回键时可以返回hideFragment
 		if (isAddStack) {
 			tc.addToBackStack(null);
 		}
 		tc.commitAllowingStateLoss();
 	}
-*/
+
+	/**
+	 * 界面切换--保留切换前fragment的页面视图到回退栈
+	 *  与changeFragmentAndSaveViews方法不同的是本方法将使用新fragment覆盖整个手机屏幕
+	 * @param hideFragment
+	 *            被隐藏掉的fragment
+	 * @param target
+	 *            目标fragment
+	 * @param isAddStack
+	 *            是否将hideFragment添加到回退栈
+	 * @param bundle
+	 *            传递数据用的对象
+	 * @param fragTag
+	 *            target的标签
+	 */
+
+	public void changeFragmentAndSaveViews2(Fragment hideFragment,
+										   Fragment target, boolean isAddStack,
+										   Bundle bundle, String fragTag) {
+		FragmentManager manager = GlobalParams.MAIN.getSupportFragmentManager();
+		if (target.isAdded()) {
+			Fragment fragment = manager.findFragmentByTag(fragTag);
+			manager.beginTransaction().show(fragment).commit();
+			return;
+		}
+		if (bundle != null) {
+			target.setArguments(bundle);
+		}
+		FragmentTransaction tc = manager.beginTransaction();
+		tc.setCustomAnimations(R.anim.push_left_out, R.anim.push_right_in,
+				R.anim.push_left_in, R.anim.push_right_out);
+		// tc.setCustomAnimations(R.anim.push_left_out, R.anim.push_right_in);
+		if ( hideFragment != null && !target.isAdded())
+			tc.hide(hideFragment);
+		tc.add(R.id.rl_main, target, fragTag);
+		// 是否添加到回退栈，以便按返回键时可以返回hideFragment
+		if (isAddStack) {
+			tc.addToBackStack(null);
+		}
+		tc.commitAllowingStateLoss();
+	}
+
 
 	/**
 	 * 清空栈

@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import austin.mysakuraapp.R;
+import austin.mysakuraapp.comm.ArgumentKey;
 import austin.mysakuraapp.comm.ConstantValue;
 import austin.mysakuraapp.utils.UIManager;
-import austin.mysakuraapp.utils.UIUtil;
 
 /**
  * Created by austin on 2016/6/28.
@@ -35,28 +35,27 @@ public class TanngoFrag extends Fragment {
      */
     public void replaceContentViewBySidePosition(int sidePostion){
         Fragment target = null;
-        target = new BaseWordPager2();
+        target = new BaseWordPager();
         Bundle bundle = new Bundle();
         switch (sidePostion){
             case 0://名词
-//                String[] stringArray = UIUtil.getContext().getResources().getStringArray(R.array.noun_tab_title);
                 String[] stringArray = {"动物","植物","交通","其他"};
-                bundle.putStringArray(ConstantValue.TitleArguBundle,stringArray);
+                bundle.putStringArray(ArgumentKey.TitleArguBundle,stringArray);
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeNoun);
                 UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_NOUN);
                 break;
             case 1://动词
-                bundle.putStringArray(ConstantValue.TitleArguBundle,getResources().getStringArray(R.array.verb_tab_title));
+                bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.verb_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeVerb);
                 UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_VERB);
                 break;
             case 2://形容词
-                bundle.putStringArray(ConstantValue.TitleArguBundle,getResources().getStringArray(R.array.adj_tab_title));
+                bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.adj_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeAdj);
                 UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_ADJ);
                 break;
             case 3://其他
-                bundle.putStringArray(ConstantValue.TitleArguBundle,getResources().getStringArray(R.array.other_tab_title));
+                bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.other_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeOther);
                 UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_OTHER);
                 break;

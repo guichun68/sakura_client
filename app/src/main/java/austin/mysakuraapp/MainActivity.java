@@ -3,6 +3,7 @@ package austin.mysakuraapp;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogRecord;
 
 import austin.mysakuraapp.adapters.MyViewPagerAdapter;
 import austin.mysakuraapp.comm.GlobalParams;
@@ -329,16 +331,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void showToolBar() {
-        ObjectAnimator ani = ObjectAnimator.ofFloat(mToolbar, View.TRANSLATION_Y, -mToolbar.getHeight(), 0);
+/*        ObjectAnimator ani = ObjectAnimator.ofFloat(mToolbar, View.TRANSLATION_Y, -mToolbar.getHeight(), 0);
         ani.setDuration(500);
-        ani.start();
+        ani.start();*/
+        mToolbar.setVisibility(View.VISIBLE);
     }
+
+//    Handler handler = new Handler();
 
     @Override
     public void hideToolBar() {
         ObjectAnimator animator = ObjectAnimator.ofFloat(mToolbar, View.TRANSLATION_Y, 0, -mToolbar.getHeight());
         animator.setDuration(500);
         animator.start();
+        new Handler().postDelayed(new Runnable(){
+            public void run() {
+                //显示dialog
+                mToolbar.setVisibility(View.GONE);
+            }
+        }, 500);   //500毫秒*/
     }
 
     @Override

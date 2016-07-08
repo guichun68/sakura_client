@@ -21,12 +21,15 @@ import austin.mysakuraapp.utils.UIUtil;
 
 public class WordRecyclerViewAdapter extends Adapter<ViewHolder> {
 
-    private static final int TYPE_ITEM = 0;
-    private static final int TYPE_FOOTER = 1;
-    private static final int TYPE_HEADER = 3;
+    public static final int TYPE_ITEM = 0;
+    public static final int TYPE_FOOTER = 1;
+    public static final int TYPE_HEADER = 3;
     private Context context;
     private List<WordResult> data;
 
+    public List<WordResult> getData() {
+        return data;
+    }
 
     public WordRecyclerViewAdapter(Context context, List<WordResult> data) {
         this.context = context;
@@ -64,6 +67,7 @@ public class WordRecyclerViewAdapter extends Adapter<ViewHolder> {
         }
 
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

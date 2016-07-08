@@ -4,6 +4,7 @@ package austin.mysakuraapp.comm;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import austin.mysakuraapp.adapters.WordRecyclerViewAdapter;
 import austin.mysakuraapp.engine.IFragmentListener;
 import austin.mysakuraapp.engine.TabChangedListener;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
@@ -78,7 +79,7 @@ public class GlobalParams {
 	public static int CURR_TAB_INDEX;
 	
 //	public static TabChangedListener tabChangedListener;
-	public static IFragmentListener iFragmentListenerSkrWord;
+	public static IFragmentListener iWord;
 	public static IFragmentListener iFragmentListenerSakuraGrammar;
 	public static boolean isCheckedUpdate = false;// 是否已经运行检查更新服务了
 	public static boolean showNihonngo = false;//sakura语法页显示日文？默认显示中文。
@@ -87,4 +88,5 @@ public class GlobalParams {
 
 	public static Integer TAB_LAYOUT_HEIGHT,TAB_LAYOUT_WIDTH;
 	public static Fragment foreFrag;
+	public static WordRecyclerViewAdapter globalWordAdapter;
 }

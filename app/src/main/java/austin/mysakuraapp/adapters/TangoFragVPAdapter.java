@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import austin.mysakuraapp.fragments.wordcenter.BaseWordPager;
+import austin.mysakuraapp.fragments.wordcenter.BaseWordPagerInner;
 
 /**
  * Created by austin on 2016/7/1.
@@ -14,9 +14,9 @@ import austin.mysakuraapp.fragments.wordcenter.BaseWordPager;
  */
 public class TangoFragVPAdapter extends PagerAdapter {
 
-    List<BaseWordPager> pagers;
+    List<BaseWordPagerInner> pagers;
     String[] titls;
-    public TangoFragVPAdapter(List<BaseWordPager> pagers,String[]titls){
+    public TangoFragVPAdapter(List<BaseWordPagerInner> pagers, String[]titls){
         this.pagers = pagers;
         this.titls = titls;
     }
