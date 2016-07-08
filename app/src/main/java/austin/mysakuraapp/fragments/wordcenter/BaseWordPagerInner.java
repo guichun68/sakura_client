@@ -233,7 +233,7 @@ public abstract class BaseWordPagerInner implements INounWordView,IFragmentListe
 
     @Override
     public void openNextWordDetailFrg(int currtPosition) {
-        if(currtPosition > GlobalParams.globalWordAdapter.getData().size()-1){
+        if(currtPosition >= GlobalParams.globalWordAdapter.getData().size()-1){
             UIUtil.showToastSafe("没了");
             return;
         }
