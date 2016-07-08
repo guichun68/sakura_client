@@ -39,7 +39,9 @@ public class TanngoFrag extends Fragment {
         Bundle bundle = new Bundle();
         switch (sidePostion){
             case 0://名词
-                bundle.putStringArray(ConstantValue.TitleArguBundle,getResources().getStringArray(R.array.noun_tab_title));
+//                String[] stringArray = UIUtil.getContext().getResources().getStringArray(R.array.noun_tab_title);
+                String[] stringArray = {"动物","植物","交通","其他"};
+                bundle.putStringArray(ConstantValue.TitleArguBundle,stringArray);
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeNoun);
                 UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_NOUN);
                 break;
@@ -58,10 +60,17 @@ public class TanngoFrag extends Fragment {
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeOther);
                 UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_OTHER);
                 break;
+
         }
     }
 
     public void setFragmentManager(FragmentManager manager){
         this.mFragManager = manager;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        replaceContentViewBySidePosition(0);
     }
 }

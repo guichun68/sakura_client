@@ -5,10 +5,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -43,6 +46,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     SkrBunnpoFrag skrBunnpo;
     SkrTanngoFrag skrTango;
     SetingFrag setFrag;
+    private LinearLayout mLlContent;
+    private ActionBarDrawerToggle mActionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +69,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         // 设置显示Toolbar
         setSupportActionBar(mToolbar);
         // 设置Drawerlayout开关指示器，即Toolbar最左边的那个icon
-        ActionBarDrawerToggle mActionBarDrawerToggle =
+        mActionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
 
         mActionBarDrawerToggle.syncState();
@@ -95,6 +100,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         tvTitleSkrTanngo.setOnClickListener(this);
     }
 
+
     /**
      * 注册侧边栏条目点击监听事件
      */
@@ -115,7 +121,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         public void onClick(View v) {
             // 判断当前哪个界面(Frag)处于显示状态,就把相应的侧边栏点击事件（连同角标）传过去让其自行处理
             if(GlobalParams.foreFrag instanceof TanngoFrag){
-                   ((TanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
+                ((TanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
+                //关闭侧边栏
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 return;
             }
             if(GlobalParams.foreFrag instanceof SkrBunnpoFrag){
@@ -192,12 +200,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mFragments.add(skrBunnpo);
         mFragments.add(skrTango);
         mFragments.add(setFrag);
+
         tanngoFrag.setFragmentManager(mFragManager);
         GlobalParams.foreFrag = tanngoFrag;
     }
 
     @Override
     void bindView() {
+        mLlContent = (LinearLayout) findViewById(R.id.ll_drawer);
         TextView item1 = (TextView) findViewById(R.id.item1);
         TextView item2 = (TextView) findViewById(R.id.item2);
         TextView item3 = (TextView) findViewById(R.id.item3);
@@ -237,25 +247,78 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_title_word:
+            case R.id.tv_title_word://切换到了单词中心
                 mViewPager.setCurrentItem(0);//切换页面
                 refreshMenu(getResources().getStringArray(R.array.word_side));//刷新侧滑栏标题
                 GlobalParams.foreFrag = tanngoFrag;//记录当前最顶端显示的frag
+                refreshToggle(R.id.tv_title_word);
                 break;
-            case R.id.tv_title_skr_bunnpo:
+            case R.id.tv_title_skr_bunnpo://切换到了文法页
                 mViewPager.setCurrentItem(1);
                 refreshMenu(getResources().getStringArray(R.array.bunnpo_side));
                 GlobalParams.foreFrag = skrBunnpo;
+                refreshToggle(R.id.tv_title_skr_bunnpo);
                 break;
-            case R.id.tv_title_skr_tanngo:
+            case R.id.tv_title_skr_tanngo://切换到了樱花单词中心
                 mViewPager.setCurrentItem(2);
                 refreshMenu(getResources().getStringArray(R.array.sakura_side));
                 GlobalParams.foreFrag = skrTango;
+                refreshToggle(R.id.tv_title_skr_tanngo);
                 break;
-            case R.id.tv_title_seting:
+            case R.id.tv_title_seting://切换到了设置页
                 mViewPager.setCurrentItem(3);
                 mDrawerLayout.closeDrawers();
+                refreshToggle(R.id.tv_title_seting);
                 GlobalParams.foreFrag = setFrag;
+                break;
+        }
+    }
+
+    /**
+     * 更新toggle按钮（不同界面控制其显隐，并且控制监听（包含手势滑动是否可用）;
+     */
+    private void refreshToggle(int viewRes) {
+        boolean isAlreadyAdded = false;
+        switch (viewRes){
+            case R.id.tv_title_word://切换到了单词中心
+                for(int i=0;i<mDrawerLayout.getChildCount();i++){
+                    if(mDrawerLayout.getChildAt(i).getId()==R.id.ll_drawer){
+                        isAlreadyAdded = true;
+                    }
+                }
+                if(!isAlreadyAdded)mDrawerLayout.addView(mLlContent);
+                mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+                mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+                break;
+            case R.id.tv_title_skr_bunnpo://切换到了文法页
+                for(int i=0;i<mDrawerLayout.getChildCount();i++){
+                    if(mDrawerLayout.getChildAt(i).getId()==R.id.ll_drawer){
+                        isAlreadyAdded = true;
+                    }
+                }
+                if(!isAlreadyAdded)mDrawerLayout.addView(mLlContent);
+                mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+                mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+                break;
+            case R.id.tv_title_skr_tanngo://切换到了樱花单词中心
+                for(int i=0;i<mDrawerLayout.getChildCount();i++){
+                    if(mDrawerLayout.getChildAt(i).getId()==R.id.ll_drawer){
+                        isAlreadyAdded = true;
+                    }
+                }
+                if(!isAlreadyAdded)mDrawerLayout.addView(mLlContent);
+                mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+                mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+                break;
+            case R.id.tv_title_seting://切换到了设置页
+                for(int i=0;i<mDrawerLayout.getChildCount();i++){
+                    if(mDrawerLayout.getChildAt(i).getId()==R.id.ll_drawer){
+                        isAlreadyAdded = true;
+                    }
+                }
+                if(isAlreadyAdded)mDrawerLayout.removeView(mLlContent);
+                mDrawerLayout.removeDrawerListener(mActionBarDrawerToggle);
+                mActionBarDrawerToggle.setDrawerIndicatorEnabled(false);
                 break;
         }
     }
