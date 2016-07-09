@@ -210,7 +210,6 @@ public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentList
         if (lastV != null) {
             Log.e(TAG + "lastView !=null", lastV.toString());
             if (lastV instanceof LinearLayout) {
-                Log.e(TAG+"comin","in if");
                 adapter.notifyItemRemoved(adapter.getItemCount());
             }
         } else {
@@ -224,6 +223,7 @@ public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentList
         refresh();
     }
 
+    //mParentFrag 是作为frag跳转时指定跳转前的页面
     public void setParentFrag(BaseWordPagerS parentFrag) {
         this.mParentFrag = parentFrag;
     }

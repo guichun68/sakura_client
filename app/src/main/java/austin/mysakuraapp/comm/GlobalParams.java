@@ -58,10 +58,9 @@ public class GlobalParams {
 		URL_NULL = GlobalParams.BASE_URL+"";
 		URL_UPDATE = GlobalParams.BASE_URL+"/app/updateApp";
 		URL_GET_GRAMMARS = GlobalParams.BASE_URL+"/sakura/getGrammars";
+
 	}
-	
-	
-	
+	public static boolean isFirstComeInSkrTanngo = true;//是否是第一次进入sakura单词页
 	public static boolean isLoggedIn;
 	public static AppCompatActivity MAIN;
 	/**

@@ -118,15 +118,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
         @Override
         public void onClick(View v) {
+            //关闭侧边栏
+            mDrawerLayout.closeDrawer(GravityCompat.START);
             // 判断当前哪个界面(Frag)处于显示状态,就把相应的侧边栏点击事件（连同角标）传过去让其自行处理
             if(GlobalParams.foreFrag instanceof TanngoFrag){
                 ((TanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
-                //关闭侧边栏
-                mDrawerLayout.closeDrawer(GravityCompat.START);
                 return;
             }
             if(GlobalParams.foreFrag instanceof SkrBunnpoFrag){
                 //TODO do sth;
+                ((TanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
                 return;
             }
             if(GlobalParams.foreFrag instanceof SkrTanngoFrag){
@@ -137,6 +138,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 //TODO do sth;
                 return;
             }
+
         }
     }
 
@@ -190,7 +192,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mSlidTitles = getResources().getStringArray(R.array.word_side);
         //初始化填充到ViewPager中的Fragment集合
         mFragments = new ArrayList<>();
-//       TanngoFragOfNoun tanngoFragOfNoun = new TanngoFragOfNoun();
+
         tanngoFrag = new TanngoFrag();
         skrBunnpo = new SkrBunnpoFrag();
         skrTango = new SkrTanngoFrag();
@@ -346,22 +348,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     public void switchFrag(int position){
         switch (position){
-            case 0:
+            case 0://单词中心页
                 refreshMenu(getResources().getStringArray(R.array.word_side));//刷新侧滑栏标题
                 GlobalParams.foreFrag = tanngoFrag;//记录当前最顶端显示的frag
                 refreshToggle(R.id.tv_title_word);
                 break;
-            case 1:
+            case 1://(樱花)语法页
                 refreshMenu(getResources().getStringArray(R.array.bunnpo_side));
                 GlobalParams.foreFrag = skrBunnpo;
                 refreshToggle(R.id.tv_title_skr_bunnpo);
                 break;
-            case 2:
+            case 2://樱花单词页
                 refreshMenu(getResources().getStringArray(R.array.sakura_side));
+                if(GlobalParams.isFirstComeInSkrTanngo){
+                    skrTango.replaceContentViewBySidePosition(0);
+                    GlobalParams.isFirstComeInSkrTanngo = false;
+                }
                 GlobalParams.foreFrag = skrTango;
                 refreshToggle(R.id.tv_title_skr_tanngo);
                 break;
-            case 3:
+            case 3://设置页
                 refreshToggle(R.id.tv_title_seting);
                 GlobalParams.foreFrag = setFrag;
                 mDrawerLayout.closeDrawers();

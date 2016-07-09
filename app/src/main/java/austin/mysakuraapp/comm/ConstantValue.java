@@ -152,4 +152,5 @@ public interface ConstantValue {
 
 	String WordCenterType = "word_center_type";
 	int WordTypeNoun = 0,WordTypeVerb=1,WordTypeAdj=2,WordTypeOther=3;
+
 }

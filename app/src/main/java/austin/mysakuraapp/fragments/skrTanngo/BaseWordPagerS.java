@@ -26,7 +26,7 @@ import austin.mysakuraapp.comm.GlobalParams;
 
 /**
  * Created by austin on 2016/6/28.
- * Desc: 单词中心之形容词Fragment
+ * Desc: 樱花单词Fragment
  */
 public class BaseWordPagerS extends Fragment {
 
@@ -41,7 +41,7 @@ public class BaseWordPagerS extends Fragment {
     int disy;//一次滑动的距离
     //顶部tab导航栏标题集合
     private String[] titles;
-    private int wordType;//要实例化的单词页面类型（如名词？形容词？）,从ConstantValue的wordTypeNoun等取值
+    private int wordType;//要实例化的单词页面级别类型（如1级别？2级别？）,从ConstantValue的wordTypeNoun等取值
 
     @Nullable
     @Override
@@ -127,33 +127,92 @@ public class BaseWordPagerS extends Fragment {
 
     public void initSpecifyTypeViews() {
         pagers.clear();
-        BaseWordPagerInnerS pagerType1=null,pagerType2=null,pagerType3=null,pagerType4=null;
         switch (wordType){
-            case ConstantValue.WordTypeNoun:
-                pagerType1 = new TangoFragBasePagerInner(getActivity(), ConstantValue.NOUN_TYPE_ANIMAL, null);
-                pagerType2 = new TangoFragBasePagerInner(getActivity(), ConstantValue.NOUN_TYPE_PLANT, null);
-                pagerType3 = new TangoFragBasePagerInner(getActivity(), ConstantValue.NOUN_TYPE_VEHICLE, null);
-                pagerType4 = new TangoFragBasePagerInner(getActivity(), ConstantValue.NOUN_TYPE_OTHER, null);
+            case ConstantValue.LEVEL1:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL1);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
             break;
-            case ConstantValue.WordTypeVerb:
-                pagerType1 = new TangoFragBasePagerInner(getActivity(), ConstantValue.VERB_TYPE_ONE, null);
-                pagerType2 = new TangoFragBasePagerInner(getActivity(), ConstantValue.VERB_TYPE_TWO, null);
-                pagerType3 = new TangoFragBasePagerInner(getActivity(), ConstantValue.VERB_TYPE_THREE, null);
+            case ConstantValue.LEVEL2:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL2);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
             break;
-            case ConstantValue.WordTypeAdj:
-                pagerType1 = new TangoFragBasePagerInner(getActivity(), ConstantValue.ADJ_TYPE_ONE, null);
-                pagerType2 = new TangoFragBasePagerInner(getActivity(), ConstantValue.ADJ_TYPE_TWO, null);
+            case ConstantValue.LEVEL3:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL3);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
             break;
-            case ConstantValue.WordTypeOther:
-                pagerType1 = new TangoFragBasePagerInner(getActivity(), ConstantValue.OTHER_TYPE_ONE, null);
-                pagerType2 = new TangoFragBasePagerInner(getActivity(), ConstantValue.OTHER_TYPE_TWO, null);
-                pagerType3 = new TangoFragBasePagerInner(getActivity(), ConstantValue.OTHER_TYPE_ALL, null);
+            case ConstantValue.LEVEL4:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL4);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
+            break;
+            case ConstantValue.LEVEL5:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL5);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
+            break;
+            case ConstantValue.LEVEL6:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL6);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
+            break;
+            case ConstantValue.LEVEL7:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL7);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
+            break;
+            case ConstantValue.LEVEL8:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL8);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
+            break;
+            case ConstantValue.LEVEL9:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL9);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
+            break;
+            case ConstantValue.LEVEL10:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL10);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
+            break;
+            case ConstantValue.LEVEL11:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL11);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
+            break;
+            case ConstantValue.LEVEL12:
+                for(int i=0;i<12;i++){
+                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL12);
+                    pagers.add(pager);
+                    pager.setParentFrag(this);
+                }
             break;
         }
-        if(pagerType1 != null){pagers.add(pagerType1); pagerType1.setParentFrag(this);}
-        if(pagerType2 != null)pagers.add(pagerType2);
-        if(pagerType3 != null)pagers.add(pagerType3);
-        if(pagerType4 != null)pagers.add(pagerType4);
     }
 
     class TangoFragBasePagerInner extends BaseWordPagerInnerS {

@@ -62,4 +62,18 @@
     <item>十一级</item>
     <item>十二级</item>
   </string-array>
+  <string-array name="sakura_unit">
+    <item>一课</item>
+    <item>二课</item>
+    <item>三课</item>
+    <item>四课</item>
+    <item>五课</item>
+    <item>六课</item>
+    <item>七课</item>
+    <item>八课</item>
+    <item>九课</item>
+    <item>十课</item>
+    <item>十一课</item>
+    <item>十二课</item>
+  </string-array>
 </resources>

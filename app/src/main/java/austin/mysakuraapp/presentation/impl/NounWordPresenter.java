@@ -57,11 +57,15 @@ public class NounWordPresenter implements INounWordPresenter {
             }
 //            view.setPageNo(1);
         }
-        String url = BusiUtils.parseUrlByClassfi(classifyType);
+
         param.put("classifyType", classifyType + "");
         param.put("pageNo", pageNo + "");
+        String url=null;
         if (level != null && level != 0) {
             param.put("level", level + "");
+            url = GlobalParams.URL_SAKURA_WORD;
+        }else{
+            url = BusiUtils.parseUrlByClassfi(classifyType);
         }
         model.getWordData(url, param, new GetWordDataListener(isRefresh,listener), ConstantValue.WHAT_BASE);
     }
