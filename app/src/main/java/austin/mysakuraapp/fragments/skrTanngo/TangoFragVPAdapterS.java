@@ -1,4 +1,4 @@
-package austin.mysakuraapp.adapters;
+package austin.mysakuraapp.fragments.skrTanngo;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
@@ -6,17 +6,17 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import austin.mysakuraapp.fragments.wordcenter.BaseWordPagerInner;
+import austin.mysakuraapp.fragments.skrTanngo.BaseWordPagerInnerS;
 
 /**
  * Created by austin on 2016/7/1.
- * Desc: 单词中心页面的ViewPager适配器
+ * Desc: 樱花单词页面的ViewPager适配器
  */
-public class TangoFragVPAdapter extends PagerAdapter {
+public class TangoFragVPAdapterS extends PagerAdapter {
 
-    List<BaseWordPagerInner> pagers;
+    List<BaseWordPagerInnerS> pagers;
     String[] titls;
-    public TangoFragVPAdapter(List<BaseWordPagerInner> pagers, String[]titls){
+    public TangoFragVPAdapterS(List<BaseWordPagerInnerS> pagers, String[]titls){
         this.pagers = pagers;
         this.titls = titls;
     }

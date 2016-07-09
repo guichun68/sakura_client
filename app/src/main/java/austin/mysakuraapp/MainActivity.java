@@ -8,23 +8,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.LogRecord;
 
 import austin.mysakuraapp.adapters.MyViewPagerAdapter;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.engine.MyActionBarDrawerToggle;
 import austin.mysakuraapp.fragments.SetingFrag;
 import austin.mysakuraapp.fragments.SkrBunnpoFrag;
-import austin.mysakuraapp.fragments.SkrTanngoFrag;
+import austin.mysakuraapp.fragments.skrTanngo.SkrTanngoFrag;
 import austin.mysakuraapp.fragments.wordcenter.TanngoFrag;
 import austin.mysakuraapp.viewfeature.IMainView;
 import austin.mysakuraapp.views.lazyviewpager.LazyViewPager;
@@ -42,7 +39,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private List<Fragment> mFragments;
     private MyViewPagerAdapter mViewPagerAdapter;
     private TextView tvTitleWordCenter, tvTitleSkrBunnpo, tvTitleSkrTanngo, tvTitleSeting;
-    private FragmentManager mFragManager;
     String defaultColor = "#CDD1D3", pressColor = "#FFFFFF";
 
     TanngoFrag tanngoFrag;
@@ -58,7 +54,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         setContentView(R.layout.activity_main);
         mForegroundActivity = this;
         GlobalParams.MAIN = this;
-        mFragManager = getSupportFragmentManager();
         bindView();
 
         initData();
@@ -89,6 +84,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onPageSelected(int position) {
                 setTitlePressIndex(position);
+                switchFrag(position);
             }
 
             @Override
@@ -204,7 +200,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mFragments.add(skrTango);
         mFragments.add(setFrag);
 
-        tanngoFrag.setFragmentManager(mFragManager);
         GlobalParams.foreFrag = tanngoFrag;
     }
 
@@ -256,27 +251,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         switch (v.getId()) {
             case R.id.tv_title_word://切换到了单词中心
                 mViewPager.setCurrentItem(0);//切换页面
-                refreshMenu(getResources().getStringArray(R.array.word_side));//刷新侧滑栏标题
-                GlobalParams.foreFrag = tanngoFrag;//记录当前最顶端显示的frag
-                refreshToggle(R.id.tv_title_word);
+                switchFrag(0);
                 break;
             case R.id.tv_title_skr_bunnpo://切换到了文法页
                 mViewPager.setCurrentItem(1);
-                refreshMenu(getResources().getStringArray(R.array.bunnpo_side));
-                GlobalParams.foreFrag = skrBunnpo;
-                refreshToggle(R.id.tv_title_skr_bunnpo);
+                switchFrag(1);
                 break;
             case R.id.tv_title_skr_tanngo://切换到了樱花单词中心
                 mViewPager.setCurrentItem(2);
-                refreshMenu(getResources().getStringArray(R.array.sakura_side));
-                GlobalParams.foreFrag = skrTango;
-                refreshToggle(R.id.tv_title_skr_tanngo);
+                switchFrag(2);
                 break;
             case R.id.tv_title_seting://切换到了设置页
                 mViewPager.setCurrentItem(3);
-                mDrawerLayout.closeDrawers();
-                refreshToggle(R.id.tv_title_seting);
-                GlobalParams.foreFrag = setFrag;
+                switchFrag(3);
                 break;
         }
     }
@@ -355,6 +342,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 mToolbar.setVisibility(View.GONE);
             }
         }, 500);   //500毫秒*/
+    }
+
+    public void switchFrag(int position){
+        switch (position){
+            case 0:
+                refreshMenu(getResources().getStringArray(R.array.word_side));//刷新侧滑栏标题
+                GlobalParams.foreFrag = tanngoFrag;//记录当前最顶端显示的frag
+                refreshToggle(R.id.tv_title_word);
+                break;
+            case 1:
+                refreshMenu(getResources().getStringArray(R.array.bunnpo_side));
+                GlobalParams.foreFrag = skrBunnpo;
+                refreshToggle(R.id.tv_title_skr_bunnpo);
+                break;
+            case 2:
+                refreshMenu(getResources().getStringArray(R.array.sakura_side));
+                GlobalParams.foreFrag = skrTango;
+                refreshToggle(R.id.tv_title_skr_tanngo);
+                break;
+            case 3:
+                refreshToggle(R.id.tv_title_seting);
+                GlobalParams.foreFrag = setFrag;
+                mDrawerLayout.closeDrawers();
+                break;
+        }
+
     }
 
     @Override

@@ -1,4 +1,4 @@
-package austin.mysakuraapp.fragments.wordcenter;
+package austin.mysakuraapp.fragments.skrTanngo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,9 +17,10 @@ import austin.mysakuraapp.utils.UIManager;
  * Created by austin on 2016/6/28.
  * Desc: 单词中心Fragment
  */
-public class TanngoFrag extends Fragment {
+public class SkrTanngoFrag extends Fragment {
 
     private View view;
+    private FragmentManager mFragManager;
 
     @Nullable
     @Override
@@ -28,13 +29,13 @@ public class TanngoFrag extends Fragment {
         return view;
     }
 
-    /**
+ /*   *//**
      * 根据侧边栏的角标来更换内容区域要显示的frag
      * @param sidePostion 侧边栏角标
-     */
+     *//*
     public void replaceContentViewBySidePosition(int sidePostion){
         Fragment target = null;
-        target = new BaseWordPager();
+        target = new BaseWordPagerS();
         Bundle bundle = new Bundle();
         switch (sidePostion){
             case 0://名词
@@ -68,4 +69,4 @@ public class TanngoFrag extends Fragment {
         super.onActivityCreated(savedInstanceState);
         replaceContentViewBySidePosition(0);
     }
-}
+*/}

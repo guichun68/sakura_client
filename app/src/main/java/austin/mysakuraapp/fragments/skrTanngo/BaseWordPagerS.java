@@ -1,4 +1,4 @@
-package austin.mysakuraapp.fragments.wordcenter;
+package austin.mysakuraapp.fragments.skrTanngo;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -28,14 +28,14 @@ import austin.mysakuraapp.comm.GlobalParams;
  * Created by austin on 2016/6/28.
  * Desc: 单词中心之形容词Fragment
  */
-public class BaseWordPager extends Fragment {
+public class BaseWordPagerS extends Fragment {
 
     private View view;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
 
-    private List<BaseWordPagerInner> pagers = new ArrayList<>();
-    TangoFragVPAdapter adapter;
+    private List<BaseWordPagerInnerS> pagers = new ArrayList<>();
+    TangoFragVPAdapterS adapter;
 
     boolean isshow ;//当前TabLayout的显示状态，默认显示。
     int disy;//一次滑动的距离
@@ -73,7 +73,7 @@ public class BaseWordPager extends Fragment {
     }
 
     private void configView() {
-        adapter = new TangoFragVPAdapter(getPagers(),getTabLayoutTitles());
+        adapter = new TangoFragVPAdapterS(getPagers(),getTabLayoutTitles());
         mViewPager.setAdapter(adapter);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -106,7 +106,7 @@ public class BaseWordPager extends Fragment {
         });
     }
 
-    public List<BaseWordPagerInner> getPagers() {
+    public List<BaseWordPagerInnerS> getPagers() {
         if(pagers != null && pagers.size()>0)
             return pagers;
         initSpecifyTypeViews();
@@ -127,7 +127,7 @@ public class BaseWordPager extends Fragment {
 
     public void initSpecifyTypeViews() {
         pagers.clear();
-        BaseWordPagerInner pagerType1=null,pagerType2=null,pagerType3=null,pagerType4=null;
+        BaseWordPagerInnerS pagerType1=null,pagerType2=null,pagerType3=null,pagerType4=null;
         switch (wordType){
             case ConstantValue.WordTypeNoun:
                 pagerType1 = new TangoFragBasePagerInner(getActivity(), ConstantValue.NOUN_TYPE_ANIMAL, null);
@@ -156,7 +156,7 @@ public class BaseWordPager extends Fragment {
         if(pagerType4 != null)pagers.add(pagerType4);
     }
 
-    class TangoFragBasePagerInner extends BaseWordPagerInner {
+    class TangoFragBasePagerInner extends BaseWordPagerInnerS {
 
         public TangoFragBasePagerInner(Context context, int classItemId, Integer level) {
             super(context, classItemId, level);

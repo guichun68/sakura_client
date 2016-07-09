@@ -1,4 +1,4 @@
-package austin.mysakuraapp.fragments.wordcenter;
+package austin.mysakuraapp.fragments.skrTanngo;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,8 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import java.util.List;
 
 import austin.mysakuraapp.MainActivity;
 import austin.mysakuraapp.R;
@@ -33,14 +31,14 @@ import austin.mysakuraapp.viewfeature.INounWordView;
  * Created by austin on 2016/6/28.
  * Desc: 名词类别，包括各种名词小类
  */
-public abstract class BaseWordPagerInner implements INounWordView,IFragmentListener {
+public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentListener {
 
     View view;
     INounWordPresenter presenter;
     private Context context;
 
     private Fragment mParentFrag;
-    protected static final String TAG = BaseWordPagerInner.class.getSimpleName();
+    protected static final String TAG = BaseWordPagerInnerS.class.getSimpleName();
     /**
      * 上拉加载，下拉刷新组件
      */
@@ -62,7 +60,7 @@ public abstract class BaseWordPagerInner implements INounWordView,IFragmentListe
     boolean isLoading;
     private FragmentManager mFragManager;
 
-    public BaseWordPagerInner(Context context, int classItemId, Integer level) {
+    public BaseWordPagerInnerS(Context context, int classItemId, Integer level) {
         mClassiNo = classItemId;
         this.context = context;
         this.level = level;
@@ -226,7 +224,7 @@ public abstract class BaseWordPagerInner implements INounWordView,IFragmentListe
         refresh();
     }
 
-    public void setParentFrag(BaseWordPager parentFrag) {
+    public void setParentFrag(BaseWordPagerS parentFrag) {
         this.mParentFrag = parentFrag;
     }
 
