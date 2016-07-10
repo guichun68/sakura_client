@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-本布局为单词中心（TanngoFrag）的布局页
--->
+  本布局为樱花单词页面(SkrTanngoFrag)的布局,
+  完全复制自frag.xml (仅改了FrameLayout的id加了后缀2)
+ -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragmentLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <FrameLayout
-        android:id="@+id/fl_content"
+        android:id="@+id/fl_content2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

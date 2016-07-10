@@ -12,6 +12,11 @@ import austin.mysakuraapp.utils.BeanFactoryUtil;
 
 public class GlobalParams {
 	public static String BASE_URL ;
+	//记录最后一次离开樱花单词页(SkrTanngoFrag)面时侧边栏选中的角标,下面几个变量同样的道理
+	public static int skrTanngoSidePosition;
+	public static int tanngoFragSidePostion;
+	public static int skrBunnpoSidePosition;
+
 	static{
 		BASE_URL = BeanFactoryUtil.properties.getProperty("BaseURL_fjjsp");
 	}

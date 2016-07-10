@@ -20,6 +20,7 @@ import austin.mysakuraapp.utils.UIManager;
 public class TanngoFrag extends Fragment {
 
     private View view;
+    private int mCurrSidePosition = 0;//记录最新的当前选中的侧边栏的角标，默认0
 
     @Nullable
     @Override
@@ -36,27 +37,28 @@ public class TanngoFrag extends Fragment {
         Fragment target = null;
         target = new BaseWordPager();
         Bundle bundle = new Bundle();
+        mCurrSidePosition = sidePostion;
         switch (sidePostion){
             case 0://名词
                 String[] stringArray = {"动物","植物","交通","其他"};
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,stringArray);
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeNoun);
-                UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_NOUN);
+                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, ConstantValue.FRAG_TAG_NOUN);
                 break;
             case 1://动词
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.verb_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeVerb);
-                UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_VERB);
+                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, ConstantValue.FRAG_TAG_VERB);
                 break;
             case 2://形容词
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.adj_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeAdj);
-                UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_ADJ);
+                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, ConstantValue.FRAG_TAG_ADJ);
                 break;
             case 3://其他
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.other_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeOther);
-                UIManager.getInstance().changeFragmentWithTag(target,false,bundle, ConstantValue.FRAG_TAG_OTHER);
+                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, ConstantValue.FRAG_TAG_OTHER);
                 break;
 
         }
@@ -67,5 +69,9 @@ public class TanngoFrag extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         replaceContentViewBySidePosition(0);
+    }
+
+    public int getCurrSlidePosition() {
+        return mCurrSidePosition;
     }
 }

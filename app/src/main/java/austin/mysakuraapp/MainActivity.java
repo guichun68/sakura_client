@@ -4,11 +4,13 @@ import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -118,6 +120,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
         @Override
         public void onClick(View v) {
+            for(int i=0;i<mSidebarMenus.size();i++){//将侧边栏所有字体颜色还原成灰白色
+                mSidebarMenus.get(i).setTextColor(getResources().getColor(R.color.text_bg));
+            }
+            mSidebarMenus.get(position).setTextColor(getResources().getColor(R.color.slideMenuTextClickedColor));
             //关闭侧边栏
             mDrawerLayout.closeDrawer(GravityCompat.START);
             // 判断当前哪个界面(Frag)处于显示状态,就把相应的侧边栏点击事件（连同角标）传过去让其自行处理
@@ -127,11 +133,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
             if(GlobalParams.foreFrag instanceof SkrBunnpoFrag){
                 //TODO do sth;
-                ((TanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
+//                ((SkrBunnpoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
                 return;
             }
             if(GlobalParams.foreFrag instanceof SkrTanngoFrag){
                 //TODO do sth;
+                ((SkrTanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
                 return;
             }
             if(GlobalParams.foreFrag instanceof SetingFrag){
@@ -209,6 +216,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     void bindView() {
         mLlContent = (LinearLayout) findViewById(R.id.ll_drawer);
         TextView item1 = (TextView) findViewById(R.id.item1);
+        if(item1 != null)item1.setTextColor(getResources().getColor(R.color.slideMenuTextClickedColor));
         TextView item2 = (TextView) findViewById(R.id.item2);
         TextView item3 = (TextView) findViewById(R.id.item3);
         TextView item4 = (TextView) findViewById(R.id.item4);
@@ -347,19 +355,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     public void switchFrag(int position){
+        saveSideMenuPosition();
+        for(int i=0;i<mSidebarMenus.size();i++){//将侧边栏所有字体颜色还原成灰白色
+            mSidebarMenus.get(i).setTextColor(getResources().getColor(R.color.text_bg));
+        }
+
         switch (position){
             case 0://单词中心页
                 refreshMenu(getResources().getStringArray(R.array.word_side));//刷新侧滑栏标题
+                //还原上次离开本页面时的角标的字体颜色
+                mSidebarMenus.get(GlobalParams.tanngoFragSidePostion).setTextColor(getResources().getColor(R.color.slideMenuTextClickedColor));
                 GlobalParams.foreFrag = tanngoFrag;//记录当前最顶端显示的frag
                 refreshToggle(R.id.tv_title_word);
                 break;
             case 1://(樱花)语法页
                 refreshMenu(getResources().getStringArray(R.array.bunnpo_side));
+                //还原上次离开本页面时的角标的字体颜色
+                mSidebarMenus.get(GlobalParams.skrBunnpoSidePosition).setTextColor(getResources().getColor(R.color.slideMenuTextClickedColor));
+
                 GlobalParams.foreFrag = skrBunnpo;
                 refreshToggle(R.id.tv_title_skr_bunnpo);
                 break;
             case 2://樱花单词页
                 refreshMenu(getResources().getStringArray(R.array.sakura_side));
+                //还原上次离开本页面时的角标的字体颜色
+                mSidebarMenus.get(GlobalParams.skrTanngoSidePosition).setTextColor(getResources().getColor(R.color.slideMenuTextClickedColor));
+
                 if(GlobalParams.isFirstComeInSkrTanngo){
                     skrTango.replaceContentViewBySidePosition(0);
                     GlobalParams.isFirstComeInSkrTanngo = false;
@@ -376,8 +397,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
+    /**
+     *
+     * 切换页面之前先保存当前页面的选中的侧边栏角标，以便下次还原时正确还原指定内容
+     */
+    private void saveSideMenuPosition() {
+        if(GlobalParams.foreFrag instanceof SkrTanngoFrag){
+            GlobalParams.skrTanngoSidePosition = skrTango.getCurrSlidePosition();
+        }else if(GlobalParams.foreFrag instanceof TanngoFrag){
+            GlobalParams.tanngoFragSidePostion = tanngoFrag.getCurrSlidePosition();
+        }else if(GlobalParams.foreFrag instanceof SkrBunnpoFrag){
+            GlobalParams.skrBunnpoSidePosition = skrBunnpo.getCurrSlidePosition();
+        }
+    }
+
     @Override
     public boolean isToobarShow() {
         return mToolbar.isShown();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            GlobalParams.isFirstComeInSkrTanngo = true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

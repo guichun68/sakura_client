@@ -20,7 +20,7 @@ import austin.mysakuraapp.comm.BaseApplication;
 public class UIUtil {
 
 	// 当测试阶段时true
-	private static final boolean isShow = false;
+	private static final boolean isShow = true;
 
 	public static Context getContext() {
 		// TODO 待查BaseApplication的用法

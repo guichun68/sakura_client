@@ -30,6 +30,7 @@ public class UIManager {
 	 * @param bundle 传递的参数
      * @param fragTag target的标签
      */
+/*
 	public void changeFragmentWithTag(Fragment target, boolean isAddStack,
 									  Bundle bundle, String fragTag) {
 		FragmentManager manager = GlobalParams.MAIN.getSupportFragmentManager();
@@ -55,6 +56,45 @@ public class UIManager {
 		}
 
 		transaction.replace(R.id.fl_content, target, fragTag);
+
+		transaction.commitAllowingStateLoss();
+
+	}
+*/
+
+	/**
+	 *
+	 * @param target 要打开的fragment
+	 * @param replacedLayoutResId 要被替换的view id
+	 * @param isAddStack 添加到回退栈？
+	 * @param bundle 传递的参数
+     * @param fragTag target的标签
+     */
+	public void changeFragmentWithTag(Fragment target, int replacedLayoutResId,boolean isAddStack,
+									  Bundle bundle, String fragTag) {
+		FragmentManager manager = GlobalParams.MAIN.getSupportFragmentManager();
+		if (target.isVisible()) {
+			return;
+		}
+		if (manager.getBackStackEntryCount() > 0) {
+			manager.popBackStack();
+		}
+		if (target.isAdded()) {
+			Fragment fragment = manager.findFragmentByTag(fragTag);
+			manager.beginTransaction().show(fragment).commit();
+			return;
+		}
+		if (bundle != null) {
+			target.setArguments(bundle);
+		}
+		FragmentTransaction transaction = manager.beginTransaction();
+
+		// 返回键操作
+		if (isAddStack) {
+			transaction.addToBackStack(null);
+		}
+
+		transaction.replace(replacedLayoutResId, target, fragTag);
 
 		transaction.commitAllowingStateLoss();
 
