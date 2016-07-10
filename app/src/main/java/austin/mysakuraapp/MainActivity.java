@@ -1,16 +1,15 @@
 package austin.mysakuraapp;
 
 import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +21,7 @@ import austin.mysakuraapp.adapters.MyViewPagerAdapter;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.engine.MyActionBarDrawerToggle;
 import austin.mysakuraapp.fragments.SetingFrag;
-import austin.mysakuraapp.fragments.SkrBunnpoFrag;
+import austin.mysakuraapp.fragments.SkrBunnpo.SkrBunnpoFrag;
 import austin.mysakuraapp.fragments.skrTanngo.SkrTanngoFrag;
 import austin.mysakuraapp.fragments.wordcenter.TanngoFrag;
 import austin.mysakuraapp.viewfeature.IMainView;
@@ -416,13 +415,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         return mToolbar.isShown();
     }
 
-    @Override
+  /*  @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getRepeatCount() == 0) {
-            GlobalParams.isFirstComeInSkrTanngo = true;
+            showExitDialog();
         }
         return super.onKeyDown(keyCode, event);
+    }*/
+    //确定要退出App?
+    private boolean isConfirmExitApp = false;
+    @Override
+    public void onBackPressed() {
+        if(!isConfirmExitApp){
+            showExitDialog();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
+    private void showExitDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("确定退出?");
+        dialog.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                isConfirmExitApp = true;
+                GlobalParams.isFirstComeInSkrTanngo = true;
+                MainActivity.this.onBackPressed();
+            }
+        });
+        dialog.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                isConfirmExitApp = false;
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

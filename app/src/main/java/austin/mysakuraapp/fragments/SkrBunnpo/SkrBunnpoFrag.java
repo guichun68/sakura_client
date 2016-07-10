@@ -1,4 +1,4 @@
-package austin.mysakuraapp.fragments;
+package austin.mysakuraapp.fragments.SkrBunnpo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
