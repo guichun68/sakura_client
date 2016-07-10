@@ -48,7 +48,7 @@ public class BaseWordPagerS extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_wordcenter,container,false);
         titles = getArguments().getStringArray(ArgumentKey.TitleArguBundle);
-        wordType = getArguments().getInt(ConstantValue.WordCenterType);
+        wordType = getArguments().getInt(ArgumentKey.WordCenterType);
         bindView();
         initData();
         configView();

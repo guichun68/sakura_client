@@ -17,4 +17,9 @@ public class WordModel extends BaseEngine implements IWordModel {
     public void getWordData(String url, HashMap param, OnResultListener listener,int what) {
         getServiceDataUsePostFastjsonArray(param,url,listener,false,null,what);
     }
+
+    @Override
+    public void getSakuraBunnpo(String url,HashMap<String, String> param, OnResultListener onResultListener) {
+        getServiceDataUsePostFastjsonArray(param,url,onResultListener,false,null,0);
+    }
 }

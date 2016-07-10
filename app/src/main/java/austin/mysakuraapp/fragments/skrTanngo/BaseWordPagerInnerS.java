@@ -25,13 +25,13 @@ import austin.mysakuraapp.presentation.INounWordPresenter;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
 import austin.mysakuraapp.utils.UIManager;
 import austin.mysakuraapp.utils.UIUtil;
-import austin.mysakuraapp.viewfeature.INounWordView;
+import austin.mysakuraapp.viewfeature.IView;
 
 /**
  * Created by austin on 2016/6/28.
  * Desc: 名词类别，包括各种名词小类
  */
-public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentListener {
+public abstract class BaseWordPagerInnerS implements IView,IFragmentListener {
 
     View view;
     INounWordPresenter presenter;

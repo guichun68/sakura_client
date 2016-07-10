@@ -14,22 +14,20 @@ import java.util.List;
 
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.comm.GlobalParams;
-import austin.mysakuraapp.model.bean.WordResult;
-import austin.mysakuraapp.utils.BusiUtils;
-import austin.mysakuraapp.utils.StringUtil;
+import austin.mysakuraapp.model.bean.SakuraResult;
 
-public class WordRecyclerViewAdapterB extends Adapter<ViewHolder> {
+public class SkrRecyclerViewAdapterB extends Adapter<ViewHolder> {
 
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_HEADER = 3;
     private Context context;
-    private List<WordResult> data;
+    private List<SakuraResult> data;
 
-    public List<WordResult> getData() {
+    public List<SakuraResult> getData() {
         return data;
     }
 
-    public WordRecyclerViewAdapterB(Context context, List<WordResult> data) {
+    public SkrRecyclerViewAdapterB(Context context, List<SakuraResult> data) {
         this.context = context;
         this.data = data;
     }
@@ -52,7 +50,6 @@ public class WordRecyclerViewAdapterB extends Adapter<ViewHolder> {
         return data.size() == 0 ? 0 : data.size() + 1;
     }
 
-
     @Override
     public int getItemViewType(int position) {
         if(position == 0){
@@ -61,9 +58,7 @@ public class WordRecyclerViewAdapterB extends Adapter<ViewHolder> {
         else{
             return TYPE_ITEM;
         }
-
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -71,35 +66,31 @@ public class WordRecyclerViewAdapterB extends Adapter<ViewHolder> {
             CardView view = new CardView(context);
             RecyclerView.LayoutParams param = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, GlobalParams.TAB_LAYOUT_HEIGHT);
             view.setLayoutParams(param);
-            HeadViewHolder holder = new HeadViewHolder(view);
-            return holder;
+            return new HeadViewHolder(view);
         }
         if (viewType == TYPE_ITEM) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_word, parent,
+            View view = LayoutInflater.from(context).inflate(R.layout.item_sentence, parent,
                     false);
             return new ItemViewHolder(view);
         }
         return null;
     }
 
-
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
-            //holder.tv.setText(data.get(position));
-            WordResult wordResult = data.get(position-1);
-            ((ItemViewHolder) holder).tvWord.setText(wordResult.getWd_name());
-            ((ItemViewHolder) holder).tvKanna.setText(wordResult.getWd_kana());
-            int tone = wordResult.getWd_tone();
-            ((ItemViewHolder) holder).tvTone.setText(BusiUtils.getToneEmoji(tone));
-            //得到动词类型（他动词、自动词）
-            String verbTypeStr = wordResult.getWd_verb_type_name();
-            //得到动词属于几段（一段、五段）
-            String wdTypeStr = wordResult.getWd_part_speech_name();
-            boolean empty = StringUtil.isEmpty(verbTypeStr);
-            String tempString = empty?wdTypeStr:(verbTypeStr+"·")+BusiUtils.getVerbTypeByInt(wdTypeStr);
-            ((ItemViewHolder) holder).tvType.setText("【"+tempString+"】");
-            ((ItemViewHolder) holder).tvCn.setText(wordResult.getWd_name_cn());
+            SakuraResult skrResult = data.get(position-1);
+            ((ItemViewHolder) holder).tvNo.setText(String.valueOf(position));
+
+            String tmpString;
+            if(!GlobalParams.showNihonngo)
+            {
+                tmpString = skrResult.getSkrSentenceCn().replace("|", "\n");
+                ((ItemViewHolder) holder).tvSentence.setText(tmpString);
+            }else{
+                tmpString = skrResult.getSkrSentenceJP().replace("|", "\n");
+                ((ItemViewHolder) holder).tvSentence.setText(tmpString);
+            }
 
             if (onItemClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -125,19 +116,16 @@ public class WordRecyclerViewAdapterB extends Adapter<ViewHolder> {
 
     static class ItemViewHolder extends ViewHolder {
 
-        TextView tvWord;
-        TextView tvKanna;
-        TextView tvType;
-        TextView tvCn;
-        TextView tvTone;
+        TextView tvSentence;
+        /**
+         * 句子序号
+         */
+        TextView tvNo;
 
         public ItemViewHolder(View view) {
             super(view);
-            tvTone = (TextView) view.findViewById(R.id.tv_tone);
-            tvWord = (TextView) view.findViewById(R.id.tv_word);
-            tvKanna = (TextView) view.findViewById(R.id.tv_kanna);
-            tvType = (TextView) view.findViewById(R.id.tv_wordtype);;
-            tvCn = (TextView) view.findViewById(R.id.tv_name_cn);
+            tvSentence = (TextView) view.findViewById(R.id.tv_sentence);
+            tvNo = (TextView) view.findViewById(R.id.tv_no);
         }
     }
 

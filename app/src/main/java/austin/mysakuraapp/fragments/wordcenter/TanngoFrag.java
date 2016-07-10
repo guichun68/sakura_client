@@ -43,22 +43,22 @@ public class TanngoFrag extends Fragment {
             case 0://名词
                 String[] stringArray = {"动物","植物","交通","其他"};
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,stringArray);
-                bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeNoun);
+                bundle.putInt(ArgumentKey.WordCenterType,ConstantValue.WordTypeNoun);
                 UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, FragTAG.FRAG_TAG_NOUN);
                 break;
             case 1://动词
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.verb_tab_title));
-                bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeVerb);
+                bundle.putInt(ArgumentKey.WordCenterType,ConstantValue.WordTypeVerb);
                 UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, FragTAG.FRAG_TAG_VERB);
                 break;
             case 2://形容词
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.adj_tab_title));
-                bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeAdj);
+                bundle.putInt(ArgumentKey.WordCenterType,ConstantValue.WordTypeAdj);
                 UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, FragTAG.FRAG_TAG_ADJ);
                 break;
             case 3://其他
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.other_tab_title));
-                bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeOther);
+                bundle.putInt(ArgumentKey.WordCenterType,ConstantValue.WordTypeOther);
                 UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, FragTAG.FRAG_TAG_OTHER);
                 break;
 

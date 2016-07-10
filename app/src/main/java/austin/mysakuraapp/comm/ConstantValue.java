@@ -19,6 +19,7 @@ public interface ConstantValue {
 	 */
 	  String FRAG_TAG_HOME = "HOME_FRAG";
 	  String FRAG_TAG_WORD_DETAIL = "WORD_DETAIL";
+	  String FRAG_TAG_SENTENCE_DETAIL = "sakura_sentence_frg";
 	  String FRAG_TAG_MENU = "MENU";
 	  String FRAG_TAG_LOGIN = "LOGIN_FRAG";
 	  String FRAG_TAG_REGIST = "LOGIN_REGIST";
@@ -122,9 +123,9 @@ public interface ConstantValue {
 	 * 接尾词
 	 */
 	  int OTHER_TYPE_TWO = 32;
-	
-	  String FRAG_TAG_SENTENCE_DETAIL = "sakura_sentence_frg";
-	
+
+
+
 	/**
 	 * 保存有wordCenter选项卡中侧边栏条目的集合的key（存储在SharedPreference）
 	 */
@@ -150,7 +151,7 @@ public interface ConstantValue {
 	int WHAT_GET_GRAMMAR = 777;
 	int WHAT_BASE = 888;
 
-	String WordCenterType = "word_center_type";
+
 	int WordTypeNoun = 0,WordTypeVerb=1,WordTypeAdj=2,WordTypeOther=3;
 
 }

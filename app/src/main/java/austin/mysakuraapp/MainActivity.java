@@ -24,6 +24,8 @@ import austin.mysakuraapp.fragments.SetingFrag;
 import austin.mysakuraapp.fragments.SkrBunnpo.SkrBunnpoFrag;
 import austin.mysakuraapp.fragments.skrTanngo.SkrTanngoFrag;
 import austin.mysakuraapp.fragments.wordcenter.TanngoFrag;
+import austin.mysakuraapp.utils.UIManager;
+import austin.mysakuraapp.utils.UIUtil;
 import austin.mysakuraapp.viewfeature.IMainView;
 import austin.mysakuraapp.views.lazyviewpager.LazyViewPager;
 
@@ -132,7 +134,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
             if(GlobalParams.foreFrag instanceof SkrBunnpoFrag){
                 //TODO do sth;
-//                ((SkrBunnpoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
+                ((SkrBunnpoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
                 return;
             }
             if(GlobalParams.foreFrag instanceof SkrTanngoFrag){
@@ -371,7 +373,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 refreshMenu(getResources().getStringArray(R.array.bunnpo_side));
                 //还原上次离开本页面时的角标的字体颜色
                 mSidebarMenus.get(GlobalParams.skrBunnpoSidePosition).setTextColor(getResources().getColor(R.color.slideMenuTextClickedColor));
-
+                if(GlobalParams.isFirstComeInSkrBunnpo){
+                    skrBunnpo.replaceContentViewBySidePosition(0);
+                    GlobalParams.isFirstComeInSkrBunnpo = false;
+                }
                 GlobalParams.foreFrag = skrBunnpo;
                 refreshToggle(R.id.tv_title_skr_bunnpo);
                 break;
@@ -428,6 +433,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private boolean isConfirmExitApp = false;
     @Override
     public void onBackPressed() {
+        UIManager.getInstance().popBackStack(1);
         if(!isConfirmExitApp){
             showExitDialog();
         }else{
@@ -444,6 +450,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 dialog.dismiss();
                 isConfirmExitApp = true;
                 GlobalParams.isFirstComeInSkrTanngo = true;
+                GlobalParams.isFirstComeInSkrBunnpo = true;
                 MainActivity.this.onBackPressed();
             }
         });

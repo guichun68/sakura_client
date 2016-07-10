@@ -16,4 +16,6 @@ public interface IWordModel {
      * @param what 标识
      */
     void getWordData(String url, HashMap param, OnResultListener listener,int what);
+
+    void getSakuraBunnpo(String url,HashMap<String, String> param, OnResultListener onResultListener);
 }

@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import java.util.List;
-
 import austin.mysakuraapp.MainActivity;
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.adapters.WordRecyclerViewAdapter;
@@ -27,13 +25,13 @@ import austin.mysakuraapp.presentation.INounWordPresenter;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
 import austin.mysakuraapp.utils.UIManager;
 import austin.mysakuraapp.utils.UIUtil;
-import austin.mysakuraapp.viewfeature.INounWordView;
+import austin.mysakuraapp.viewfeature.IView;
 
 /**
  * Created by austin on 2016/6/28.
  * Desc: 名词类别，包括各种名词小类
  */
-public abstract class BaseWordPagerInner implements INounWordView,IFragmentListener {
+public abstract class BaseWordPagerInner implements IView,IFragmentListener {
 
     View view;
     INounWordPresenter presenter;

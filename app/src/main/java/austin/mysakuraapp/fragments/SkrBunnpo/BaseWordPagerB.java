@@ -26,7 +26,7 @@ import austin.mysakuraapp.comm.GlobalParams;
 
 /**
  * Created by austin on 2016/6/28.
- * Desc: 樱花单词Fragment
+ * Desc: 樱花语法Fragment
  */
 public class BaseWordPagerB extends Fragment {
 
@@ -41,14 +41,14 @@ public class BaseWordPagerB extends Fragment {
     int disy;//一次滑动的距离
     //顶部tab导航栏标题集合
     private String[] titles;
-    private int wordType;//要实例化的单词页面级别类型（如1级别？2级别？）,从ConstantValue的wordTypeNoun等取值
+    private int skrLevel;//要实例化的单词页面级别类型（如1级别？2级别？）,从ConstantValue的wordTypeNoun等取值
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_wordcenter,container,false);
         titles = getArguments().getStringArray(ArgumentKey.TitleArguBundle);
-        wordType = getArguments().getInt(ConstantValue.WordCenterType);
+        skrLevel = getArguments().getInt(ArgumentKey.SkrWordLevel);
         bindView();
         initData();
         configView();
@@ -128,14 +128,7 @@ public class BaseWordPagerB extends Fragment {
 
     public void initSpecifyTypeViews() {
         pagers.clear();
-        switch (wordType){
-            case ConstantValue.LEVEL1:
-                for(int i=0;i<12;i++){
-                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL1);
-                    pagers.add(pager);
-                    pager.setParentFrag(this);
-                }
-            break;
+        switch (skrLevel){
             case ConstantValue.LEVEL2:
                 for(int i=0;i<12;i++){
                     BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL2);

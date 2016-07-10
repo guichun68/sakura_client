@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import java.util.List;
+
 import austin.mysakuraapp.MainActivity;
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.adapters.WordRecyclerViewAdapter;
@@ -20,21 +22,21 @@ import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.engine.IFragmentListener;
 import austin.mysakuraapp.engine.OnResultListener;
 import austin.mysakuraapp.fragments.WordDetailFragment;
-import austin.mysakuraapp.model.bean.WordResult;
-import austin.mysakuraapp.presentation.INounWordPresenter;
+import austin.mysakuraapp.model.bean.SakuraResult;
+import austin.mysakuraapp.presentation.ISakuraBunnpoPresenter;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
 import austin.mysakuraapp.utils.UIManager;
 import austin.mysakuraapp.utils.UIUtil;
-import austin.mysakuraapp.viewfeature.INounWordView;
+import austin.mysakuraapp.viewfeature.IView;
 
 /**
  * Created by austin on 2016/6/28.
- * Desc: 名词类别，包括各种名词小类
+ * Desc: 文法课时，包括各课(unit)语法
  */
-public abstract class BaseWordPagerInnerB implements INounWordView,IFragmentListener {
+public abstract class BaseWordPagerInnerB implements IView,IFragmentListener {
 
     View view;
-    INounWordPresenter presenter;
+    ISakuraBunnpoPresenter presenter;
     private Context context;
 
     private Fragment mParentFrag;
@@ -50,21 +52,17 @@ public abstract class BaseWordPagerInnerB implements INounWordView,IFragmentList
     /**
      * 当前展示的子页数据类型，如在名词界面时，代表 动物、植物等分类请求参数id
      */
-    private int mClassiNo;//当前页面的类别，动物：1 ；植物2； 交通工具类3，其他4; 或者代表sakura词汇中心某个级别下的课时
-    /**
-     * 分页，默认第一页
-     */
-    private Integer mPageNo = 1;
-    private WordRecyclerViewAdapterB adapter;
+    private int mUnit;//代表sakura词汇中心某个级别下的课时
+    private SkrRecyclerViewAdapterB adapter;
 
 //    boolean isLoading;
     private FragmentManager mFragManager;
 
-    public BaseWordPagerInnerB(Context context, int classItemId, Integer level) {
-        mClassiNo = classItemId;
+    public BaseWordPagerInnerB(Context context, int mUnit, Integer level) {
+        this.mUnit = mUnit;
         this.context = context;
         this.level = level;
-        GlobalParams.iWord = this;
+        GlobalParams.iFragmentListenerSakuraGrammar=this;
         mFragManager = ((MainActivity)context).getSupportFragmentManager();
         initPresenter();
         bindView();
@@ -72,15 +70,15 @@ public abstract class BaseWordPagerInnerB implements INounWordView,IFragmentList
     }
 
     private void initPresenter() {
-        this.presenter = BeanFactoryUtil.getImpl(INounWordPresenter.class);
+        this.presenter = BeanFactoryUtil.getImpl(ISakuraBunnpoPresenter.class);
         if (presenter == null) {
-            throw new NullPointerException("check if you forget to write INounWordPresenter's implement class in properties file ?");
+            throw new NullPointerException("check if you forget to write ISakuraBunnpoPresenter's implement class in properties file ?");
         }
         presenter.init(this);
     }
 
     public void bindView() {
-        adapter = new WordRecyclerViewAdapterB(context, presenter.getAdapterData());
+        adapter = new SkrRecyclerViewAdapterB(context, presenter.getSkrAdapterData());
         view = View.inflate(context, R.layout.wordpager, null);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -88,7 +86,6 @@ public abstract class BaseWordPagerInnerB implements INounWordView,IFragmentList
 
     public void configView() {
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blueStatus);
-        //进入时本页时默认自动刷新
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -112,21 +109,21 @@ public abstract class BaseWordPagerInnerB implements INounWordView,IFragmentList
             }
         });
         //添加点击事件
-        adapter.setOnItemClickListener(new WordRecyclerViewAdapterB.OnItemClickListener() {
+        adapter.setOnItemClickListener(new SkrRecyclerViewAdapterB.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 GlobalParams.globalWordAdapterB = adapter;
 //                Log.d(TAG, "item position = " + position);
                 if(adapter.getItemViewType(position)!=WordRecyclerViewAdapter.TYPE_ITEM)return;
-                WordResult word = adapter.getData().get(position-1);
-                WordDetailFragment target = (WordDetailFragment) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_WORD_DETAIL);
+                SakuraResult sentence = adapter.getData().get(position-1);
+                SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
                 if(target == null){
-                    target = new WordDetailFragment();
+                    target = new SakuraSentceDetailFrg();
                 }
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(ArgumentKey.WordArguBundleKey,word);
+                bundle.putSerializable(ArgumentKey.SentenceArguBundleKey,sentence);
                 bundle.putInt(ArgumentKey.position,position-1);
-                UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_WORD_DETAIL);
+                UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
             }
 
             @Override
@@ -140,16 +137,10 @@ public abstract class BaseWordPagerInnerB implements INounWordView,IFragmentList
     public abstract void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy);
 
     private void refresh() {
-        mPageNo = 1;
-        presenter.getWordItemData(mClassiNo, level, mPageNo, true, new OnResultListener() {
+        presenter.getClassifyItemData(level,mUnit,new OnResultListener() {
             @Override
             public void onGetData(Object obj, int what) {
                 {
-                    dismisProgress();
-                    if (obj == null) {
-                        UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));
-                        return;
-                    }
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -197,14 +188,14 @@ public abstract class BaseWordPagerInnerB implements INounWordView,IFragmentList
             UIUtil.showToastSafe("没了");
             return;
         }
-        WordResult word = GlobalParams.globalWordAdapterB.getData().get(currtPosition + 1);
+        SakuraResult word = GlobalParams.globalWordAdapterB.getData().get(currtPosition + 1);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ArgumentKey.WordArguBundleKey,word);
+        bundle.putSerializable(ArgumentKey.SentenceArguBundleKey,word);
         bundle.putInt(ArgumentKey.position,currtPosition+1);
-        WordDetailFragment target = (WordDetailFragment) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_WORD_DETAIL);
+        SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
         if(target == null){
-            target = new WordDetailFragment();
-            UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_WORD_DETAIL);
+            target = new SakuraSentceDetailFrg();
+            UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
         }else{
             target.refreshUIAdv(currtPosition+1,word);
         }
@@ -216,16 +207,16 @@ public abstract class BaseWordPagerInnerB implements INounWordView,IFragmentList
             UIUtil.showToastSafe("没了");
             return;
         }
-        WordResult word = GlobalParams.globalWordAdapterB.getData().get(currtPosition - 1);
+        SakuraResult sakura = GlobalParams.globalWordAdapterB.getData().get(currtPosition - 1);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ArgumentKey.WordArguBundleKey,word);
+        bundle.putSerializable(ArgumentKey.SentenceArguBundleKey,sakura);
         bundle.putInt(ArgumentKey.position,currtPosition-1);
-        WordDetailFragment target = (WordDetailFragment) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_WORD_DETAIL);
+        SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
         if(target == null){
-            target = new WordDetailFragment();
-            UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_WORD_DETAIL);
+            target = new SakuraSentceDetailFrg();
+            UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
         }else{
-            target.refreshUIAdv(currtPosition-1,word);
+            target.refreshUIAdv(currtPosition-1,sakura);
         }
     }
 }

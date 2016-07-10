@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import austin.mysakuraapp.R;
-import austin.mysakuraapp.comm.BaseApplication;
 import austin.mysakuraapp.comm.ConstantValue;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.engine.OnResultListener;
@@ -22,7 +21,7 @@ import austin.mysakuraapp.utils.BeanFactoryUtil;
 import austin.mysakuraapp.utils.BusiUtils;
 import austin.mysakuraapp.utils.StringUtil;
 import austin.mysakuraapp.utils.UIUtil;
-import austin.mysakuraapp.viewfeature.INounWordView;
+import austin.mysakuraapp.viewfeature.IView;
 
 /**
  * Created by austin on 2016/6/29.
@@ -32,15 +31,14 @@ public class NounWordPresenter implements INounWordPresenter {
 
     String TAG = NounWordPresenter.class.getSimpleName();
     IWordModel model;
-    INounWordView view;
-    private List<WordResult> wordsTemp;//当前列表所有数据（已经刷新出来的），点击"上一个"、"下一个"时从中取值。
+    IView view;
     /**
      * 适配器所需数据
      */
     private List<WordResult> mWordsList = new ArrayList<WordResult>();
 
     @Override
-    public void init(INounWordView view) {
+    public void init(IView view) {
         this.view = view;
         model = BeanFactoryUtil.getImpl(IWordModel.class);
     }
@@ -51,12 +49,6 @@ public class NounWordPresenter implements INounWordPresenter {
             throw new NullPointerException("whether you forget to call init() method to init NounWordView in its view(activity or fragment)?");
         }
         HashMap<String, String> param = new HashMap<String, String>();
-        if (isRefresh) {
-            if (wordsTemp != null) {
-                wordsTemp.clear();
-            }
-//            view.setPageNo(1);
-        }
 
         param.put("classifyType", classifyType + "");
         param.put("pageNo", pageNo + "");
@@ -144,6 +136,8 @@ public class NounWordPresenter implements INounWordPresenter {
     public List<WordResult> getAdapterData(){
          return mWordsList;
     }
+
+
 
 
 }

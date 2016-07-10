@@ -4,15 +4,15 @@ import java.util.List;
 
 import austin.mysakuraapp.engine.OnResultListener;
 import austin.mysakuraapp.model.bean.WordResult;
-import austin.mysakuraapp.viewfeature.INounWordView;
+import austin.mysakuraapp.viewfeature.IView;
 
 /**
  * Created by austin on 2016/6/29.
- * Desc: 名词页面行为接口
+ * Desc: 名词(单词中心和樱花单词)页面和语法页面行为接口
  */
 public interface INounWordPresenter {
 
-    void init(INounWordView view);
+    void init(IView view);
 
     /**
      * 获取单词

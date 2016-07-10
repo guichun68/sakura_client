@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import austin.mysakuraapp.adapters.WordRecyclerViewAdapter;
 import austin.mysakuraapp.engine.IFragmentListener;
 import austin.mysakuraapp.engine.TabChangedListener;
-import austin.mysakuraapp.fragments.SkrBunnpo.WordRecyclerViewAdapterB;
+import austin.mysakuraapp.fragments.SkrBunnpo.SkrRecyclerViewAdapterB;
 import austin.mysakuraapp.fragments.skrTanngo.WordRecyclerViewAdapterS;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
 
@@ -68,6 +68,7 @@ public class GlobalParams {
 
 	}
 	public static boolean isFirstComeInSkrTanngo = true;//是否是第一次进入sakura单词页
+	public static boolean isFirstComeInSkrBunnpo = true;//是否是第一次进入sakura 语法页
 	public static boolean isLoggedIn;
 	public static AppCompatActivity MAIN;
 	/**
@@ -91,8 +92,8 @@ public class GlobalParams {
 	public static boolean showNihonngo = false;//sakura语法页显示日文？默认显示中文。
 	public static TabChangedListener mTabChangedListener;//BaseItemPager类使用的tab改变监听器
 	public static TabChangedListener mTabChangedLisBaseItemPager;
-
-	public static Integer TAB_LAYOUT_HEIGHT,TAB_LAYOUT_WIDTH;
+	//记录顶部TabLayout的高度，当实际TabLayout绘制完成，有高度数值时回调并将本变量赋值；本变量在所有带tabLayout控件的frag中共用
+	public static Integer TAB_LAYOUT_HEIGHT;
 	public static Fragment foreFrag;
 	/**
 	 * 缓存单词中心的adapter
@@ -105,6 +106,6 @@ public class GlobalParams {
 	/**
 	 * 樱花语法页的adapter
 	 */
-	public static WordRecyclerViewAdapterB globalWordAdapterB;
+	public static SkrRecyclerViewAdapterB globalWordAdapterB;
 	public static boolean isDrawerOpened ;
 }
