@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import austin.mysakuraapp.adapters.WordRecyclerViewAdapter;
 import austin.mysakuraapp.engine.IFragmentListener;
 import austin.mysakuraapp.engine.TabChangedListener;
+import austin.mysakuraapp.fragments.SkrBunnpo.WordRecyclerViewAdapterB;
 import austin.mysakuraapp.fragments.skrTanngo.WordRecyclerViewAdapterS;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
 
@@ -101,5 +102,9 @@ public class GlobalParams {
 	 * 樱花日语单词页的adapter
 	 */
 	public static WordRecyclerViewAdapterS globalWordAdapterS;
+	/**
+	 * 樱花语法页的adapter
+	 */
+	public static WordRecyclerViewAdapterB globalWordAdapterB;
 	public static boolean isDrawerOpened ;
 }

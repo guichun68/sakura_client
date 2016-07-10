@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<!--
+  本布局为樱花语法页面(SkrBunnpoFrag)的布局,
+  完全复制自frag.xml (仅改了FrameLayout的id加了后缀2)
+ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragmentLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tl_tablayout"
+    <FrameLayout
+        android:id="@+id/fl_content3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        android:background="@drawable/sel_click_btn_login"
-        app:tabIndicatorColor="@color/indicator_color"
-        app:tabTextColor="@color/tran_white"
-        app:tabSelectedTextColor="@color/main_white"
-        />
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_tabvp"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-</LinearLayout>
+        android:layout_height="match_parent"/>
+</RelativeLayout>
