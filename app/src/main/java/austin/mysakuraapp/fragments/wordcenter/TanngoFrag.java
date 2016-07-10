@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.comm.ArgumentKey;
 import austin.mysakuraapp.comm.ConstantValue;
+import austin.mysakuraapp.comm.FragTAG;
 import austin.mysakuraapp.utils.UIManager;
 
 /**
@@ -43,22 +44,22 @@ public class TanngoFrag extends Fragment {
                 String[] stringArray = {"动物","植物","交通","其他"};
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,stringArray);
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeNoun);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, ConstantValue.FRAG_TAG_NOUN);
+                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, FragTAG.FRAG_TAG_NOUN);
                 break;
             case 1://动词
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.verb_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeVerb);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, ConstantValue.FRAG_TAG_VERB);
+                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, FragTAG.FRAG_TAG_VERB);
                 break;
             case 2://形容词
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.adj_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeAdj);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, ConstantValue.FRAG_TAG_ADJ);
+                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, FragTAG.FRAG_TAG_ADJ);
                 break;
             case 3://其他
                 bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.other_tab_title));
                 bundle.putInt(ConstantValue.WordCenterType,ConstantValue.WordTypeOther);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, ConstantValue.FRAG_TAG_OTHER);
+                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content,false,bundle, FragTAG.FRAG_TAG_OTHER);
                 break;
 
         }

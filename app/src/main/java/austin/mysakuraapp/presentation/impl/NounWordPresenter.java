@@ -83,7 +83,7 @@ public class NounWordPresenter implements INounWordPresenter {
 
         @Override
         public void onGetData(Object obj, int what) {
-            Log.e(TAG, "获取数据成功");
+//            Log.e(TAG, "获取数据成功");
             this.what = what;
             processData(obj.toString(), isRefresh);
         }

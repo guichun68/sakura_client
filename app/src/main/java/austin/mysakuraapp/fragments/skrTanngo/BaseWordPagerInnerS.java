@@ -55,9 +55,9 @@ public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentList
      * 分页，默认第一页
      */
     private Integer mPageNo = 1;
-    private WordRecyclerViewAdapter adapter;
+    private WordRecyclerViewAdapterS adapter;
 
-    boolean isLoading;
+//    boolean isLoading;
     private FragmentManager mFragManager;
 
     public BaseWordPagerInnerS(Context context, int classItemId, Integer level) {
@@ -80,7 +80,7 @@ public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentList
     }
 
     public void bindView() {
-        adapter = new WordRecyclerViewAdapter(context, presenter.getAdapterData());
+        adapter = new WordRecyclerViewAdapterS(context, presenter.getAdapterData());
         view = View.inflate(context, R.layout.wordpager, null);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -103,55 +103,19 @@ public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentList
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-//                Log.d("test", "StateChanged = " + newState);
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 ctrlToolBarShowOrHide(recyclerView,dx,dy);
-
-                int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-                if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
-//                    Log.d("test", "loading executed：isLoading=" + isLoading);
-
-                    boolean isRefreshing = mSwipeRefreshLayout.isRefreshing();
-                    if (isRefreshing) {
-                        adapter.notifyItemRemoved(adapter.getItemCount());
-                        return;
-                    }
-                    if (!isLoading) {
-//                        Log.e(TAG, "加载更多");
-                        isLoading = true;
-                        presenter.getWordItemData(mClassiNo, level, ++mPageNo, false, new OnResultListener() {
-
-                            @Override
-                            public void onGetData(Object obj, int what) {
-                                dismisProgress();
-                                if (obj == null) {
-                                    mPageNo--;
-                                    UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));
-                                    return;
-                                }
-                                adapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onFailure(String msg, int what) {
-                                dismisProgress();
-                                mPageNo--;
-                                UIUtil.showToastSafe(msg);
-                            }
-                        });
-                    }
-                }
             }
         });
         //添加点击事件
-        adapter.setOnItemClickListener(new WordRecyclerViewAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new WordRecyclerViewAdapterS.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                GlobalParams.globalWordAdapter = adapter;
+                GlobalParams.globalWordAdapterS = adapter;
 //                Log.d(TAG, "item position = " + position);
                 if(adapter.getItemViewType(position)!=WordRecyclerViewAdapter.TYPE_ITEM)return;
                 WordResult word = adapter.getData().get(position-1);
@@ -204,7 +168,6 @@ public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentList
 
     @Override
     public void dismisProgress() {
-        isLoading = false;
         mSwipeRefreshLayout.setRefreshing(false);
         View lastV = layoutManager.findViewByPosition(layoutManager.findLastVisibleItemPosition());
         if (lastV != null) {
@@ -230,11 +193,11 @@ public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentList
 
     @Override
     public void openNextWordDetailFrg(int currtPosition) {
-        if(currtPosition >= GlobalParams.globalWordAdapter.getData().size()-1){
+        if(currtPosition >= GlobalParams.globalWordAdapterS.getData().size()-1){
             UIUtil.showToastSafe("没了");
             return;
         }
-        WordResult word = GlobalParams.globalWordAdapter.getData().get(currtPosition + 1);
+        WordResult word = GlobalParams.globalWordAdapterS.getData().get(currtPosition + 1);
         Bundle bundle = new Bundle();
         bundle.putSerializable(ArgumentKey.WordArguBundleKey,word);
         bundle.putInt(ArgumentKey.position,currtPosition+1);
@@ -253,7 +216,7 @@ public abstract class BaseWordPagerInnerS implements INounWordView,IFragmentList
             UIUtil.showToastSafe("没了");
             return;
         }
-        WordResult word = GlobalParams.globalWordAdapter.getData().get(currtPosition - 1);
+        WordResult word = GlobalParams.globalWordAdapterS.getData().get(currtPosition - 1);
         Bundle bundle = new Bundle();
         bundle.putSerializable(ArgumentKey.WordArguBundleKey,word);
         bundle.putInt(ArgumentKey.position,currtPosition-1);

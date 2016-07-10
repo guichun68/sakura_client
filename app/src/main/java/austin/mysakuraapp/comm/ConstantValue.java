@@ -27,8 +27,8 @@ public interface ConstantValue {
 	 */
 	  String FRAG_TAG_GRAMMAR="FRAG_TAG_GRAMMAR";
 
-	String FRAG_TAG_NOUN="FRAG_TAG_NOUN",FRAG_TAG_VERB = "FRAG_TAG_VERB",FRAG_TAG_ADJ="Frag_TAG_adj",
-	FRAG_TAG_OTHER = "FRAG_TAG_OTHER";
+
+
 
 	/**
 	 * 点击个人中心的“语法和文化”进入后的页面TAG
