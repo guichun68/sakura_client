@@ -1,7 +1,5 @@
 package austin.mysakuraapp.presentation.impl;
 
-import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.List;
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.engine.OnResultListener;
-import austin.mysakuraapp.model.IWordModel;
+import austin.mysakuraapp.model.IModel;
 import austin.mysakuraapp.model.bean.SakuraResult;
 import austin.mysakuraapp.presentation.ISakuraBunnpoPresenter;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
@@ -26,7 +24,7 @@ import austin.mysakuraapp.viewfeature.IView;
 public class SakuraBunnpoPresenter implements ISakuraBunnpoPresenter{
 
     String TAG = SakuraBunnpoPresenter.class.getSimpleName();
-    IWordModel model;
+    IModel model;
     IView view;
     /**
      * 适配器所需数据
@@ -37,7 +35,7 @@ public class SakuraBunnpoPresenter implements ISakuraBunnpoPresenter{
     @Override
     public void init(IView view) {
         this.view = view;
-        model = BeanFactoryUtil.getImpl(IWordModel.class);
+        model = BeanFactoryUtil.getImpl(IModel.class);
     }
 
     @Override
@@ -56,7 +54,6 @@ public class SakuraBunnpoPresenter implements ISakuraBunnpoPresenter{
         model.getSakuraBunnpo(GlobalParams.URL_SAKURA_CLASS_ITEM, param, new OnResultListener() {
             @Override
             public void onGetData(Object obj, int what) {
-                UIUtil.showTestLog(TAG,obj.toString());
                 view.dismisProgress();
                 if(StringUtil.isEmpty(obj.toString())){
                     UIUtil.showToastSafe(UIUtil.getString(R.string.no_enough_data));

@@ -1,5 +1,6 @@
 package austin.mysakuraapp.fragments.SkrBunnpo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,8 +16,9 @@ import android.widget.TextView;
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.comm.ArgumentKey;
 import austin.mysakuraapp.comm.ConstantValue;
+import austin.mysakuraapp.comm.FragTAG;
 import austin.mysakuraapp.comm.GlobalParams;
-import austin.mysakuraapp.fragments.GrammarWebFragment;
+import austin.mysakuraapp.fragments.GrammarWebAct;
 import austin.mysakuraapp.model.bean.SakuraResult;
 import austin.mysakuraapp.utils.StringUtil;
 import austin.mysakuraapp.utils.UIManager;
@@ -146,16 +148,20 @@ public class SakuraSentceDetailFrg extends Fragment implements OnClickListener {
 		mTvMore.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if(mFrgManager ==null){
+/*				if(mFrgManager ==null){
 					mFrgManager = getActivity().getSupportFragmentManager();
 				}
-				Fragment target = mFrgManager.findFragmentByTag(ConstantValue.FRAG_TAG_GRAMMAR);
+				Fragment target = mFrgManager.findFragmentByTag(FragTAG.FRAG_TAG_GRAMMAR);
 				if(target == null){
 					target = new GrammarWebFragment();
-				}
-				Bundle bundle = new Bundle();
-				bundle.putString("url",GlobalParams.BASE_URL+mSakuraResult.getGrammar().getUrl());
-				UIManager.getInstance().changeFragmentAndSaveViews(SakuraSentceDetailFrg.this,target,true,bundle,ConstantValue.FRAG_TAG_GRAMMAR);
+				}*/
+				Intent intent = new Intent(getActivity(), GrammarWebAct.class);
+				intent.putExtra("url",GlobalParams.BASE_URL+mSakuraResult.getGrammar().getUrl());
+				getActivity().startActivity(intent);
+//
+//				Bundle bundle = new Bundle();
+//				bundle.putString("url",GlobalParams.BASE_URL+mSakuraResult.getGrammar().getUrl());
+//				UIManager.getInstance().changeFragmentAndSaveViews(SakuraSentceDetailFrg.this,target,true,bundle,FragTAG.FRAG_TAG_GRAMMAR);
 			}
 		});
 	}

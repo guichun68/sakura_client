@@ -20,4 +20,6 @@
   <dimen name="marginRight">14dp</dimen>
   <dimen name="textSize_small">14sp</dimen>
   <dimen name="tabLayout_size">35dp</dimen>
+  <dimen name="setTextPading">25dp</dimen>
+  <dimen name="setTextSize">18sp</dimen>
 </resources>

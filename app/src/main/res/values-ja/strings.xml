@@ -375,5 +375,9 @@
     <!-- tencent IM end-->
     <string name="userNameIsNull">请输入用户名.</string>
     <string name="hintReEnterPwd">再度パスワードを入力</string>
+    <string name="check_update">检查更新</string>
+    <string name="feedback">意见反馈</string>
+    <string name="switch_tip">语法页显示日语</string>
+    <string name="cultrue">语法/文化</string>
 </resources>
 

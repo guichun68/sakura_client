@@ -4,14 +4,13 @@ import java.util.HashMap;
 
 import austin.mysakuraapp.engine.BaseEngine;
 import austin.mysakuraapp.engine.OnResultListener;
-import austin.mysakuraapp.model.IWordModel;
-import austin.mysakuraapp.presentation.INounWordPresenter;
+import austin.mysakuraapp.model.IModel;
 
 /**
  * Created by austin on 2016/6/29.
  * Desc:
  */
-public class WordModel extends BaseEngine implements IWordModel {
+public class Model extends BaseEngine implements IModel {
 
     @Override
     public void getWordData(String url, HashMap param, OnResultListener listener,int what) {

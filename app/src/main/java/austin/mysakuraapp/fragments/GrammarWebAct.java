@@ -11,32 +11,43 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import austin.mysakuraapp.BaseActivity;
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.utils.UIManager;
 
 
-public class GrammarWebFragment extends Fragment {
-	private static final String TAG = GrammarWebFragment.class.getSimpleName();
+public class GrammarWebAct extends BaseActivity {
+	private static final String TAG = GrammarWebAct.class.getSimpleName();
 	private LinearLayout mLlGrammar;
-//	private TextView mTvTitle,mTvRefresh;
-	private ImageButton mIbBack;
 	private WebView mWebView;
 	private FrameLayout loading_view;
 	private String url;
 	private Toolbar mToolbar;
+	private ImageView ivBack;
+	private TextView tvTitle;
 
-	public View initView(LayoutInflater inflater) {
-		Bundle bundle = getArguments();
-		url = (String) bundle.get("url");
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.frag_grammar_web);
+		initView();
+	}
 
-		View view = inflater.inflate(R.layout.frag_grammar_web, null);
-		mLlGrammar = (LinearLayout) view.findViewById(R.id.ll_grammar);
-		mToolbar = (Toolbar) view.findViewById(R.id.id_toolbar);
+	String title="";
+	public void initView() {
+		url = getIntent().getStringExtra("url");
+		title = getIntent().getStringExtra("title");
 
-		mToolbar.setTitle(R.string.about_more_grammar);
+		tvTitle = (TextView) findViewById(R.id.tv_title);
+		ivBack = (ImageView) findViewById(R.id.iv_left);
+		mLlGrammar = (LinearLayout) findViewById(R.id.ll_grammar);
+		mToolbar = (Toolbar) findViewById(R.id.id_toolbar);
+
+		tvTitle.setText(title);
 		mToolbar.setNavigationOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -44,24 +55,19 @@ public class GrammarWebFragment extends Fragment {
 			}
 		});
 
-		mWebView = (WebView) view.findViewById(R.id.wb_grammar_detail);
-		loading_view = (FrameLayout) view.findViewById(R.id.loading_view);
-//		mTvRefresh = (TextView) view.findViewById(R.id.tv_right);
-//		mTvRefresh.setVisibility(View.VISIBLE);
-//		mTvTitle.setText(R.string.about_more_grammar);
-		mIbBack.setVisibility(View.VISIBLE);
-		// 用户点击了标题栏最左侧的回退按钮
-		mIbBack.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				UIManager.getInstance().popBackStack(1);
-			}
-		});
+		mWebView = (WebView) findViewById(R.id.wb_grammar_detail);
+		loading_view = (FrameLayout) findViewById(R.id.loading_view);
 		mWebView.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				loading_view.setVisibility(View.GONE);
 				super.onPageFinished(view, url);
+			}
+		});
+		ivBack.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
 			}
 		});
 /*		mWebView.getSettings().setJavaScriptEnabled(true);//支持js
@@ -81,17 +87,16 @@ public class GrammarWebFragment extends Fragment {
 				mWebView.reload();
 			}
 		});*/
-		return view;
+
 	}
 
-
-	@Override
+/*	@Override
 	public void onHiddenChanged(boolean hidden) {
 		if(hidden){
 			mWebView.reload();
 		}
 		super.onHiddenChanged(hidden);
-	}
+	}*/
 
 	@Override
 	public void onStop() {

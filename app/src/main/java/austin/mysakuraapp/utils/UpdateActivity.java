@@ -1,7 +1,6 @@
 package austin.mysakuraapp.utils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -79,7 +78,8 @@ public class UpdateActivity extends Activity  {
 		 */
 		protected void showConfirmUpdateDialog() {
 			//对话框，他是activity的一部分。
-			AlertDialog.Builder adb = new AlertDialog.Builder(this);
+
+			android.support.v7.app.AlertDialog.Builder adb = new android.support.v7.app.AlertDialog.Builder(this);
 			adb.setTitle("升级提醒");
 			adb.setMessage(desc);
 //			adb.setCancelable(false);

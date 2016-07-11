@@ -18,6 +18,7 @@ import austin.mysakuraapp.R;
 import austin.mysakuraapp.adapters.WordRecyclerViewAdapter;
 import austin.mysakuraapp.comm.ArgumentKey;
 import austin.mysakuraapp.comm.ConstantValue;
+import austin.mysakuraapp.comm.FragTAG;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.engine.IFragmentListener;
 import austin.mysakuraapp.engine.OnResultListener;
@@ -116,14 +117,14 @@ public abstract class BaseWordPagerInnerB implements IView,IFragmentListener {
 //                Log.d(TAG, "item position = " + position);
                 if(adapter.getItemViewType(position)!=WordRecyclerViewAdapter.TYPE_ITEM)return;
                 SakuraResult sentence = adapter.getData().get(position-1);
-                SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
+                SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(FragTAG.FRAG_TAG_SENTENCE_DETAIL);
                 if(target == null){
                     target = new SakuraSentceDetailFrg();
                 }
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(ArgumentKey.SentenceArguBundleKey,sentence);
                 bundle.putInt(ArgumentKey.position,position-1);
-                UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
+                UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, FragTAG.FRAG_TAG_SENTENCE_DETAIL);
             }
 
             @Override
@@ -192,10 +193,10 @@ public abstract class BaseWordPagerInnerB implements IView,IFragmentListener {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ArgumentKey.SentenceArguBundleKey,word);
         bundle.putInt(ArgumentKey.position,currtPosition+1);
-        SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
+        SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(FragTAG.FRAG_TAG_SENTENCE_DETAIL);
         if(target == null){
             target = new SakuraSentceDetailFrg();
-            UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
+            UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, FragTAG.FRAG_TAG_SENTENCE_DETAIL);
         }else{
             target.refreshUIAdv(currtPosition+1,word);
         }
@@ -211,10 +212,10 @@ public abstract class BaseWordPagerInnerB implements IView,IFragmentListener {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ArgumentKey.SentenceArguBundleKey,sakura);
         bundle.putInt(ArgumentKey.position,currtPosition-1);
-        SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
+        SakuraSentceDetailFrg target = (SakuraSentceDetailFrg) mFragManager.findFragmentByTag(FragTAG.FRAG_TAG_SENTENCE_DETAIL);
         if(target == null){
             target = new SakuraSentceDetailFrg();
-            UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, ConstantValue.FRAG_TAG_SENTENCE_DETAIL);
+            UIManager.getInstance().changeFragmentAndSaveViews2(mParentFrag,target,true,bundle, FragTAG.FRAG_TAG_SENTENCE_DETAIL);
         }else{
             target.refreshUIAdv(currtPosition-1,sakura);
         }

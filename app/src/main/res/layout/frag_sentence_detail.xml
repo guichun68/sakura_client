@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/bg_wd" >
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:background="@mipmap/bg_wd">
     
    <LinearLayout
         android:id="@+id/ll_bottom"
@@ -84,10 +85,10 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="别经的大街小巷，中华人民共和国成立了。"
+	        tools:text="别经的大街小巷，中华人民共和国成立了。"
 	        android:paddingLeft="7dp"
 	        android:paddingRight="7dp"
-			android:textSize="25sp"
+			android:textSize="20sp"
 	        android:textColor="#882555"
 	        />
 	    
@@ -115,7 +116,7 @@
 			android:layout_marginTop="10dp"
 			android:textColor="#554433"
 			android:paddingLeft="10dp"
-			android:textSize="23sp"
+			android:textSize="20sp"
 			android:visibility="visible"
 			/>
 	    <TextView
@@ -127,7 +128,7 @@
 			android:paddingRight="10dp"
 			android:layout_marginTop="10dp"
 			android:paddingLeft="10dp"
-			android:textSize="23sp"
+			android:textSize="20sp"
 			android:visibility="visible"
 			android:textColor="@android:color/transparent"
 			android:background="#888888"

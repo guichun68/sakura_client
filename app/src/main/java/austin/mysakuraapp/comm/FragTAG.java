@@ -19,4 +19,23 @@ public interface FragTAG {
             Frag_TAG_LEVEL10="Frag_TAG_LEVEL10",
             Frag_TAG_LEVEL11="Frag_TAG_LEVEL11",
             Frag_TAG_LEVEL12="Frag_TAG_LEVEL12";
+    String TAG_ABOUT_ME = "about_me";
+
+
+    String FRAG_TAG_HOME = "HOME_FRAG";
+    String FRAG_TAG_WORD_DETAIL = "WORD_DETAIL";
+    String FRAG_TAG_SENTENCE_DETAIL = "sakura_sentence_frg";
+    String FRAG_TAG_MENU = "MENU";
+    String FRAG_TAG_LOGIN = "LOGIN_FRAG";
+    String FRAG_TAG_REGIST = "LOGIN_REGIST";
+    /**
+     * 语法详情web页面TAG
+     */
+    String FRAG_TAG_GRAMMAR="FRAG_TAG_GRAMMAR";
+
+    /**
+     * 点击个人中心的“语法和文化”进入后的页面TAG
+     */
+    String FRAG_TAG_GRAMMAR_LIST = "Frag_tag_grammar_list";
+    String TAG_GRAMMAR_LIST_ITEM_DETAIL = "FRAG_TAG_GRAMMAR_LIST_ITEM_DETAIL";
 }

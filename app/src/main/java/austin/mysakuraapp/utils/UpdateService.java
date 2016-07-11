@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.design.widget.Snackbar;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yolanda.nohttp.Response;
@@ -20,6 +21,9 @@ public class UpdateService extends Service implements HttpListener<JSONObject> {
 
 	private PackageManager pm;
 	private int currVersionCode;
+	private CheckUpdateCallBack callBack;
+
+
 	@Override
 	public void onCreate() {
 		
@@ -40,17 +44,17 @@ public class UpdateService extends Service implements HttpListener<JSONObject> {
 	}
 	
 	public class MyBinder extends Binder{
-		public void callCheckUpdate(){
-			checkUpdate();
+		public void callCheckUpdate(CheckUpdateCallBack callBack){
+			checkUpdate(callBack);
+
 		}
 	}
-	
-	public void checkUpdate(){
+	void checkUpdate(CheckUpdateCallBack callBack){
+		this.callBack = callBack;
 		IAppEngine engine = BeanFactoryUtil.getImpl(IAppEngine.class);
-		engine.checkUpdate(currVersionCode,this, false);
+		engine.checkUpdate(currVersionCode,UpdateService.this, false);
 	}
-
-
+	
 	@Override
 	public void onSucceed(int what, Response<JSONObject> response) {
 		switch (what) {
@@ -85,7 +89,10 @@ public class UpdateService extends Service implements HttpListener<JSONObject> {
 				
 			} else {
 				if ("415".equals(code)) {
-					//OtherUtils.showShortToastInAnyThread(act, "已是最新版本.");
+					if(callBack!=null){
+						callBack.shouldUpdate(false);
+					}
+//					OtherUtils.showShortToastInAnyThread(act, "已是最新版本.");
 				} else {
 					//OtherUtils.showShortToastInAnyThread(act, "未知参数，返回代码:" + code);
 				}
@@ -116,6 +123,8 @@ public class UpdateService extends Service implements HttpListener<JSONObject> {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	public interface CheckUpdateCallBack{
+		void shouldUpdate(boolean shoudUpdate);
+	}
 	
 }

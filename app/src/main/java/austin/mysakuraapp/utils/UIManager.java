@@ -135,7 +135,7 @@ public class UIManager {
 		// tc.setCustomAnimations(R.anim.push_left_out, R.anim.push_right_in);
 		if ( hideFragment != null && !target.isAdded())
 			tc.hide(hideFragment);
-		tc.add(R.id.fl_content, target, fragTag);
+		tc.add(R.id.rl_main, target, fragTag);
 		// 是否添加到回退栈，以便按返回键时可以返回hideFragment
 		if (isAddStack) {
 			tc.addToBackStack(null);

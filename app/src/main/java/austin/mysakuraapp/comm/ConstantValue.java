@@ -14,27 +14,7 @@ public interface ConstantValue {
 	 */
 	  String LOGIN_TYPE_LOCAL = "LOCAL";
 	  String LOGIN_TYPE_REMOTE = "REMOTE";
-	/**
-	 * Fragment tags
-	 */
-	  String FRAG_TAG_HOME = "HOME_FRAG";
-	  String FRAG_TAG_WORD_DETAIL = "WORD_DETAIL";
-	  String FRAG_TAG_SENTENCE_DETAIL = "sakura_sentence_frg";
-	  String FRAG_TAG_MENU = "MENU";
-	  String FRAG_TAG_LOGIN = "LOGIN_FRAG";
-	  String FRAG_TAG_REGIST = "LOGIN_REGIST";
-	/**
-	 * 语法详情web页面TAG
-	 */
-	  String FRAG_TAG_GRAMMAR="FRAG_TAG_GRAMMAR";
 
-
-
-
-	/**
-	 * 点击个人中心的“语法和文化”进入后的页面TAG
-	 */
-	String FRAG_TAG_GRAMMAR_LIST = "Frag_tag_grammar_list";
 	/**
 	 * 返回值 1 标识访问成功并信息验证通过
 	 */
@@ -43,8 +23,7 @@ public interface ConstantValue {
 	 * 网络访问成功，但信息验证未通过
 	 */
 	  Integer ACCCESS_REFUSE = 400;
-	
-	
+
 	/**
 	 * 名词分类之 动物篇
 	 */

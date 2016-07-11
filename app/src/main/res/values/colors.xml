@@ -74,4 +74,6 @@
   <color name="white_tran">#99ffffff</color>
   <color name="blueStatus">#1680E2</color>
   <color name="grey">#8C8C8C</color>
+  <color name="setting_text_color">#576168</color>
+
 </resources>

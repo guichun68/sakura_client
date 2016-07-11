@@ -1,15 +1,20 @@
 package austin.mysakuraapp;
 
 import android.animation.ObjectAnimator;
+import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,12 +25,11 @@ import java.util.List;
 import austin.mysakuraapp.adapters.MyViewPagerAdapter;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.engine.MyActionBarDrawerToggle;
-import austin.mysakuraapp.fragments.SetingFrag;
 import austin.mysakuraapp.fragments.SkrBunnpo.SkrBunnpoFrag;
+import austin.mysakuraapp.fragments.setting.SetingFrag;
 import austin.mysakuraapp.fragments.skrTanngo.SkrTanngoFrag;
 import austin.mysakuraapp.fragments.wordcenter.TanngoFrag;
-import austin.mysakuraapp.utils.UIManager;
-import austin.mysakuraapp.utils.UIUtil;
+import austin.mysakuraapp.utils.UpdateService;
 import austin.mysakuraapp.viewfeature.IMainView;
 import austin.mysakuraapp.views.lazyviewpager.LazyViewPager;
 
@@ -52,13 +56,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private MyActionBarDrawerToggle mActionBarDrawerToggle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mForegroundActivity = this;
         GlobalParams.MAIN = this;
         bindView();
-
         initData();
         configViews();
     }
@@ -213,7 +216,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         GlobalParams.foreFrag = tanngoFrag;
     }
 
-    @Override
     void bindView() {
         mLlContent = (LinearLayout) findViewById(R.id.ll_drawer);
         TextView item1 = (TextView) findViewById(R.id.item1);
@@ -456,6 +458,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 isConfirmExitApp = true;
                 GlobalParams.isFirstComeInSkrTanngo = true;
                 GlobalParams.isFirstComeInSkrBunnpo = true;
+                GlobalParams.isCheckedUpdate = false;
                 MainActivity.this.onBackPressed();
             }
         });
@@ -467,5 +470,43 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         });
         dialog.show();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!GlobalParams.isCheckedUpdate) {
+            checkUpdate();
+        }
+    }
+    private String TAG = MainActivity.class.getSimpleName();
+    public UpdateService.MyBinder mBinder;
+    private ServiceConnection myServiceConn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+//            Log.e(TAG,"Update service is Connected.");
+            mBinder = (UpdateService.MyBinder) service;
+            mBinder.callCheckUpdate(null);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.e(TAG,"Update service is Disconnected.");
+        }
+    };
+    /**
+     * 启动服务检查更新
+     */
+    private void checkUpdate() {
+        Intent in = new Intent(MainActivity.this, UpdateService.class);
+        bindService(in, myServiceConn, BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != myServiceConn) {
+            unbindService(myServiceConn);
+            myServiceConn = null;
+        }
     }
 }

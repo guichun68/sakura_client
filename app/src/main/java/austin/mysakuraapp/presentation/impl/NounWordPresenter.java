@@ -14,7 +14,7 @@ import austin.mysakuraapp.R;
 import austin.mysakuraapp.comm.ConstantValue;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.engine.OnResultListener;
-import austin.mysakuraapp.model.IWordModel;
+import austin.mysakuraapp.model.IModel;
 import austin.mysakuraapp.model.bean.WordResult;
 import austin.mysakuraapp.presentation.INounWordPresenter;
 import austin.mysakuraapp.utils.BeanFactoryUtil;
@@ -30,7 +30,7 @@ import austin.mysakuraapp.viewfeature.IView;
 public class NounWordPresenter implements INounWordPresenter {
 
     String TAG = NounWordPresenter.class.getSimpleName();
-    IWordModel model;
+    IModel model;
     IView view;
     /**
      * 适配器所需数据
@@ -40,7 +40,7 @@ public class NounWordPresenter implements INounWordPresenter {
     @Override
     public void init(IView view) {
         this.view = view;
-        model = BeanFactoryUtil.getImpl(IWordModel.class);
+        model = BeanFactoryUtil.getImpl(IModel.class);
     }
 
     @Override

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/ll_grammar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,6 +16,24 @@
     app:layout_scrollFlags="scroll|enterAlways"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+    <ImageView
+        android:id="@+id/iv_left"
+        android:layout_width="25dp"
+        android:padding="5dp"
+        android:layout_height="match_parent"
+        android:src="@mipmap/back"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        tool:text="ds"/>
 
 </android.support.v7.widget.Toolbar>
 
