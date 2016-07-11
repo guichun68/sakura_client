@@ -433,7 +433,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private boolean isConfirmExitApp = false;
     @Override
     public void onBackPressed() {
-        UIManager.getInstance().popBackStack(1);
+        //返回键逻辑：首先检查fragment回退栈中(只保存有在程序运行后打开的frag)是否有打开的fragment，有则按照系统的返回键默认处理，
+        //没有则说明已经返回到了首页,此时显示退出确认框。
+        if(getSupportFragmentManager().getBackStackEntryCount()>=1){
+            super.onBackPressed();
+            return;
+        }
         if(!isConfirmExitApp){
             showExitDialog();
         }else{

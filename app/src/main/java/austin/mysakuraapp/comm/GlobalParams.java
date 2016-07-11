@@ -94,7 +94,7 @@ public class GlobalParams {
 	public static TabChangedListener mTabChangedLisBaseItemPager;
 	//记录顶部TabLayout的高度，当实际TabLayout绘制完成，有高度数值时回调并将本变量赋值；本变量在所有带tabLayout控件的frag中共用
 	public static Integer TAB_LAYOUT_HEIGHT;
-	public static Fragment foreFrag;
+	public static Fragment foreFrag;//记录顶部4个功能选项(Fragment)当前哪个在前台展示中
 	/**
 	 * 缓存单词中心的adapter
 	 */
