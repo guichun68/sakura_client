@@ -359,5 +359,6 @@
   <string name="feedback">Suggestion feedback</string>
   <string name="switch_tip">语法页显示日语</string>
   <string name="cultrue">语法/文化</string>
+  <string name="moreclickexit">再次按返回键退出</string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,6 +30,7 @@ import austin.mysakuraapp.fragments.SkrBunnpo.SkrBunnpoFrag;
 import austin.mysakuraapp.fragments.setting.SetingFrag;
 import austin.mysakuraapp.fragments.skrTanngo.SkrTanngoFrag;
 import austin.mysakuraapp.fragments.wordcenter.TanngoFrag;
+import austin.mysakuraapp.utils.UIUtil;
 import austin.mysakuraapp.utils.UpdateService;
 import austin.mysakuraapp.viewfeature.IMainView;
 import austin.mysakuraapp.views.lazyviewpager.LazyViewPager;
@@ -442,9 +444,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             return;
         }
         if(!isConfirmExitApp){
-            showExitDialog();
+//            showExitDialog();
+            twoClick();
         }else{
             super.onBackPressed();
+        }
+    }
+    long[] mHits = new long[2];
+    /**
+     * 两次快速点击
+     */
+    private void twoClick() {
+        UIUtil.showToastSafe(R.string.moreclickexit);
+        System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+        mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+        if (mHits[0] >= (SystemClock.uptimeMillis() - 600)) {
+            isConfirmExitApp = true;
+            GlobalParams.isFirstComeInSkrTanngo = true;
+            GlobalParams.isFirstComeInSkrBunnpo = true;
+            GlobalParams.isCheckedUpdate = false;
+            MainActivity.this.onBackPressed();
         }
     }
 

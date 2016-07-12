@@ -7,18 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import austin.mysakuraapp.MainActivity;
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.comm.ArgumentKey;
 import austin.mysakuraapp.comm.ConstantValue;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.model.bean.WordResult;
+import austin.mysakuraapp.utils.NetworkUtil;
 import austin.mysakuraapp.utils.StringUtil;
 import austin.mysakuraapp.utils.UIManager;
+import austin.mysakuraapp.utils.UIUtil;
 
 
 public class WordDetailFragment extends Fragment implements OnClickListener{
@@ -39,9 +42,14 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 	private ImageView ivNextWord,ivPreWord;
 	private LinearLayout mLlSentence,mLlExtendWord,mLlOther;//例句、引申、其他说明
 	private TextView mTvTone;
-	
+
 	private WordResult mWordResult;
 	private int currWdPosition;//当前单词所在list的角标
+	//朗读的实现原理：本朗读使用了百度接口，示例网址：http://tts.baidu.com/text2audio?lan=jp&ie=UTF-8&spd=2&text=%E6%9E%97%E6%AA%8E
+	//所以使用webView加载上述网址，并且自动播放，实现朗读功能。
+	private WebView wv,wv2;//分别代表单词朗读的webVeiw和例句的朗读webView
+	private MyWebClient myClient;
+	private MyWebClient2 myClient2;
 
 	@Nullable
 	@Override
@@ -54,6 +62,8 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 	}
 
 	private void bindView() {
+		wv = (WebView) view.findViewById(R.id.wv);
+		wv2 = (WebView) view.findViewById(R.id.wv2);
 		mLlSentence = (LinearLayout) view.findViewById(R.id.ll_two);
 		mTvTone = (TextView) view.findViewById(R.id.tv_tone);
 		ivLeft = (ImageView) view.findViewById(R.id.iv_left);
@@ -88,6 +98,10 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 		tvShade.setOnClickListener(this);
 		ivNextWord.setOnClickListener(this);
 		ivPreWord.setOnClickListener(this);
+		myClient = new MyWebClient();
+		myClient2 = new MyWebClient2();
+		wv.setWebViewClient(myClient);
+		wv2.setWebViewClient(myClient2);
 		return view;
 	}
 
@@ -105,6 +119,9 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 	}
 
 	public void refreshUI() {
+		wv.loadUrl(ConstantValue.BaiduTTSBaseURL+mWordResult.getWd_name());
+	    wv2.loadUrl(ConstantValue.BaiduTTSBaseURL+mWordResult.getWd_sentence_eg());
+
 		mTvTone.setText("");
 		tvWord.setText(mWordResult.getWd_name());
 		tvKana.setText(mWordResult.getWd_kana());
@@ -155,8 +172,11 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 			UIManager.getInstance().popBackStack(1);
 			break;
 		case R.id.iv_speek://单词朗读
+			speek(R.id.iv_speek);
 			break;
 		case R.id.tv_sentence_eg_speek://例句朗读
+
+			speek(R.id.tv_sentence_eg_speek);
 			break;
 		case R.id.tv_shade://例句翻译遮罩
 			tvShade.setVisibility(View.INVISIBLE);
@@ -177,6 +197,55 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 			break;
 		}
 	}
+	int SDK_INT=android.os.Build.VERSION.SDK_INT;;
+	//朗读 单词 或者 例句
+	private void speek(int viewId) {
+		if(!NetworkUtil.checkNetwork(getActivity())){
+			UIUtil.showToastSafe(R.string.hintCheckNet);
+			return;
+		}
+		switch (viewId)
+		{
+			case R.id.iv_speek:
+				if(wv==null){
+					wv = (WebView) view.findViewById(R.id.wv);
+				}
+				if (SDK_INT > 16) {
+					wv.getSettings().setMediaPlaybackRequiresUserGesture(false);
+				}
+				wv.reload();
+				break;
+			case R.id.tv_sentence_eg_speek:
+				if(wv2==null){
+					wv2 = (WebView) view.findViewById(R.id.wv2);
+				}
+				if (SDK_INT > 16) {
+					wv2.getSettings().setMediaPlaybackRequiresUserGesture(false);
+				}
+				wv2.reload();
+				break;
+		}
 
+
+	}
+
+	class MyWebClient extends WebViewClient{
+		@Override
+		public void onPageFinished(WebView view, String url) {
+			int SDK_INT = android.os.Build.VERSION.SDK_INT;
+			if (SDK_INT > 16) {
+				wv.getSettings().setMediaPlaybackRequiresUserGesture(true);
+			}
+		}
+	}
+	class MyWebClient2 extends WebViewClient{
+		@Override
+		public void onPageFinished(WebView view, String url) {
+			int SDK_INT = android.os.Build.VERSION.SDK_INT;
+			if (SDK_INT > 16) {
+				wv2.getSettings().setMediaPlaybackRequiresUserGesture(true);
+			}
+		}
+	}
 
 }

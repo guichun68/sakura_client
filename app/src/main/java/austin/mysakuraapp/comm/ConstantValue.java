@@ -132,5 +132,6 @@ public interface ConstantValue {
 
 
 	int WordTypeNoun = 0,WordTypeVerb=1,WordTypeAdj=2,WordTypeOther=3;
+	String BaiduTTSBaseURL = "http://tts.baidu.com/text2audio?lan=jp&ie=UTF-8&spd=2&text=";
 
 }

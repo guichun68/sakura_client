@@ -44,7 +44,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
 
             <ImageView
@@ -96,16 +96,6 @@
                 android:layout_toRightOf="@id/tv_kana"
                 android:text="]"
                 android:textColor="@color/white" />
-
-            <ImageView
-                android:id="@+id/iv_speek"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignTop="@id/tv_kana"
-                android:layout_marginLeft="6dp"
-                android:layout_toRightOf="@id/tv_right"
-                android:src="@mipmap/h521"
-                android:visibility="gone"/>
             <TextView
                 android:id="@+id/tv_tone"
                 android:layout_width="wrap_content"
@@ -117,6 +107,28 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 />
+
+            <ImageView
+                android:id="@+id/iv_speek"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignTop="@id/tv_kana"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@id/tv_tone"
+                android:background="@drawable/speack_btn_sentence"
+                android:visibility="visible"/>
+
+            <WebView
+                android:id="@+id/wv"
+                android:layout_width="1dp"
+                android:layout_toRightOf="@id/tv_tone"
+                android:layout_height="1dp"/>
+            <WebView
+                android:id="@+id/wv2"
+                android:layout_width="1dp"
+                android:layout_toRightOf="@id/wv"
+                android:layout_height="1dp"/>
+
 
             <LinearLayout
                 android:id="@+id/ll_first"
@@ -186,6 +198,7 @@
                     android:layout_marginTop="7dp"
                     android:clickable="true"
                     android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/speack_btn_sentence"
                     android:text="@string/example_sentence"
                     android:textSize="@dimen/textsize20" />
 
