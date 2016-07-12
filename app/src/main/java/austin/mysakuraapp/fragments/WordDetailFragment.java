@@ -119,8 +119,11 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 	}
 
 	public void refreshUI() {
-		wv.loadUrl(ConstantValue.BaiduTTSBaseURL+mWordResult.getWd_name());
-	    wv2.loadUrl(ConstantValue.BaiduTTSBaseURL+mWordResult.getWd_sentence_eg());
+		//发现下面的loadURl方法针对5.0以上才有效
+//		wv.loadUrl(ConstantValue.BaiduTTSBaseURL+mWordResult.getWd_name());
+//	    wv2.loadUrl(ConstantValue.BaiduTTSBaseURL+mWordResult.getWd_sentence_eg());
+		wv.loadData(getHtml(mWordResult.getWd_name()),"text/html","UTF-8");
+		wv2.loadData(getHtml(mWordResult.getWd_sentence_eg()),"text/html","UTF-8");
 
 		mTvTone.setText("");
 		tvWord.setText(mWordResult.getWd_name());
@@ -247,5 +250,19 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 			}
 		}
 	}
+
+	public String getHtml(String word){
+		String html = "<!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
+				"<head>\n" +
+				"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" +
+				"<title>title</title>\n" +
+				"<body>\n" +
+				"<audio src=\"http://tts.baidu.com/text2audio%3flan=jp&ie=UTF-8&spd=2&text="+word+"\"\n" +
+				"       controls=\"controls\" autoplay=\"true\"/>\n" +
+				"</body>\n" +
+				"</html>";
+		return html;
+	}
+
 
 }

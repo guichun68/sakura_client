@@ -68,6 +68,9 @@ public abstract class BaseEngine<T> {
 		if (!NetworkUtil.checkNetwork(MainActivity.getForegroundActivity())) {
 			// PromptUtil.showNoNetWork(GlobalParams.MAIN);
 			UIUtil.showToastSafe(UIUtil.getContext(),R.string.hintCheckNet);
+			if(listener!=null){
+				listener.onFailure(UIUtil.getString(R.string.hintCheckNet),500);
+			}
 		} else {
 
 			Request<JSONArray> request = new JsonArrayRequest(url, RequestMethod.POST);
@@ -83,7 +86,7 @@ public abstract class BaseEngine<T> {
 					JSONArray jsonObj = response.get();
 					String result = jsonObj.toString();
 //					String jsonString = jsonObj.toJSONString();
-					if (result.length() > 0) {
+					if (result.length() > 0 && listener !=null) {
 						listener.onGetData(result, what);
 					}
 				}

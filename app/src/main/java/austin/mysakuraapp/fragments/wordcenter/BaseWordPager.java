@@ -26,7 +26,7 @@ import austin.mysakuraapp.comm.GlobalParams;
 
 /**
  * Created by austin on 2016/6/28.
- * Desc: 单词中心之形容词Fragment
+ * Desc: 单词中心之Fragment
  */
 public class BaseWordPager extends Fragment {
 
