@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import austin.mysakuraapp.R;
 import austin.mysakuraapp.comm.ArgumentKey;
-import austin.mysakuraapp.comm.ConstantValue;
-import austin.mysakuraapp.comm.FragTAG;
 import austin.mysakuraapp.comm.GlobalParams;
 import austin.mysakuraapp.fragments.GrammarWebAct;
 import austin.mysakuraapp.model.bean.SakuraResult;
