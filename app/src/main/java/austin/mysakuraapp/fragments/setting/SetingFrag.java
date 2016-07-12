@@ -1,24 +1,30 @@
 package austin.mysakuraapp.fragments.setting;
 
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import austin.mysakuraapp.MainActivity;
 import austin.mysakuraapp.R;
-import austin.mysakuraapp.comm.ConstantValue;
 import austin.mysakuraapp.comm.FragTAG;
 import austin.mysakuraapp.comm.GlobalParams;
+import austin.mysakuraapp.utils.BeanFactoryUtil;
 import austin.mysakuraapp.utils.UIManager;
+import austin.mysakuraapp.utils.UIUtil;
 import austin.mysakuraapp.utils.UpdateService;
 import austin.mysakuraapp.views.CustomToggleBtn;
 
@@ -33,6 +39,8 @@ public class SetingFrag extends Fragment implements View.OnClickListener {
     private CardView mCvCheckupdate,mCvGrammar;
     private LinearLayoutCompat mLlcAbout;
     private CustomToggleBtn mSwitchBtn;
+    private ImageView headIcon;
+
 
 
     @Nullable
@@ -78,10 +86,88 @@ public class SetingFrag extends Fragment implements View.OnClickListener {
     }
 
     private void bindView() {
+        headIcon = (ImageView)view.findViewById(R.id.imageView_head_icon);
         mCvCheckupdate = (CardView) view.findViewById(R.id.cv_checkupdate);
         mLlcAbout = (LinearLayoutCompat) view.findViewById(R.id.ll_about);
         mSwitchBtn = (CustomToggleBtn) view.findViewById(R.id.ctb_show_nihonngo);
         mCvGrammar = (CardView) view.findViewById(R.id.cv_grammar);
+        headIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                threeClick();
+            }
+        });
+    }
+    long[] mHits = new long[3];
+    private void threeClick() {
+        System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+        mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+        if (mHits[0] >= (SystemClock.uptimeMillis() - 500)) {
+            ipConfigDialog();
+        }
+    }
+    private void ipConfigDialog() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+        View view = View.inflate(getActivity(), R.layout.dialog_ipconfig, null);
+        ((TextView)view.findViewById(R.id.tv_curr_server)).setText("current server:"+GlobalParams.BASE_URL);
+
+        final EditText etIpInput = (EditText) view.findViewById(R.id.et_input);
+        Button btn_ok = (Button) view.findViewById(R.id.btn_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(!TextUtils.isEmpty(etIpInput.getText().toString())){
+                    GlobalParams.BASE_URL = "http://"+etIpInput.getText().toString();
+                    UIUtil.showToastSafe("已设置为:"+GlobalParams.BASE_URL);
+                    GlobalParams.refreshIP();
+                }
+            }
+        });
+
+        Button btnEclipseServer,btnGenymotion,btnFj,btnChan;
+        btnEclipseServer = (Button) view.findViewById(R.id.btn_localserver);
+        btnGenymotion = (Button) view.findViewById(R.id.btn_test_server);
+        btnChan = (Button) view.findViewById(R.id.btn_chan);
+        btnFj = (Button) view.findViewById(R.id.btn_hbx_server);
+        btnChan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GlobalParams.BASE_URL = BeanFactoryUtil.properties.getProperty("BaseURL_fjjsp");
+                GlobalParams.refreshIP();
+                UIUtil.showToastSafe("已设置为:"+GlobalParams.BASE_URL);
+            }
+        });
+        btnEclipseServer.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                GlobalParams.BASE_URL = BeanFactoryUtil.properties.getProperty("BaseURL_eclipse");
+                GlobalParams.refreshIP();
+                UIUtil.showToastSafe("已设置为:"+GlobalParams.BASE_URL);
+            }
+        });
+        btnGenymotion.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                GlobalParams.BASE_URL = BeanFactoryUtil.properties.getProperty("BaseURL_genymotion");
+                GlobalParams.refreshIP();
+                UIUtil.showToastSafe("已设置为:"+GlobalParams.BASE_URL);
+            }
+        });
+        btnFj.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                GlobalParams.BASE_URL = BeanFactoryUtil.properties.getProperty("FJJSP");
+                GlobalParams.refreshIP();
+                UIUtil.showToastSafe("已设置为:"+GlobalParams.BASE_URL);
+            }
+        });
+        final AlertDialog dialog = adb.create();
+        dialog.setView(view, 0,0,0,0);
+        dialog.show();
     }
 
     @Override

@@ -37,7 +37,7 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 	private TextView tvExtendWordCn;//引申单词含义
 	private TextView tvOther;//其他说明
 	private ImageView ivNextWord,ivPreWord;
-	private LinearLayout mLlExtendWord,mLlOther;//引申、其他说明
+	private LinearLayout mLlSentence,mLlExtendWord,mLlOther;//例句、引申、其他说明
 	private TextView mTvTone;
 	
 	private WordResult mWordResult;
@@ -54,6 +54,7 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 	}
 
 	private void bindView() {
+		mLlSentence = (LinearLayout) view.findViewById(R.id.ll_two);
 		mTvTone = (TextView) view.findViewById(R.id.tv_tone);
 		ivLeft = (ImageView) view.findViewById(R.id.iv_left);
 		tvWord = (TextView) view.findViewById(R.id.tv_word);
@@ -125,6 +126,11 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 			tvSentence.setText(""+mWordResult.getWd_sentence_eg());
 		}
 		tvSentenceCn.setText(StringUtil.getNoVertiLineStr(mWordResult.getWd_sentence_cn()));
+		if(StringUtil.isEmpty(mWordResult.getWd_sentence_eg())&& StringUtil.isEmpty(mWordResult.getWd_sentence_cn())){
+			mLlSentence.setVisibility(View.GONE);
+		}else{
+			mLlSentence.setVisibility(View.VISIBLE);
+		}
 		if(StringUtil.isEmpty(mWordResult.getWd_extend_word())&&StringUtil.isEmpty(mWordResult.getWd_extend_word_cn())){
 			mLlExtendWord.setVisibility(View.GONE);
 		}else{
