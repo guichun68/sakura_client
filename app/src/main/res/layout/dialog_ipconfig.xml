@@ -99,12 +99,13 @@
 
         <Button
             android:id="@+id/btn_localserver"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:layout_marginRight="5dip"
             android:background="@drawable/button_update_selector"
             android:gravity="center_horizontal|center_vertical"
-            android:text="10.0.2.2"
+            android:text="2.2"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
@@ -115,13 +116,14 @@
 
         <Button
             android:id="@+id/btn_test_server"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"
             android:background="@drawable/button_update_selector"
             android:gravity="center_horizontal|center_vertical"
-            android:text="10.0.3.3"
+            android:text="3.3"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
@@ -132,7 +134,8 @@
 
         <Button
             android:id="@+id/btn_hbx_server"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"
@@ -150,14 +153,15 @@
 
         <Button
             android:id="@+id/btn_chan"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"
             android:textColor="@android:color/black"
             android:background="@drawable/button_update_selector"
             android:gravity="center_horizontal|center_vertical"
-            android:text="192.168.1"
+            android:text="191.1"
             android:textSize="14sp" />
         
         
@@ -166,15 +170,6 @@
             android:layout_height="fill_parent"
             android:background="#ffd2d2d2" />
 
-        <Button
-            android:id="@+id/btn_cancel2"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dip"
-            android:background="@drawable/button_update_selector"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="取消"
-            android:textSize="14sp" />
     </LinearLayout>
 
 </RelativeLayout>

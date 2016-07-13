@@ -122,9 +122,14 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 		//发现下面的loadURl方法针对5.0以上才有效
 //		wv.loadUrl(ConstantValue.BaiduTTSBaseURL+mWordResult.getWd_name());
 //	    wv2.loadUrl(ConstantValue.BaiduTTSBaseURL+mWordResult.getWd_sentence_eg());
-		wv.loadData(getHtml(mWordResult.getWd_name()),"text/html","UTF-8");
-		wv2.loadData(getHtml(mWordResult.getWd_sentence_eg()),"text/html","UTF-8");
-
+		if (SDK_INT <= 16) {
+			ivSpeekWord.setVisibility(View.INVISIBLE);
+			wv.loadUrl("");
+			wv2.loadUrl("");
+		}else{
+			wv.loadData(getHtml(mWordResult.getWd_name()),"text/html","UTF-8");
+			wv2.loadData(getHtml(mWordResult.getWd_sentence_eg()),"text/html","UTF-8");
+		}
 		mTvTone.setText("");
 		tvWord.setText(mWordResult.getWd_name());
 		tvKana.setText(mWordResult.getWd_kana());
