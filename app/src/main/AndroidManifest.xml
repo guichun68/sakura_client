@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="austin.mysakuraapp">
+    package="com.austin.mynihonngo">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -13,35 +13,37 @@
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <application
-        android:name=".comm.BaseApplication"
+        android:name="com.austin.mynihonngo.comm.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.austin.mynihonngo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".utils.UpdateService" />
+        <service android:name="com.austin.mynihonngo.utils.UpdateService" />
 
         <activity
-            android:name=".utils.ForceUpdateActivity"
+            android:name="com.austin.mynihonngo.utils.ForceUpdateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Base.V7.Theme.AppCompat.Dialog" />
 
         <activity
-            android:name=".utils.UpdateActivity"
+            android:name="com.austin.mynihonngo.utils.UpdateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Base.V7.Theme.AppCompat.Dialog" />
         <activity
-            android:name=".fragments.GrammarWebAct"
+            android:name="com.austin.mynihonngo.fragments.GrammarWebAct"
             android:screenOrientation="portrait" />
+        <activity android:name=".fragments.setting.AboutMe"
+            android:screenOrientation="portrait"/>
         <!-- 友盟统计start -->
         <meta-data
             android:name="UMENG_APPKEY"

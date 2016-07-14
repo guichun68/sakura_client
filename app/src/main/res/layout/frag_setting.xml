@@ -126,7 +126,7 @@
                 android:textColor="@color/setting_text_color"
                 android:textSize="@dimen/setTextSize"  />
 
-            <austin.mysakuraapp.views.CustomToggleBtn
+            <com.austin.mynihonngo.views.CustomToggleBtn
                 android:id="@+id/ctb_show_nihonngo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

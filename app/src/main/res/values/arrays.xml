@@ -4,77 +4,77 @@
 <resources>
 
   <string-array name="tab_titles">
-    <item>单词</item>
-    <item>语法</item>
-    <item>桜单词</item>
-    <item>其他</item>
+    <item>@string/word</item>
+    <item>@string/sakura_g</item>
+    <item>@string/tab_word_sakura</item>
+    <item>@string/other</item>
   </string-array>
   <string-array name="noun_tab_title">
-    <item>动物</item>
-    <item>植物</item>
-    <item>交通</item>
-    <item>其他</item>
+    <item>@string/animal</item>
+    <item>@string/plant</item>
+    <item>@string/jiaotong</item>
+    <item>@string/other</item>
   </string-array>
   <string-array name="verb_tab_title">
-    <item>一类</item>
-    <item>二类</item>
-    <item>三类</item>
+    <item>@string/onetype</item>
+    <item>@string/twotype</item>
+    <item>@string/threetype</item>
   </string-array>
   <string-array name="adj_tab_title">
-    <item>一类</item>
-    <item>二类</item>
+    <item>@string/onetype</item>
+    <item>@string/twotype</item>
   </string-array>
   <string-array name="other_tab_title">
-    <item>接头词</item>
-    <item>接尾词</item>
-    <item>全部</item>
+    <item>@string/startbound</item>
+    <item>@string/Suffix</item>
+    <item>@string/all</item>
   </string-array>
   <string-array name="word_side">
-    <item>名词</item>
-    <item>动词</item>
-    <item>形容词</item>
-    <item>其他</item>
+    <item>@string/noun</item>
+    <item>@string/verb</item>
+    <item>@string/adj</item>
+    <item>@string/other</item>
   </string-array>
   <string-array name="bunnpo_side">
-    <item>二级</item>
-    <item>三级</item>
-    <item>四级</item>
-    <item>五级</item>
-    <item>六级</item>
-    <item>七级</item>
-    <item>八级</item>
-    <item>九级</item>
-    <item>十级</item>
-    <item>十一级</item>
-    <item>十二级</item>
+    <item>@string/twoLevel</item>
+    <item>@string/threeLevel</item>
+    <item>@string/fourLevel</item>
+    <item>@string/fiveLevel</item>
+    <item>@string/sixLevel</item>
+    <item>@string/sevenLevel</item>
+    <item>@string/eightLevel</item>
+    <item>@string/nineLevel</item>
+    <item>@string/tenLevel</item>
+    <item>@string/elevenLevel</item>
+    <item>@string/twelveLevel</item>
   </string-array>
   <string-array name="sakura_side">
-    <item>一级</item>
-    <item>二级</item>
-    <item>三级</item>
-    <item>四级</item>
-    <item>五级</item>
-    <item>六级</item>
-    <item>七级</item>
-    <item>八级</item>
-    <item>九级</item>
-    <item>十级</item>
-    <item>十一级</item>
-    <item>十二级</item>
+    <item>@string/oneLevel</item>
+    <item>@string/twoLevel</item>
+    <item>@string/threeLevel</item>
+    <item>@string/fourLevel</item>
+    <item>@string/fiveLevel</item>
+    <item>@string/sixLevel</item>
+    <item>@string/sevenLevel</item>
+    <item>@string/eightLevel</item>
+    <item>@string/nineLevel</item>
+    <item>@string/tenLevel</item>
+    <item>@string/elevenLevel</item>
+    <item>@string/twelveLevel</item>
   </string-array>
   <string-array name="sakura_unit">
-    <item>一课</item>
-    <item>二课</item>
-    <item>三课</item>
-    <item>四课</item>
-    <item>五课</item>
-    <item>六课</item>
-    <item>七课</item>
-    <item>八课</item>
-    <item>九课</item>
-    <item>十课</item>
-    <item>十一课</item>
-    <item>十二课</item>
+    <item>@string/oneUnit</item>
+    <item>@string/twoUnit</item>
+    <item>@string/threeUnit</item>
+    <item>@string/fourUnit</item>
+    <item>@string/fiveUnit</item>
+    <item>@string/sixUnit</item>
+    <item>@string/sevenUnit</item>
+    <item>@string/eightUnit</item>
+    <item>@string/nineUnit</item>
+    <item>@string/tenUnit</item>
+    <item>@string/elevenUnit</item>
+    <item>@string/twelveUnit</item>
   </string-array>
 
 </resources>

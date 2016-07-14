@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 本布局为AboutMe 和 GrammarWebAct共用-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
@@ -33,7 +34,7 @@
         android:gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
-        tool:text="ds"/>
+        tool:text="关于"/>
 
 </android.support.v7.widget.Toolbar>
 

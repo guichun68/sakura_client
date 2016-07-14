@@ -48,7 +48,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/id_toolbar">
 
-        <austin.mysakuraapp.views.lazyviewpager.LazyViewPager
+        <com.austin.mynihonngo.views.lazyviewpager.LazyViewPager
             android:id="@+id/id_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

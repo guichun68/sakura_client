@@ -377,4 +377,57 @@
 	<string name="switch_tip">语法页显示日语</string>
 	<string name="cultrue">语法/文化</string>
 	<string name="moreclickexit">再次按返回退出</string>
+	<string name="tab_titles">tab_titles</string>
+	<string name="noun_tab_title">noun_tab_title</string>
+	<string name="animal">动物</string>
+	<string name="plant">植物</string>
+	<string name="jiaotong">交通</string>
+	<string name="other">其他</string>
+
+	<string name="word">单词</string>
+	<string name="grammar2">语法</string>
+	<string name="sakura_g">樱花语法</string>
+	<string name="onetype">1类</string>
+	<string name="twotype">2类</string>
+	<string name="threetype">3类</string>
+	<string name="startbound">接头词</string>
+	<string name="Suffix">接尾词</string>
+	<string name="all">全部</string>
+	<string name="oneLevel">一级</string>
+	<string name="twoLevel">二级</string>
+	<string name="threeLevel">三级</string>
+	<string name="fourLevel">四级</string>
+	<string name="fiveLevel">五级</string>
+	<string name="sixLevel">六级</string>
+	<string name="sevenLevel">七级</string>
+	<string name="eightLevel">八级</string>
+	<string name="nineLevel">九级</string>
+	<string name="tenLevel">十级</string>
+	<string name="elevenLevel">十一级</string>
+	<string name="twelveLevel">十二级</string>
+
+	<string name="oneUnit">一课</string>
+	<string name="twoUnit">二课</string>
+	<string name="threeUnit">三课</string>
+	<string name="fourUnit">四课</string>
+	<string name="fiveUnit">五课</string>
+	<string name="sixUnit">六课</string>
+	<string name="sevenUnit">七课</string>
+	<string name="eightUnit">八课</string>
+	<string name="nineUnit">九课</string>
+	<string name="tenUnit">十课</string>
+	<string name="elevenUnit">十一课</string>
+	<string name="twelveUnit">十二课</string>
+
+	<string name="toolbar_title">我的手册</string>
+	<string name="open">打开</string>
+	<string name="close">关闭</string>
+	<string name="header_author_name">SakuraGo</string>
+	<string name="header_author_url">sunjiajia.com</string>
+	<string name="plusone">+1</string>
+	<string name="item_clicked">item clicked！</string>
+	<string name="item_longclicked">item long clicked！</string>
+	<string name="refresh">刷新</string>
+
+
 </resources>
