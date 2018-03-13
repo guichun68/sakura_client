@@ -15,6 +15,7 @@
     
 <img src="https://github.com/guichun68/sakura_client/raw/master/img/816830306691421561.jpg" width = "400" height = "710" alt="单词分类1" align=center />
 <img src="https://github.com/guichun68/sakura_client/raw/master/img/596888197257212260.jpg" width = "400" height = "710" alt="单词分类2" align=center />
+<img src="https://github.com/guichun68/sakura_client/raw/master/img/892742519549737966.jpg" width = "400" height = "710" alt="个人中心" align=center />
 
 
 ![演示](https://github.com/guichun68/sakura_client/raw/master/img/sakura.gif)
