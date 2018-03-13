@@ -20,7 +20,7 @@ public class GlobalParams {
 	public static int skrBunnpoSidePosition;
 
 	static{
-		BASE_URL = BeanFactoryUtil.properties.getProperty("BaseURL_fjjsp");
+		BASE_URL = BeanFactoryUtil.properties.getProperty("BaseURL_genymotion");
 	}
 	/**
 	 * 获取名词 的RootUrl

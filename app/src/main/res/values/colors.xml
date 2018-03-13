@@ -75,5 +75,6 @@
   <color name="blueStatus">#1680E2</color>
   <color name="grey">#8C8C8C</color>
   <color name="setting_text_color">#576168</color>
+  <color name="list_itease_secondary_color">#888888</color>
 
 </resources>

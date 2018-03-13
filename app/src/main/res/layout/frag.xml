@@ -2,13 +2,9 @@
 <!--
 本布局为单词中心（TanngoFrag）的布局页
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragmentLayout"
-    android:orientation="vertical"
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout
-        android:id="@+id/fl_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</RelativeLayout>
+    android:layout_height="match_parent" />

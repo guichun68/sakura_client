@@ -53,12 +53,6 @@
     <string name="level4">level 4</string>
     <string name="level5">level 5</string>
     <string name="level6">level 6</string>
-    <string name="level7">level 7</string>
-    <string name="level8">level 8</string>
-    <string name="level9">level 9</string>
-    <string name="level10">leve 10</string>
-    <string name="level11">leve l1</string>
-    <string name="level12">leve l2</string>
     <string name="nomorewd">No more words </string>
     <string name="nomoresentence">No more sentence</string>
 
@@ -403,12 +397,6 @@
     <string name="fourLevel">Fourth Level</string>
     <string name="fiveLevel">Fifth Level</string>
     <string name="sixLevel">Sixth Level</string>
-    <string name="sevenLevel">Seventh Level</string>
-    <string name="eightLevel">Eighth Level</string>
-    <string name="nineLevel">Ninth Level</string>
-    <string name="tenLevel">Tenth Level</string>
-    <string name="elevenLevel">Eleventh Level</string>
-    <string name="twelveLevel">Twelfth Level</string>
 
     <string name="oneUnit">First Unit</string>
     <string name="twoUnit">Second Unit</string>

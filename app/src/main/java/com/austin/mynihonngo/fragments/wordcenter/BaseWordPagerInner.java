@@ -109,7 +109,7 @@ public abstract class BaseWordPagerInner implements IView,IFragmentListener {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                ctrlToolBarShowOrHide(recyclerView,dx,dy);
+                //ctrlToolBarShowOrHide(recyclerView,dx,dy);
 
                 int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
@@ -173,7 +173,7 @@ public abstract class BaseWordPagerInner implements IView,IFragmentListener {
     }
 
     //控制首页中ToolBar的显示和隐藏
-    public abstract void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy);
+   // public abstract void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy);
 
     private void refresh() {
         mPageNo = 1;
@@ -224,7 +224,7 @@ public abstract class BaseWordPagerInner implements IView,IFragmentListener {
         refresh();
     }
 
-    public void setParentFrag(BaseWordPager parentFrag) {
+    public void setParentFrag(WordPagerFrag parentFrag) {
         this.mParentFrag = parentFrag;
     }
 

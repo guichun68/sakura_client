@@ -15,9 +15,9 @@ import com.austin.mynihonngo.utils.UIManager;
 
 /**
  * Created by com.austin on 2016/6/28.
- * Desc: 单词中心Fragment
+ * Desc: 单词中心框架Fragment
  */
-public class TanngoFrag extends Fragment {
+public class TanngoFrameFrag extends Fragment {
 
     private View view;
     private int mCurrSidePosition = 0;//记录最新的当前选中的侧边栏的角标，默认0
@@ -35,7 +35,7 @@ public class TanngoFrag extends Fragment {
      */
     public void replaceContentViewBySidePosition(int sidePostion){
         Fragment target = null;
-        target = new BaseWordPager();
+        target = new WordPagerFrag();
         Bundle bundle = new Bundle();
         mCurrSidePosition = sidePostion;
         switch (sidePostion){

@@ -12,14 +12,15 @@ import com.austin.mynihonngo.comm.ArgumentKey;
 import com.austin.mynihonngo.comm.ConstantValue;
 import com.austin.mynihonngo.comm.FragTAG;
 import com.austin.mynihonngo.utils.UIManager;
+import com.austin.mynihonngo.utils.UIUtil;
 
 /**
  * Created by com.austin on 2016/6/28.
- * Desc: Sakura 文法
+ * Desc: Sakura 文法框架Fragment
  */
-public class SkrBunnpoFrag extends Fragment{
+public class SkrBunnpoFrameFrag extends Fragment{
 
-    private String TAG = SkrBunnpoFrag.class.getSimpleName();
+    private String TAG = SkrBunnpoFrameFrag.class.getSimpleName();
     private int currSideMenuPosition = 0;//记录最新的当前选中的侧边栏的角标，默认0
     private View view;
 
@@ -36,9 +37,9 @@ public class SkrBunnpoFrag extends Fragment{
      */
     public void replaceContentViewBySidePosition(int sidePostion){
         Fragment target ;
-        target = new BaseWordPagerB();
+        target = new SakuraBunnpoFrag();
         Bundle bundle = new Bundle();
-        bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.sakura_unit));
+        bundle.putStringArray(ArgumentKey.TitleArguBundle, UIUtil.getContext().getResources().getStringArray(R.array.sakura_unit));
         currSideMenuPosition = sidePostion;
         switch (sidePostion){
             case 0://2级别
@@ -60,30 +61,6 @@ public class SkrBunnpoFrag extends Fragment{
             case 4://6级别
                 bundle.putInt(ArgumentKey.SkrWordLevel,ConstantValue.LEVEL6);
                 UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content3,false,bundle, FragTAG.Frag_TAG_LEVEL6);
-                break;
-            case 5://7级别
-                bundle.putInt(ArgumentKey.SkrWordLevel,ConstantValue.LEVEL7);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content3,false,bundle, FragTAG.Frag_TAG_LEVEL7);
-                break;
-            case 6://8级别
-                bundle.putInt(ArgumentKey.SkrWordLevel,ConstantValue.LEVEL8);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content3,false,bundle, FragTAG.Frag_TAG_LEVEL8);
-                break;
-            case 7://9级别
-                bundle.putInt(ArgumentKey.SkrWordLevel,ConstantValue.LEVEL9);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content3,false,bundle, FragTAG.Frag_TAG_LEVEL9);
-                break;
-            case 8://10级别
-                bundle.putInt(ArgumentKey.SkrWordLevel,ConstantValue.LEVEL10);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content3,false,bundle, FragTAG.Frag_TAG_LEVEL10);
-                break;
-            case 9://11级别
-                bundle.putInt(ArgumentKey.SkrWordLevel,ConstantValue.LEVEL11);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content3,false,bundle, FragTAG.Frag_TAG_LEVEL11);
-                break;
-            case 10://12级别
-                bundle.putInt(ArgumentKey.SkrWordLevel,ConstantValue.LEVEL12);
-                UIManager.getInstance().changeFragmentWithTag(target,R.id.fl_content3,false,bundle, FragTAG.Frag_TAG_LEVEL12);
                 break;
         }
     }

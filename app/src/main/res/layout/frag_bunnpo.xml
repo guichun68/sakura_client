@@ -3,13 +3,9 @@
   本布局为樱花语法页面(SkrBunnpoFrag)的布局,
   完全复制自frag.xml (仅改了FrameLayout的id加了后缀3)
  -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragmentLayout"
-    android:orientation="vertical"
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_content3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout
-        android:id="@+id/fl_content3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</RelativeLayout>
+    android:layout_height="match_parent" />

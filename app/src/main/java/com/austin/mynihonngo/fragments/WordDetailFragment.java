@@ -13,12 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.austin.mynihonngo.MainActivity;
 import com.austin.mynihonngo.R;
 import com.austin.mynihonngo.comm.ArgumentKey;
 import com.austin.mynihonngo.comm.GlobalParams;
-import com.austin.mynihonngo.fragments.skrTanngo.SkrTanngoFrag;
-import com.austin.mynihonngo.fragments.wordcenter.TanngoFrag;
+import com.austin.mynihonngo.fragments.skrTanngo.SkrTanngoFrameFrag;
+import com.austin.mynihonngo.fragments.wordcenter.TanngoFrameFrag;
 import com.austin.mynihonngo.model.bean.WordResult;
 import com.austin.mynihonngo.utils.NetworkUtil;
 import com.austin.mynihonngo.utils.StringUtil;
@@ -192,13 +191,13 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 			tvShade.setVisibility(View.INVISIBLE);
 			break;
 		case R.id.iv_next_word://转到下一个单词
-			if(GlobalParams.foreFrag instanceof TanngoFrag){
+			if(GlobalParams.foreFrag instanceof TanngoFrameFrag){
 				if(GlobalParams.iWord != null){
 					GlobalParams.iWord.openNextWordDetailFrg(currWdPosition);
 				}else{
 					throw new RuntimeException("GloalParams.iFragmentListener is null.");
 				}
-			}else if(GlobalParams.foreFrag instanceof SkrTanngoFrag){
+			}else if(GlobalParams.foreFrag instanceof SkrTanngoFrameFrag){
 				if(GlobalParams.iWordSkaura != null){
 					GlobalParams.iWordSkaura.openNextWordDetailFrg(currWdPosition);
 				}else{
@@ -208,13 +207,13 @@ public class WordDetailFragment extends Fragment implements OnClickListener{
 
 			break;
 		case R.id.iv_pre_word://转到上一个单词
-			if(GlobalParams.foreFrag instanceof TanngoFrag){
+			if(GlobalParams.foreFrag instanceof TanngoFrameFrag){
 				if(GlobalParams.iWord != null){
 					GlobalParams.iWord.openPreWordDetailFrg(currWdPosition);
 				}else{
 					throw new RuntimeException("GloalParams.iFragmentListener is null.");
 				}
-			}else if(GlobalParams.foreFrag instanceof SkrTanngoFrag) {
+			}else if(GlobalParams.foreFrag instanceof SkrTanngoFrameFrag) {
 				if(GlobalParams.iWordSkaura != null){
 					GlobalParams.iWordSkaura.openPreWordDetailFrg(currWdPosition);
 				}else{

@@ -16,11 +16,11 @@ import com.austin.mynihonngo.utils.UIUtil;
 
 /**
  * Created by com.austin on 2016/6/28.
- * Desc: 樱花单词中心Fragment
+ * Desc: 樱花单词页Frag框架
  */
-public class SkrTanngoFrag extends Fragment {
+public class SkrTanngoFrameFrag extends Fragment {
 
-    private String TAG = SkrTanngoFrag.class.getSimpleName();
+    private String TAG = SkrTanngoFrameFrag.class.getSimpleName();
     private int currSideMenuPosition = 0;//记录最新的当前选中的侧边栏的角标，默认0
     private View view;
 
@@ -38,7 +38,7 @@ public class SkrTanngoFrag extends Fragment {
      */
     public void replaceContentViewBySidePosition(int sidePostion){
         Fragment target ;
-        target = new BaseWordPagerS();
+        target = new SakurWordFrag();
         Bundle bundle = new Bundle();
         bundle.putStringArray(ArgumentKey.TitleArguBundle,getResources().getStringArray(R.array.sakura_unit));
         currSideMenuPosition = sidePostion;

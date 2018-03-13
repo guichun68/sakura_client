@@ -26,10 +26,10 @@ import java.util.List;
 import com.austin.mynihonngo.adapters.MyViewPagerAdapter;
 import com.austin.mynihonngo.comm.GlobalParams;
 import com.austin.mynihonngo.engine.MyActionBarDrawerToggle;
-import com.austin.mynihonngo.fragments.SkrBunnpo.SkrBunnpoFrag;
+import com.austin.mynihonngo.fragments.SkrBunnpo.SkrBunnpoFrameFrag;
 import com.austin.mynihonngo.fragments.setting.SetingFrag;
-import com.austin.mynihonngo.fragments.skrTanngo.SkrTanngoFrag;
-import com.austin.mynihonngo.fragments.wordcenter.TanngoFrag;
+import com.austin.mynihonngo.fragments.skrTanngo.SkrTanngoFrameFrag;
+import com.austin.mynihonngo.fragments.wordcenter.TanngoFrameFrag;
 import com.austin.mynihonngo.utils.UIUtil;
 import com.austin.mynihonngo.utils.UpdateService;
 import com.austin.mynihonngo.viewfeature.IMainView;
@@ -50,9 +50,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView tvTitleWordCenter, tvTitleSkrBunnpo, tvTitleSkrTanngo, tvTitleSeting;
     String defaultColor = "#CDD1D3", pressColor = "#FFFFFF";
 
-    TanngoFrag tanngoFrag;
-    SkrBunnpoFrag skrBunnpo;
-    SkrTanngoFrag skrTango;
+    TanngoFrameFrag tanngoFrameFrag;
+    SkrBunnpoFrameFrag skrBunnpo;
+    SkrTanngoFrameFrag skrTango;
     SetingFrag setFrag;
     private LinearLayout mLlContent;
     private MyActionBarDrawerToggle mActionBarDrawerToggle;
@@ -79,6 +79,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 new MyActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
 
         mActionBarDrawerToggle.syncState();
+
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
         // 初始化ViewPager的适配器，并设置给它
         mViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), mTitles, mFragments);
@@ -133,18 +134,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             //关闭侧边栏
             mDrawerLayout.closeDrawer(GravityCompat.START);
             // 判断当前哪个界面(Frag)处于显示状态,就把相应的侧边栏点击事件（连同角标）传过去让其自行处理
-            if(GlobalParams.foreFrag instanceof TanngoFrag){
-                ((TanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
+            if(GlobalParams.foreFrag instanceof TanngoFrameFrag){
+                ((TanngoFrameFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
                 return;
             }
-            if(GlobalParams.foreFrag instanceof SkrBunnpoFrag){
+            if(GlobalParams.foreFrag instanceof SkrBunnpoFrameFrag){
                 //TODO do sth;
-                ((SkrBunnpoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
+                ((SkrBunnpoFrameFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
                 return;
             }
-            if(GlobalParams.foreFrag instanceof SkrTanngoFrag){
+            if(GlobalParams.foreFrag instanceof SkrTanngoFrameFrag){
                 //TODO do sth;
-                ((SkrTanngoFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
+                ((SkrTanngoFrameFrag) GlobalParams.foreFrag).replaceContentViewBySidePosition(position);
                 return;
             }
             if(GlobalParams.foreFrag instanceof SetingFrag){
@@ -206,16 +207,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         //初始化填充到ViewPager中的Fragment集合
         mFragments = new ArrayList<>();
 
-        tanngoFrag = new TanngoFrag();
-        skrBunnpo = new SkrBunnpoFrag();
-        skrTango = new SkrTanngoFrag();
+        tanngoFrameFrag = new TanngoFrameFrag();
+        skrBunnpo = new SkrBunnpoFrameFrag();
+        skrTango = new SkrTanngoFrameFrag();
         setFrag = new SetingFrag();
-        mFragments.add(tanngoFrag);
+        mFragments.add(tanngoFrameFrag);
         mFragments.add(skrBunnpo);
         mFragments.add(skrTango);
         mFragments.add(setFrag);
 
-        GlobalParams.foreFrag = tanngoFrag;
+        GlobalParams.foreFrag = tanngoFrameFrag;
     }
 
     void bindView() {
@@ -370,7 +371,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 refreshMenu(getResources().getStringArray(R.array.word_side));//刷新侧滑栏标题
                 //还原上次离开本页面时的角标的字体颜色
                 mSidebarMenus.get(GlobalParams.tanngoFragSidePostion).setTextColor(getResources().getColor(R.color.slideMenuTextClickedColor));
-                GlobalParams.foreFrag = tanngoFrag;//记录当前最顶端显示的frag
+                GlobalParams.foreFrag = tanngoFrameFrag;//记录当前最顶端显示的frag
                 refreshToggle(R.id.tv_title_word);
                 break;
             case 1://(樱花)语法页
@@ -410,11 +411,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 切换页面之前先保存当前页面的选中的侧边栏角标，以便下次还原时正确还原指定内容
      */
     private void saveSideMenuPosition() {
-        if(GlobalParams.foreFrag instanceof SkrTanngoFrag){
+        if(GlobalParams.foreFrag instanceof SkrTanngoFrameFrag){
             GlobalParams.skrTanngoSidePosition = skrTango.getCurrSlidePosition();
-        }else if(GlobalParams.foreFrag instanceof TanngoFrag){
-            GlobalParams.tanngoFragSidePostion = tanngoFrag.getCurrSlidePosition();
-        }else if(GlobalParams.foreFrag instanceof SkrBunnpoFrag){
+        }else if(GlobalParams.foreFrag instanceof TanngoFrameFrag){
+            GlobalParams.tanngoFragSidePostion = tanngoFrameFrag.getCurrSlidePosition();
+        }else if(GlobalParams.foreFrag instanceof SkrBunnpoFrameFrag){
             GlobalParams.skrBunnpoSidePosition = skrBunnpo.getCurrSlidePosition();
         }
     }

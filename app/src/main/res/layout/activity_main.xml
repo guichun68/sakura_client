@@ -6,47 +6,12 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/id_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/title_color"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-         >
-        <!--自定义标题栏内容-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tv_title_word"
-                style="@style/title_text"
-                android:text="@string/tab_word_center"/>
-            <TextView
-                android:id="@+id/tv_title_skr_bunnpo"
-                style="@style/title_text"
-                android:text="@string/tab_grammar_sakura"/>
-            <TextView
-                android:id="@+id/tv_title_skr_tanngo"
-                style="@style/title_text"
-                android:text="@string/tab_word_sakura"/>
-            <TextView
-                android:id="@+id/tv_title_seting"
-                style="@style/title_text"
-                android:text="@string/setting"/>
-
-        </LinearLayout>
-
-        </android.support.v7.widget.Toolbar>
-
     <!--DrawerLayout分两部分，一部分是内容，一部分是侧边栏-->
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/id_drawerlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/id_toolbar">
+        android:layout_below="@+id/id_toolbar">
 
         <com.austin.mynihonngo.views.lazyviewpager.LazyViewPager
             android:id="@+id/id_viewpager"
@@ -113,4 +78,41 @@
                 tools:text="级别1"/>
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@id/id_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/title_color"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <!--自定义标题栏内容-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_title_word"
+                style="@style/title_text"
+                android:text="@string/tab_word_center"/>
+            <TextView
+                android:id="@+id/tv_title_skr_bunnpo"
+                style="@style/title_text"
+                android:text="@string/tab_grammar_sakura"/>
+            <TextView
+                android:id="@+id/tv_title_skr_tanngo"
+                style="@style/title_text"
+                android:text="@string/tab_word_sakura"/>
+            <TextView
+                android:id="@+id/tv_title_seting"
+                style="@style/title_text"
+                android:text="@string/setting"/>
+
+        </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
 </RelativeLayout>

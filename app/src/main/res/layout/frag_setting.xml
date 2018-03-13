@@ -156,6 +156,7 @@
                 android:textSize="@dimen/setTextSize" />
 
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:id="@+id/cv_checkupdate"
             android:layout_width="match_parent"

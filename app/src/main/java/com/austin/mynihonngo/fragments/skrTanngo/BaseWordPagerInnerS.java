@@ -22,7 +22,6 @@ import com.austin.mynihonngo.engine.OnResultListener;
 import com.austin.mynihonngo.fragments.WordDetailFragment;
 import com.austin.mynihonngo.model.bean.WordResult;
 import com.austin.mynihonngo.presentation.INounWordPresenter;
-import com.austin.mynihonngo.utils.AppUtil;
 import com.austin.mynihonngo.utils.BeanFactoryUtil;
 import com.austin.mynihonngo.utils.SharedPreferencesUtils;
 import com.austin.mynihonngo.utils.UIManager;
@@ -110,7 +109,7 @@ public abstract class BaseWordPagerInnerS implements IView,IFragmentListener {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                ctrlToolBarShowOrHide(recyclerView,dx,dy);
+//                ctrlToolBarShowOrHide(recyclerView,dx,dy);
             }
         });
         //添加点击事件
@@ -141,7 +140,7 @@ public abstract class BaseWordPagerInnerS implements IView,IFragmentListener {
     }
 
     //控制首页中ToolBar的显示和隐藏
-    public abstract void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy);
+    //public abstract void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy);
 
     private void refresh() {
         mPageNo = 1;
@@ -191,7 +190,7 @@ public abstract class BaseWordPagerInnerS implements IView,IFragmentListener {
     }
 
     //mParentFrag 是作为frag跳转时指定跳转前的页面
-    public void setParentFrag(BaseWordPagerS parentFrag) {
+    public void setParentFrag(SakurWordFrag parentFrag) {
         this.mParentFrag = parentFrag;
     }
 

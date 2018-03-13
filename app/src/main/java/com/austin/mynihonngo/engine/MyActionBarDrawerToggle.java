@@ -283,7 +283,7 @@ public class MyActionBarDrawerToggle implements DrawerLayout.DrawerListener {
         return false;
     }
 
-    private void toggle() {
+    public void toggle() {
         int drawerLockMode = mDrawerLayout.getDrawerLockMode(GravityCompat.START);
         if (mDrawerLayout.isDrawerVisible(GravityCompat.START)
                 && (drawerLockMode != DrawerLayout.LOCK_MODE_LOCKED_OPEN)) {

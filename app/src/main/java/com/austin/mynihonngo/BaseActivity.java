@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 
-import com.umeng.analytics.MobclickAgent;
+//import com.umeng.analytics.MobclickAgent;
 
 import com.austin.mynihonngo.comm.BaseApplication;
 
@@ -27,7 +27,7 @@ public class BaseActivity extends AppCompatActivity{
         mForegroundActivity = this;
 
         // 配置友盟统计
-        MobclickAgent.onResume(this); // 统计时长
+//        MobclickAgent.onResume(this); // 统计时长
     }
 
     @Override
@@ -39,7 +39,7 @@ public class BaseActivity extends AppCompatActivity{
         }
 
         // 配置友盟统计
-        MobclickAgent.onPause(this);
+//        MobclickAgent.onPause(this);
     }
 
     public static BaseActivity getForegroundActivity() {

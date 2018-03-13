@@ -36,17 +36,11 @@
     <item>@string/other</item>
   </string-array>
   <string-array name="bunnpo_side">
+    <item>@string/oneLevel</item>
     <item>@string/twoLevel</item>
     <item>@string/threeLevel</item>
     <item>@string/fourLevel</item>
     <item>@string/fiveLevel</item>
-    <item>@string/sixLevel</item>
-    <item>@string/sevenLevel</item>
-    <item>@string/eightLevel</item>
-    <item>@string/nineLevel</item>
-    <item>@string/tenLevel</item>
-    <item>@string/elevenLevel</item>
-    <item>@string/twelveLevel</item>
   </string-array>
   <string-array name="sakura_side">
     <item>@string/oneLevel</item>
@@ -55,12 +49,6 @@
     <item>@string/fourLevel</item>
     <item>@string/fiveLevel</item>
     <item>@string/sixLevel</item>
-    <item>@string/sevenLevel</item>
-    <item>@string/eightLevel</item>
-    <item>@string/nineLevel</item>
-    <item>@string/tenLevel</item>
-    <item>@string/elevenLevel</item>
-    <item>@string/twelveLevel</item>
   </string-array>
   <string-array name="sakura_unit">
     <item>@string/oneUnit</item>

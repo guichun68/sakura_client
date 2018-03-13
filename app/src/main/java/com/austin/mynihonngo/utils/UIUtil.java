@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,11 +81,13 @@ public class UIUtil {
 	}
 
 	/** 获取文字 */
+	@NonNull
 	public static String getString(int resId) {
 		return getResources().getString(resId);
 	}
 
 	/** 获取文字数组 */
+	@NonNull
 	public static String[] getStringArray(int resId) {
 		return getResources().getStringArray(resId);
 	}

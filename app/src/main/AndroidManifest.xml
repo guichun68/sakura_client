@@ -45,13 +45,15 @@
             android:screenOrientation="portrait" />
         <activity android:name=".fragments.setting.AboutMe"
             android:screenOrientation="portrait"/>
+        <activity android:name=".fragments.setting.GramAndCultureAct"
+            android:screenOrientation="portrait"/>
         <!-- 友盟统计start -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="571ee35be0f55a8c740004ca" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Wandoujia" />
+            android:value="mumayi" />
         <!-- 友盟统计 end -->
     </application>
 

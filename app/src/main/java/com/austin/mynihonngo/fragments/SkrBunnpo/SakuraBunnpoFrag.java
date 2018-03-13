@@ -1,4 +1,4 @@
-package com.austin.mynihonngo.fragments.skrTanngo;
+package com.austin.mynihonngo.fragments.SkrBunnpo;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -26,29 +26,29 @@ import com.austin.mynihonngo.comm.GlobalParams;
 
 /**
  * Created by com.austin on 2016/6/28.
- * Desc: 樱花单词Fragment
+ * Desc: 樱花语法Fragment
  */
-public class BaseWordPagerS extends Fragment {
+public class SakuraBunnpoFrag extends Fragment {
 
     private View view;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
 
-    private List<BaseWordPagerInnerS> pagers = new ArrayList<>();
-    TangoFragVPAdapterS adapter;
+    private List<BaseWordPagerInnerB> pagers = new ArrayList<>();
+    TangoFragVPAdapterB adapter;
 
     boolean isshow ;//当前TabLayout的显示状态，默认显示。
     int disy;//一次滑动的距离
     //顶部tab导航栏标题集合
     private String[] titles;
-    private int wordType;//要实例化的单词页面级别类型（如1级别？2级别？）,从ConstantValue的wordTypeNoun等取值
+    private int skrLevel;//要实例化的单词页面级别类型（如1级别？2级别？）,从ConstantValue的wordTypeNoun等取值
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_wordcenter,container,false);
         titles = getArguments().getStringArray(ArgumentKey.TitleArguBundle);
-        wordType = getArguments().getInt(ArgumentKey.WordCenterType);
+        skrLevel = getArguments().getInt(ArgumentKey.SkrWordLevel);
         bindView();
         initData();
         configView();
@@ -73,7 +73,7 @@ public class BaseWordPagerS extends Fragment {
     }
 
     private void configView() {
-        adapter = new TangoFragVPAdapterS(getPagers(),getTabLayoutTitles());
+        adapter = new TangoFragVPAdapterB(getPagers(),getTabLayoutTitles());
         mViewPager.setAdapter(adapter);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -107,7 +107,7 @@ public class BaseWordPagerS extends Fragment {
         });
     }
 
-    public List<BaseWordPagerInnerS> getPagers() {
+    public List<BaseWordPagerInnerB> getPagers() {
         if(pagers != null && pagers.size()>0)
             return pagers;
         initSpecifyTypeViews();
@@ -128,87 +128,80 @@ public class BaseWordPagerS extends Fragment {
 
     public void initSpecifyTypeViews() {
         pagers.clear();
-        switch (wordType){
-            case ConstantValue.LEVEL1:
-                for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL1);
-                    pagers.add(pager);
-                    pager.setParentFrag(this);
-                }
-            break;
+        switch (skrLevel){
             case ConstantValue.LEVEL2:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL2);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL2);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL3:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL3);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL3);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL4:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL4);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL4);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL5:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL5);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL5);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL6:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL6);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL6);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL7:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL7);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL7);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL8:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL8);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL8);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL9:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL9);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL9);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL10:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL10);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL10);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL11:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL11);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL11);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
             break;
             case ConstantValue.LEVEL12:
                 for(int i=0;i<12;i++){
-                    BaseWordPagerInnerS pager = new TangoFragBasePagerInner(getActivity(),i+1,ConstantValue.LEVEL12);
+                    BaseWordPagerInnerB pager = new TangoFragBasePagerInnerB(getActivity(),i+1,ConstantValue.LEVEL12);
                     pagers.add(pager);
                     pager.setParentFrag(this);
                 }
@@ -216,12 +209,12 @@ public class BaseWordPagerS extends Fragment {
         }
     }
 
-    class TangoFragBasePagerInner extends BaseWordPagerInnerS {
+    class TangoFragBasePagerInnerB extends BaseWordPagerInnerB {
 
-        public TangoFragBasePagerInner(Context context, int classItemId, Integer level) {
+        public TangoFragBasePagerInnerB(Context context, int classItemId, Integer level) {
             super(context, classItemId, level);
         }
-        @Override
+    /*    @Override
         public void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy) {
             //得到第一个item
             int firstVisibleItem = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
@@ -249,6 +242,6 @@ public class BaseWordPagerS extends Fragment {
                 disy += dy;
             }
         }
-    }
+   */ }
 
 }

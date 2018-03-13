@@ -51,12 +51,7 @@
 	<string name="level4">四级别</string>
 	<string name="level5">五级别</string>
 	<string name="level6">六级别</string>
-	<string name="level7">七级别</string>
-	<string name="level8">八级别</string>
-	<string name="level9">九级别</string>
-	<string name="level10">十级别</string>
-	<string name="level11">十一级别</string>
-	<string name="level12">十二级别</string>
+
 	<string name="nomorewd">没有更多单词了.</string>
 	<string name="tab_word_sakura">桜単語</string>
 	<string name="register">注册(新規登録)</string>
@@ -399,12 +394,7 @@
 	<string name="fourLevel">四级</string>
 	<string name="fiveLevel">五级</string>
 	<string name="sixLevel">六级</string>
-	<string name="sevenLevel">七级</string>
-	<string name="eightLevel">八级</string>
-	<string name="nineLevel">九级</string>
-	<string name="tenLevel">十级</string>
-	<string name="elevenLevel">十一级</string>
-	<string name="twelveLevel">十二级</string>
+
 
 	<string name="oneUnit">一课</string>
 	<string name="twoUnit">二课</string>

@@ -20,6 +20,7 @@ public class TSakura implements Serializable{
 	private String skrSentenceJP;//日语例句
 	private String skrParse;//解析
 	private TSakuraGrammar grammar;//TSakuraGrammar外键，
+	private int moreUrlId;
 
 	public TSakura() {
 		super();
@@ -81,6 +82,12 @@ public class TSakura implements Serializable{
 		this.skrParse = skrParse;
 		this.grammar = grammar;
 	}
-	
-	
+
+	public int getMoreUrlId() {
+		return moreUrlId;
+	}
+
+	public void setMoreUrlId(int moreUrlId) {
+		this.moreUrlId = moreUrlId;
+	}
 }

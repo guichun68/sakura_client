@@ -26,9 +26,9 @@ import com.austin.mynihonngo.comm.GlobalParams;
 
 /**
  * Created by com.austin on 2016/6/28.
- * Desc: 单词中心之Fragment
+ * Desc: 单词中心Fragment
  */
-public class BaseWordPager extends Fragment {
+public class WordPagerFrag extends Fragment {
 
     private View view;
     private TabLayout mTabLayout;
@@ -161,7 +161,7 @@ public class BaseWordPager extends Fragment {
         public TangoFragBasePagerInner(Context context, int classItemId, Integer level) {
             super(context, classItemId, level);
         }
-        @Override
+      /*  @Override
         public void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy) {
             //得到第一个item
             int firstVisibleItem = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
@@ -189,6 +189,6 @@ public class BaseWordPager extends Fragment {
                 disy += dy;
             }
         }
-    }
+    */}
 
 }

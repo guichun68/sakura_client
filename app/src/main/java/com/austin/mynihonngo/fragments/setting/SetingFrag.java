@@ -1,6 +1,7 @@
 package com.austin.mynihonngo.fragments.setting;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -199,6 +200,9 @@ public class SetingFrag extends Fragment implements View.OnClickListener {
                 }
                 UIManager.getInstance().changeFragmentAndSaveViews2(SetingFrag.this,target,true,null, FragTAG.FRAG_TAG_GRAMMAR_LIST);
 
+                /*Intent in = new Intent(getActivity(),GramAndCultureAct.class);
+                startActivity(in);
+*/
                 break;
         }
     }

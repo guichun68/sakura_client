@@ -131,7 +131,7 @@ public class WordRecyclerViewAdapter extends Adapter<ViewHolder> {
     }
 
 
-    static class ItemViewHolder extends ViewHolder {
+        static class ItemViewHolder extends ViewHolder {
 
         TextView tvWord;
         TextView tvKanna;

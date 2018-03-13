@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Created by Austin on 2015/6/29.
- * Desc:
+ * Desc:首页(整个APP主页ViewPager框架)的Adapter
  */
 public class MyViewPagerAdapter extends FragmentStatePagerAdapter {
 

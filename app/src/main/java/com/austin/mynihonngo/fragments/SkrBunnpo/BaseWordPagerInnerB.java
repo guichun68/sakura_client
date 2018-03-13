@@ -102,7 +102,7 @@ public abstract class BaseWordPagerInnerB implements IView,IFragmentListener {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                ctrlToolBarShowOrHide(recyclerView,dx,dy);
+//                ctrlToolBarShowOrHide(recyclerView,dx,dy);
             }
         });
         //添加点击事件
@@ -131,7 +131,7 @@ public abstract class BaseWordPagerInnerB implements IView,IFragmentListener {
     }
 
     //控制首页中ToolBar的显示和隐藏
-    public abstract void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy);
+//    public abstract void ctrlToolBarShowOrHide(RecyclerView recyclerView, int dx, int dy);
 
     private void refresh() {
         presenter.getClassifyItemData(level,mUnit,new OnResultListener() {
@@ -175,7 +175,7 @@ public abstract class BaseWordPagerInnerB implements IView,IFragmentListener {
     }
 
     //mParentFrag 是作为frag跳转时指定跳转前的页面
-    public void setParentFrag(BaseWordPagerB parentFrag) {
+    public void setParentFrag(SakuraBunnpoFrag parentFrag) {
         this.mParentFrag = parentFrag;
     }
 
