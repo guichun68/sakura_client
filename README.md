@@ -12,8 +12,10 @@
   #### 语法例句中日对照，类似闯关模式，可以遮盖中文（或日文）查看日文（或中文），以便强化记忆和应用。
   #### 文化及实用场景对话模块  
     
-![单词分类1](https://github.com/guichun68/sakura_client/raw/master/img/816830306691421561.jpg)    
-![单词分类2](https://github.com/guichun68/sakura_client/raw/master/img/596888197257212260.jpg)    
+    
+<img src="https://github.com/guichun68/sakura_client/raw/master/img/816830306691421561.jpg" width = "400" height = "710" alt="单词分类1" align=center />
+<img src="https://github.com/guichun68/sakura_client/raw/master/img/596888197257212260.jpg" width = "400" height = "710" alt="单词分类2" align=center />
+
 
 ![演示](https://github.com/guichun68/sakura_client/raw/master/img/sakura.gif)
 
